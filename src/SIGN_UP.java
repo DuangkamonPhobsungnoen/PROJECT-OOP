@@ -31,7 +31,6 @@ public class SIGN_UP extends javax.swing.JFrame {
         Enter_Password = new javax.swing.JLabel();
         Confirm_Password = new javax.swing.JLabel();
         REGISTER = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         text_password = new javax.swing.JPasswordField();
         text_confirm = new javax.swing.JPasswordField();
 
@@ -74,8 +73,6 @@ public class SIGN_UP extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_male_user_96px.png"))); // NOI18N
-
         text_password.setText("jPasswordField1");
 
         text_confirm.setText("jPasswordField1");
@@ -86,9 +83,7 @@ public class SIGN_UP extends javax.swing.JFrame {
             bg_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bg_dataLayout.createSequentialGroup()
                 .addGap(132, 132, 132)
-                .addGroup(bg_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
+                .addComponent(jLabel1)
                 .addGap(114, 114, 114)
                 .addGroup(bg_dataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(text_username)
@@ -127,8 +122,7 @@ public class SIGN_UP extends javax.swing.JFrame {
                         .addComponent(REGISTER, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(bg_dataLayout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(102, 102, 102)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(169, 169, 169))))
         );
@@ -235,7 +229,6 @@ public class SIGN_UP extends javax.swing.JFrame {
     private javax.swing.JButton REGISTER;
     private javax.swing.JPanel bg_data;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField text_confirm;
     private javax.swing.JTextField text_name;
     private javax.swing.JPasswordField text_password;

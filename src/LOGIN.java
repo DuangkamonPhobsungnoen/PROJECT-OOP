@@ -30,7 +30,6 @@ public class LOGIN extends javax.swing.JFrame {
         username1 = new javax.swing.JLabel();
         Enter_password = new javax.swing.JPasswordField();
         LOGIN = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         SIGN_UP = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,8 +79,6 @@ public class LOGIN extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons8_test_account_96px.png"))); // NOI18N
-
         SIGN_UP.setText("SIGN UP");
         SIGN_UP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,10 +107,7 @@ public class LOGIN extends javax.swing.JFrame {
                                 .addComponent(Enter_username, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                                 .addComponent(username1)
                                 .addComponent(Enter_password))
-                            .addGroup(bgLayout.createSequentialGroup()
-                                .addComponent(img)
-                                .addGap(52, 52, 52)
-                                .addComponent(jLabel1)))))
+                            .addComponent(img))))
                 .addContainerGap(257, Short.MAX_VALUE))
         );
         bgLayout.setVerticalGroup(
@@ -121,9 +115,7 @@ public class LOGIN extends javax.swing.JFrame {
             .addGroup(bgLayout.createSequentialGroup()
                 .addGap(54, 54, 54)
                 .addComponent(name)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(144, 144, 144)
                 .addComponent(img)
                 .addGap(26, 26, 26)
                 .addComponent(username, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,7 +244,6 @@ public class LOGIN extends javax.swing.JFrame {
     private javax.swing.JButton SIGN_UP;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel img;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel name;
     private javax.swing.JLabel username;
     private javax.swing.JLabel username1;

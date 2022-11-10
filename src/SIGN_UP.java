@@ -178,6 +178,9 @@ public class SIGN_UP extends javax.swing.JFrame {
                 ps.setString(2, username);
                 ps.setString(3, password);
                 ps.setString(4, confirm);
+                if (ps.executeUpdate() > 0) {
+                    JOptionPane.showMessageDialog(null, "New User Add");
+                }
             }
         } catch (SQLException ex) {
             Logger.getLogger(SIGN_UP.class.getName()).log(Level.SEVERE, null, ex);

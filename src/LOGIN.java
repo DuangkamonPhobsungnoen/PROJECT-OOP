@@ -144,54 +144,12 @@ public class LOGIN extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void bgAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_bgAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_bgAncestorAdded
-
-    private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
-        PreparedStatement ps;
-        ResultSet rs;
-        String uname = Enter_username.getText();
-        String pass = String.valueOf(Enter_password.getPassword());
-        
-        String query = "SELECT * FROM `member` WHERE `Member_Username` =? AND `Member_Password` =?";
-        
-        try {
-            ps = MyConnection.getConnection().prepareStatement(query);
-            
-            ps.setString(1, uname);
-            ps.setString(2, pass);
-            
-            rs = ps.executeQuery();
-            
-            if(rs.next())
-            {
-                    HOME_JFrame mf = new HOME_JFrame();
-                    mf.setVisible(true);
-                    mf.pack();
-                    mf.setLocationRelativeTo(null);
-                    mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);               
-                    this.dispose();
-            }
-             else{
-                    JOptionPane.showMessageDialog(null, "Incorrect Username Or Password", "Login Failed", 2);
-                }
-        } catch (SQLException ex) {
-            Logger.getLogger(LOGIN.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        
-    }//GEN-LAST:event_LOGINActionPerformed
-
-    private void Enter_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enter_passwordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Enter_passwordActionPerformed
-
-    private void Enter_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enter_usernameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Enter_usernameActionPerformed
 
     private void SIGN_UPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SIGN_UPActionPerformed
         SIGN_UP rgf = new SIGN_UP();
@@ -201,6 +159,47 @@ public class LOGIN extends javax.swing.JFrame {
         rgf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.dispose();
     }//GEN-LAST:event_SIGN_UPActionPerformed
+
+    private void LOGINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LOGINActionPerformed
+        PreparedStatement ps;
+        ResultSet rs;
+        String uname = Enter_username.getText();
+        String pass = String.valueOf(Enter_password.getPassword());
+
+        String query = "SELECT * FROM `member` WHERE `Member_Username` =? AND `Member_Password` =?";
+
+        try {
+            ps = MyConnection.getConnection().prepareStatement(query);
+
+            ps.setString(1, uname);
+            ps.setString(2, pass);
+
+            rs = ps.executeQuery();
+
+            if(rs.next())
+            {
+                HOME_JFrame mf = new HOME_JFrame();
+                mf.setVisible(true);
+                mf.pack();
+                mf.setLocationRelativeTo(null);
+                mf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.dispose();
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Incorrect Username or Password", "Login Failed", 2);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LOGIN.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_LOGINActionPerformed
+
+    private void Enter_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enter_passwordActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Enter_passwordActionPerformed
+
+    private void Enter_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Enter_usernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Enter_usernameActionPerformed
 
     /**
      * @param args the command line arguments

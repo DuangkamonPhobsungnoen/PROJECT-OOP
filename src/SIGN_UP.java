@@ -1,5 +1,6 @@
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -11,6 +12,26 @@ public class SIGN_UP extends javax.swing.JFrame {
     }
 
     @SuppressWarnings("unchecked")
+//    ใช้คู่กับการแสดงตาราง ยังไม่จำเป็น
+//    public ArrayList<User> getUsersList(){
+//        ArrayList<User> userList = new ArrayList<User>();
+//        Connection con = MyConnection.getConnection(); //เชื่อม database
+//        String query = "select * from register";
+//        
+//        try{
+//            Statement st = con.createStatement();
+//            ResultSet rs = st.executeQuery(query);
+//            User user;
+//            while(rs.next()){
+//                // ดึง column database
+//                user = new User(rs.getString("ShopName"),rs.getString("Username"),rs.getString("Password"),rs.getString("Confirm"));
+//                userList.add(user); // เก็บ user ใส่ array
+//            }
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return userList;
+//    }
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -41,7 +62,7 @@ public class SIGN_UP extends javax.swing.JFrame {
         jLabel1.setText("SIGN UP");
 
         Enter_Name.setFont(new java.awt.Font("TH SarabunPSK", 1, 24)); // NOI18N
-        Enter_Name.setText("Enter Name");
+        Enter_Name.setText("Enter Shop Name");
 
         Enter_Username.setFont(new java.awt.Font("TH SarabunPSK", 1, 24)); // NOI18N
         Enter_Username.setText("Enter Username");
@@ -149,6 +170,7 @@ public class SIGN_UP extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void REGISTERActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REGISTERActionPerformed
+        // ดึงสิ่งที่กรอก
         String name = text_name.getText();
         String username = text_username.getText();
         String password = String.valueOf(text_password.getPassword());
@@ -170,8 +192,9 @@ public class SIGN_UP extends javax.swing.JFrame {
         }
 
         PreparedStatement ps;
-        String query = "INSERT INTO `member`(`Member_Name`, `Member_Username`, `Member_Password`, `Member_Comfirm`) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO `member`(`ShopName`, `Username`, `Password`, `Comfirm`) VALUES (?, ?, ?, ?)";
         try {
+            // count 0 = ผ่านการเชค
             if (count == 0) {
                 ps = MyConnection.getConnection().prepareStatement(query);
                 ps.setString(1, name);

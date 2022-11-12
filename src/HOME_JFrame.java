@@ -70,7 +70,6 @@ public class HOME_JFrame extends javax.swing.JFrame {
         );
 
         cash_btn.setBackground(new java.awt.Color(251, 210, 64));
-        cash_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_8_1.png"))); // NOI18N
         cash_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cash_btnActionPerformed(evt);
@@ -82,7 +81,6 @@ public class HOME_JFrame extends javax.swing.JFrame {
         jLabel2.setToolTipText("");
 
         editMenu_btn.setBackground(new java.awt.Color(251, 210, 64));
-        editMenu_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_7_1.png"))); // NOI18N
         editMenu_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editMenu_btnActionPerformed(evt);
@@ -100,6 +98,10 @@ public class HOME_JFrame extends javax.swing.JFrame {
                 .addGap(272, 272, 272)
                 .addComponent(jLabel1))
             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addGap(282, 282, 282))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(108, 108, 108)
@@ -107,14 +109,12 @@ public class HOME_JFrame extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(45, 45, 45)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3)
-                            .addGap(42, 42, 42))
+                            .addContainerGap(604, Short.MAX_VALUE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(cash_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(117, 117, 117)
-                            .addComponent(editMenu_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGap(109, 109, 109)))
+                            .addComponent(editMenu_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap(247, Short.MAX_VALUE)))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,7 +122,9 @@ public class HOME_JFrame extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(76, 76, 76)
                 .addComponent(jLabel1)
-                .addContainerGap(362, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 223, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(123, 123, 123)
@@ -130,10 +132,8 @@ public class HOME_JFrame extends javax.swing.JFrame {
                         .addComponent(editMenu_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cash_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addContainerGap(118, Short.MAX_VALUE)))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(120, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -155,15 +155,14 @@ public class HOME_JFrame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cash_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cash_btnActionPerformed
-        // TODO add your handling code here:
-        CASHIER am = new CASHIER();
-        am.setVisible(true);
-        am.pack();
-        am.setLocationRelativeTo(null);
-        am.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        dispose();
-    }//GEN-LAST:event_cash_btnActionPerformed
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        LOGIN lg = new LOGIN();
+        lg.setVisible(true);
+        lg.pack();
+        lg.setLocationRelativeTo(null);
+        lg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_logoutActionPerformed
 
     private void editMenu_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editMenu_btnActionPerformed
         // TODO add your handling code here:
@@ -175,14 +174,15 @@ public class HOME_JFrame extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_editMenu_btnActionPerformed
 
-    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
-        LOGIN lg = new LOGIN();
-        lg.setVisible(true);
-        lg.pack();
-        lg.setLocationRelativeTo(null);
-        lg.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
-    }//GEN-LAST:event_logoutActionPerformed
+    private void cash_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cash_btnActionPerformed
+        // TODO add your handling code here:
+        CASHIER am = new CASHIER();
+        am.setVisible(true);
+        am.pack();
+        am.setLocationRelativeTo(null);
+        am.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        dispose();
+    }//GEN-LAST:event_cash_btnActionPerformed
 
     /**
      * @param args the command line arguments

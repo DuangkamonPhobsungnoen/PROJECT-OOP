@@ -70,6 +70,7 @@ public class HOME_JFrame extends javax.swing.JFrame {
         );
 
         cash_btn.setBackground(new java.awt.Color(251, 210, 64));
+        cash_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_8_1.png"))); // NOI18N
         cash_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cash_btnActionPerformed(evt);
@@ -81,6 +82,7 @@ public class HOME_JFrame extends javax.swing.JFrame {
         jLabel2.setToolTipText("");
 
         editMenu_btn.setBackground(new java.awt.Color(251, 210, 64));
+        editMenu_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_7_1.png"))); // NOI18N
         editMenu_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editMenu_btnActionPerformed(evt);
@@ -108,13 +110,12 @@ public class HOME_JFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addGap(45, 45, 45)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(604, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(cash_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(117, 117, 117)
-                            .addComponent(editMenu_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addContainerGap(247, Short.MAX_VALUE)))))
+                            .addComponent(editMenu_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(247, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -60,7 +60,6 @@ public class EDIT_MENU extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         creatCat.setBackground(new java.awt.Color(204, 204, 204));
-        creatCat.setIcon(new javax.swing.ImageIcon("C:\\Users\\Tadporn\\OneDrive\\Documents\\NetBeansProjects\\HOM-KLIN-NGERN\\src\\plus (1).png")); // NOI18N
         creatCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creatCatActionPerformed(evt);

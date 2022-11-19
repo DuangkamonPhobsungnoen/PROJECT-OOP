@@ -60,13 +60,16 @@ public class EDIT_MENU extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         creatCat.setBackground(new java.awt.Color(204, 204, 204));
+        creatCat.setIcon(new javax.swing.ImageIcon("C:\\Users\\Tadporn\\OneDrive\\Documents\\NetBeansProjects\\HOM-KLIN-NGERN\\src\\plus (1).png")); // NOI18N
         creatCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creatCatActionPerformed(evt);
             }
         });
 
-        btnCat.setBackground(new java.awt.Color(255, 255, 0));
+        btnCat.setBackground(new java.awt.Color(251, 210, 64));
+        btnCat.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnCat.setText("ต้มยำ");
         btnCat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCatActionPerformed(evt);
@@ -80,9 +83,9 @@ public class EDIT_MENU extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(btnCat, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(95, 95, 95)
+                .addGap(97, 97, 97)
                 .addComponent(creatCat, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(450, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +104,7 @@ public class EDIT_MENU extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 498, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 514, Short.MAX_VALUE)
                 .addComponent(Back, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -155,7 +158,7 @@ public class EDIT_MENU extends javax.swing.JFrame {
     }//GEN-LAST:event_BackActionPerformed
 
     //center internalFrame
-    public void ceterJIF(JInternalFrame jif){
+    public void centerJIF(JInternalFrame jif){
         desktop.add(jif);
         Dimension desktopSize = desktop.getSize();
         Dimension jInternalFrameSize = jif.getSize();
@@ -169,11 +172,17 @@ public class EDIT_MENU extends javax.swing.JFrame {
         newCat nc = new newCat();
         //desktop.add(nc);
         //nc.setVisible(true);
-        ceterJIF(nc);
+        centerJIF(nc);
     }//GEN-LAST:event_creatCatActionPerformed
 
     private void btnCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatActionPerformed
         // TODO add your handling code here:
+        CLICK_CATE c = new CLICK_CATE();
+        c.setVisible(true);
+        c.pack();
+        c.setLocationRelativeTo(null);
+        c.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        dispose();
     }//GEN-LAST:event_btnCatActionPerformed
 
     

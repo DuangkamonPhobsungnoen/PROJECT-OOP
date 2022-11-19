@@ -350,7 +350,7 @@ public class EDIT_MENU2 extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EDIT_MENU().setVisible(true);
+                new EDIT_MENU2().setVisible(true);
             }
         });
     }

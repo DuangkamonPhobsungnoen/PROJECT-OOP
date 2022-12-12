@@ -14,7 +14,7 @@ public class LoginView {
 
     public LoginView() {
         jf = new JFrame();
-        img = new ImageIcon("C:\\Users\\User\\Documents\\NetBeansProjects\\Project_oop\\src\\icon_noodle.png");
+        img = new ImageIcon("C:\\Users\\ADVICE_003\\Documents\\NetBeansProjects\\HOM-KLIN-NGERN\\src\\icon_noodle.png");
         jlimg = new JLabel(img);
         jlsign= new JLabel("Login...");
         jluser = new JLabel("Username");

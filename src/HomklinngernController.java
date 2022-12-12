@@ -10,11 +10,18 @@ public class HomklinngernController implements ActionListener {
     private LoginView loginview;
     private SignupView signupview;
     private HomeView homeview;
+    private MenuView menuview;
 
     public HomklinngernController() {
         loginview = new LoginView();
         signupview = new SignupView();
         homeview = new HomeView();
+        menuview = new MenuView();
+        
+        homeview.getJbcashier().addActionListener(this);
+        homeview.getJbmenu().addActionListener(this);
+        
+        menuview.getJbback().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
         signupview.getJbb().addActionListener(this);
@@ -88,6 +95,14 @@ public class HomklinngernController implements ActionListener {
             } catch (SQLException ex) {
                 Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if (e.getSource().equals(homeview.getJbcashier())){
+            menuview.getJf().setVisible(true);
+            homeview.getJf().dispose();
+        }
+        else if (e.getSource().equals(menuview.getJbback())){
+            homeview.getJf().setVisible(true);
+            menuview.getJf().dispose();
         }
     }
 

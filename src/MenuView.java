@@ -3,13 +3,13 @@ import javax.swing.*;
 import javax.xml.parsers.FactoryConfigurationError;
 public class MenuView {
     private JFrame jf;
-    private JPanel jphead, jphtext, jphback, jpcombo, jptable, jpbadd, jpleft, jpright, jpbill, jppay, jpbutton, jpgroup, jporder, jptable1, jgrouptable;
+    private JPanel jphead, jphtext, jphback, jpcombo, jptable, jpbadd, jpleft, jpright, jpbill, jppay, jpbutton, jpgroup, jptable1, jgrouptable;
     private JComboBox jcbmenu;
     private JTextArea jtabill;
     private JLabel jlhtext, jlpay;
     private JTextField jtfpay;
     private JTable jtmenu, jtorder;
-    private JButton jbback, jbadd, jbbill, jbclear, jbprint;
+    private JButton jbback, jbadd, jbbill, jbclear, jbprint, jbdelete;
     
     public MenuView(){
         jf = new JFrame();
@@ -26,7 +26,6 @@ public class MenuView {
         jppay = new JPanel();
         jpbutton = new JPanel();
         jpgroup = new JPanel();
-        jporder = new JPanel();
         jptable1 = new JPanel();
         jgrouptable = new JPanel();
         
@@ -46,6 +45,7 @@ public class MenuView {
         jbbill = new JButton("BILL");
         jbclear = new JButton("CLEAR");
         jbprint = new JButton("PRINT BILL");
+        jbdelete = new JButton("DELETE");
         
         // tablemenu
         jptable.setLayout(new BoxLayout(jptable, BoxLayout.Y_AXIS));
@@ -79,7 +79,9 @@ public class MenuView {
         jpleft.setLayout(new BorderLayout());
         jpcombo.add(jcbmenu);
         jptable.add(jtmenu);   
+        jpbadd.setLayout(new FlowLayout());
         jpbadd.add(jbadd);
+        jpbadd.add(jbdelete);
         jpleft.add(jpcombo, BorderLayout.NORTH);
         jpleft.add(jgrouptable, BorderLayout.CENTER);
         jpleft.add(jpbadd, BorderLayout.SOUTH);
@@ -115,6 +117,7 @@ public class MenuView {
         jtmenu.setBackground(new Color(28, 64, 121));
         jtmenu.getTableHeader().setBackground(new Color(28, 64, 121));
         jbadd.setBackground(new Color(255, 204, 0));
+        jbdelete.setBackground(new Color(28, 64, 121));
         jptable.setBackground(new Color(28, 64, 121));
         jptable1.setBackground(new Color(255, 204, 0));
         jtorder.setBackground(new Color(255, 204, 0));
@@ -141,6 +144,7 @@ public class MenuView {
         jtmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jtmenu.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbadd.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+        jbdelete.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jtorder.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jtorder.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         
@@ -160,6 +164,7 @@ public class MenuView {
         jbprint.setForeground(Color.WHITE);
         jtmenu.setForeground(Color.WHITE);
         jtmenu.getTableHeader().setForeground(Color.WHITE);
+        jbdelete.setForeground(Color.WHITE);
         
         
         // set table grid

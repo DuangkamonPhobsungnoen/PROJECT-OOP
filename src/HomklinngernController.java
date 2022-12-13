@@ -10,19 +10,19 @@ public class HomklinngernController implements ActionListener {
     private LoginView loginview;
     private SignupView signupview;
     private HomeView homeview;
-    private MenuView menuview;
+    private CashierView cashierview;
     private boolean selected;
 
     public HomklinngernController() {
         loginview = new LoginView();
         signupview = new SignupView();
         homeview = new HomeView();
-        menuview = new MenuView();
+        cashierview = new CashierView();
 
         homeview.getJbcashier().addActionListener(this);
         homeview.getJbmenu().addActionListener(this);
         homeview.getJbback().addActionListener(this);
-        menuview.getJbback().addActionListener(this);
+        cashierview.getJbback().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
         loginview.getJcheckb().addActionListener(this);
@@ -32,9 +32,12 @@ public class HomklinngernController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        // กดปุ่ม sign up
         if (e.getSource() == (loginview.getJbsign())) {
             signupview.getJf().setVisible(true);
             loginview.getJf().dispose();
+            
+        // กดปุ่ม back ใน sign up
         } else if (e.getSource() == (signupview.getJbb())) {
             loginview.getJf().setVisible(true);
             signupview.getJf().dispose();
@@ -42,6 +45,8 @@ public class HomklinngernController implements ActionListener {
             signupview.getJtuser().setText("");
             signupview.getJpass().setText("");
             signupview.getJcpass().setText("");
+            
+        // กดปุ่ม register ใน sign up
         } else if (e.getSource() == (signupview.getJbregis())) {
             String name = signupview.getJtname().getText();
             String username = signupview.getJtuser().getText();
@@ -77,6 +82,8 @@ public class HomklinngernController implements ActionListener {
             } catch (SQLException ex) {
                 Logger.getLogger(SignupView.class.getName()).log(Level.SEVERE, null, ex);
             }
+        
+        // กดปุ่ม login ใน login
         } else if (e.getSource() == (loginview.getJblogin())) {
             PreparedStatement ps;
             ResultSet rs;
@@ -98,12 +105,16 @@ public class HomklinngernController implements ActionListener {
                 Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        
+        // ไป cashier
         if (e.getSource().equals(homeview.getJbcashier())) {
-            menuview.getJf().setVisible(true);
+            cashierview.getJf().setVisible(true);
             homeview.getJf().dispose();
-        } else if (e.getSource().equals(menuview.getJbback())) {
+        
+        // 
+        } else if (e.getSource().equals(cashierview.getJbback())) {
             homeview.getJf().setVisible(true);
-            menuview.getJf().dispose();
+            cashierview.getJf().dispose();
         } else if (e.getSource().equals(homeview.getJbback())) {
             selected = loginview.getJcheckb().isSelected(); //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
 //            System.out.println(selected); //test true, false

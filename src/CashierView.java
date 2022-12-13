@@ -1,7 +1,8 @@
 import java.awt.*;
 import javax.swing.*;
 import javax.xml.parsers.FactoryConfigurationError;
-public class MenuView {
+
+public class CashierView {
     private JFrame jf;
     private JPanel jphead, jphtext, jphback, jpcombo, jptable, jpbadd, jpleft, jpright, jpbill, jppay, jpbutton, jpgroup, jptable1, jgrouptable;
     private JComboBox jcbmenu;
@@ -11,7 +12,7 @@ public class MenuView {
     private JTable jtmenu, jtorder;
     private JButton jbback, jbadd, jbbill, jbclear, jbprint, jbdelete;
     
-    public MenuView(){
+    public CashierView(){
         jf = new JFrame();
         
         jphead = new JPanel();
@@ -196,7 +197,7 @@ public class MenuView {
         
     }
     public static void main(String[] args) {
-        new MenuView();
+        new CashierView();
     }
 
     public JFrame getJf() {

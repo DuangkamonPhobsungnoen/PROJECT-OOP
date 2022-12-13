@@ -14,7 +14,7 @@ public class SignupView {
 
     public SignupView() {
         jf = new JFrame();
-        img = new ImageIcon("C:\\Users\\ADVICE_003\\Documents\\NetBeansProjects\\HOM-KLIN-NGERN\\src\\icon_username.png");
+        img = new ImageIcon("icon_username.png");
         jlnameh = new JLabel("Name");
         jlname = new JLabel("HOM KLIN NGERN");
         jlimg = new JLabel(img);

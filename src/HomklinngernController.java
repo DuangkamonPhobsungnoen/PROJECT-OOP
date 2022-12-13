@@ -11,19 +11,21 @@ public class HomklinngernController implements ActionListener {
     private SignupView signupview;
     private HomeView homeview;
     private MenuView menuview;
+    private boolean selected;
 
     public HomklinngernController() {
         loginview = new LoginView();
         signupview = new SignupView();
         homeview = new HomeView();
         menuview = new MenuView();
-        
+
         homeview.getJbcashier().addActionListener(this);
         homeview.getJbmenu().addActionListener(this);
-        
+        homeview.getJbback().addActionListener(this);
         menuview.getJbback().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
+        loginview.getJcheckb().addActionListener(this);
         signupview.getJbb().addActionListener(this);
         signupview.getJbregis().addActionListener(this);
     }
@@ -96,13 +98,26 @@ public class HomklinngernController implements ActionListener {
                 Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (e.getSource().equals(homeview.getJbcashier())){
+        if (e.getSource().equals(homeview.getJbcashier())) {
             menuview.getJf().setVisible(true);
             homeview.getJf().dispose();
-        }
-        else if (e.getSource().equals(menuview.getJbback())){
+        } else if (e.getSource().equals(menuview.getJbback())) {
             homeview.getJf().setVisible(true);
             menuview.getJf().dispose();
+        } else if (e.getSource().equals(homeview.getJbback())) {
+            selected = loginview.getJcheckb().isSelected(); //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
+//            System.out.println(selected); //test true, false
+            if (selected) { //true
+                loginview.getJf().setVisible(true);
+                homeview.getJf().dispose();
+                System.out.println("Save password");
+            } else { //false
+                loginview.getJf().setVisible(true);
+                homeview.getJf().dispose();
+                loginview.getJtuser().setText("");
+                loginview.getJpass().setText("");
+
+            }
         }
     }
 

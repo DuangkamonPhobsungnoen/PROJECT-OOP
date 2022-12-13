@@ -2,24 +2,27 @@ import java.awt.*;
 import javax.swing.*;
 public class HomeView {
     private JFrame jf;
-    private JPanel jphead, jphtext, jpicon, jptext1, jptext2, jpgrouptext;
-    private JButton jbcashier, jbmenu;
+    private JPanel jphead, jphtext, jpicon, jptext1, jptext2, jpgrouptext, jphback;
+    private JButton jbcashier, jbmenu, jbback;
     private JLabel jlhname, jlcashier, jlmenu;
     
     public HomeView(){
         jf = new JFrame("Menu");
         
         jphead = new JPanel();
+        jphback  = new JPanel();
         jphtext = new JPanel();
         jpicon = new JPanel();
         jptext1 = new JPanel();
         jptext2 = new JPanel();
         jpgrouptext = new JPanel();
         
+        
         ImageIcon imgcashier = new ImageIcon("cashier.png");
         ImageIcon imgmenu = new ImageIcon("menu.png");
         jbcashier = new JButton(imgcashier);
         jbmenu = new JButton(imgmenu);
+        jbback = new JButton("BACK");
         
         jlhname = new JLabel("HOM-KLIN-NGERN");
         jlcashier = new JLabel("CASHIER");
@@ -28,7 +31,10 @@ public class HomeView {
         // head
         jphead.setLayout(new BorderLayout());
         jphtext.add(jlhname);
+         jphback.add(jbback);
         jphead.add(jphtext, BorderLayout.WEST);
+        jphead.add(jphback, BorderLayout.EAST);
+       
         
         // button select menu/cashier
         jpicon.setLayout(new FlowLayout());
@@ -49,6 +55,8 @@ public class HomeView {
         //background
         jphead.setBackground(new Color(28, 64, 121));
         jphtext.setBackground(new Color(28, 64, 121));
+        jphback.setBackground(new Color(28, 64, 121));
+        jbback.setBackground(Color.WHITE);
         
         jbcashier.setBackground(new Color(255, 204, 0));
         jbmenu.setBackground(new Color(255, 204, 0));
@@ -62,6 +70,7 @@ public class HomeView {
         jlhname.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
         jlcashier.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
         jlmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
+        jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         
         // Font color
         jlhname.setForeground(new Color(255, 204, 0));
@@ -71,7 +80,7 @@ public class HomeView {
         jf.add(jphead, BorderLayout.NORTH);
         jf.add(jpicon, BorderLayout.CENTER);
         jf.add(jpgrouptext, BorderLayout.SOUTH);
-        jf.setVisible(true);
+        jf.setVisible(false);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setSize(720, 400);
         jf.setResizable(false);
@@ -175,6 +184,14 @@ public class HomeView {
 
     public void setJlmenu(JLabel jlmenu) {
         this.jlmenu = jlmenu;
+    }
+
+    public JButton getJbback() {
+        return jbback;
+    }
+
+    public void setJbback(JButton jbback) {
+        this.jbback = jbback;
     }
     
     

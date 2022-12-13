@@ -11,6 +11,7 @@ public class LoginView {
     private JButton jbsign, jblogin;
     private ImageIcon img;
     private JPanel jp, jpgroup, jpleft, jplefts, jplefti, jpright, jprightgu, jprightgp, jprightlower, jprightgbt, jprighttop, jpleftn;
+    private JCheckBox jcheckb;
 
     public LoginView() {
         jf = new JFrame();
@@ -36,6 +37,7 @@ public class LoginView {
         jprightgbt = new JPanel();
         jprighttop = new JPanel();
         jpleftn = new JPanel();
+         jcheckb = new JCheckBox("Remember me?");
         //name
         jprighttop.add(jlname);
         jp.setLayout(new GridLayout(1, 2));
@@ -68,6 +70,7 @@ public class LoginView {
         jlpass.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
         jbsign.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
         jblogin.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+         jcheckb.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
         //ปรับสีพื้นหลัง
         jplefti.setBackground(new Color(255, 204, 0));
         jpleftn.setBackground(new Color(255, 204, 0));
@@ -77,6 +80,7 @@ public class LoginView {
         jprightgp.setBackground(new Color(255, 204, 0));
         jprightgu.setBackground(new Color(255, 204, 0));
         jprighttop.setBackground(new Color(255, 204, 0));
+         jcheckb.setBackground(new Color(255, 204, 0));
         //ปรับสีปุ่ม
         jbsign.setBackground(new Color(28, 64, 121));
         jblogin.setBackground(new Color(28, 64, 121));
@@ -91,6 +95,7 @@ public class LoginView {
         //ปรับสี JTextField
         jtuser.setBackground(new Color(255, 251, 235));
         jpass.setBackground(new Color(255, 251, 235));
+        jprightlower.add(jcheckb);
         jpright.add(jprighttop);
         jpright.add(jprightgu);
         jpright.add(jprightgp);
@@ -289,6 +294,14 @@ public class LoginView {
 
     public void setJpleftn(JPanel jpleftn) {
         this.jpleftn = jpleftn;
+    }
+
+    public JCheckBox getJcheckb() {
+        return jcheckb;
+    }
+
+    public void setJcheckb(JCheckBox jcheckb) {
+        this.jcheckb = jcheckb;
     }
 
     public static void main(String[] args) {

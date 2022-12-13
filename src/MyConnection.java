@@ -17,5 +17,8 @@ public class MyConnection {
         
         return con;
     }
+    public static void main(String[] args) {
+        getConnection();
+    }
     
 }    

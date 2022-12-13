@@ -1,9 +1,13 @@
 
+import java.util.List;
 import java.awt.event.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class HomklinngernController implements ActionListener {
 
@@ -13,6 +17,12 @@ public class HomklinngernController implements ActionListener {
     private CashierView cashierview;
     private CategoryView categoryview;
     private boolean selected;
+    private String username;
+    private String shopName;
+
+    private String[][] myOrder = {};
+    private String orderName;
+    private String orderPrice;
 
     public HomklinngernController() {
         loginview = new LoginView();
@@ -25,6 +35,9 @@ public class HomklinngernController implements ActionListener {
         homeview.getJbmenu().addActionListener(this);
         homeview.getJbback().addActionListener(this);
         cashierview.getJbback().addActionListener(this);
+        cashierview.getJbmenu().addActionListener(this);
+        cashierview.getJbadd().addActionListener(this);
+        cashierview.getJbclear().addActionListener(this);
         categoryview.getJbback().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
@@ -35,12 +48,12 @@ public class HomklinngernController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        // กดปุ่ม sign up
+        // กดปุ่ม sign up ใน login
         if (e.getSource() == (loginview.getJbsign())) {
             signupview.getJf().setVisible(true);
             loginview.getJf().dispose();
-            
-        // กดปุ่ม back ใน sign up
+
+            // กดปุ่ม back ใน sign up
         } else if (e.getSource() == (signupview.getJbb())) {
             loginview.getJf().setVisible(true);
             signupview.getJf().dispose();
@@ -48,18 +61,18 @@ public class HomklinngernController implements ActionListener {
             signupview.getJtuser().setText("");
             signupview.getJpass().setText("");
             signupview.getJcpass().setText("");
-            
-        // กดปุ่ม register ใน sign up
+
+            // กดปุ่ม register ใน sign up
         } else if (e.getSource() == (signupview.getJbregis())) {
             String name = signupview.getJtname().getText();
-            String username = signupview.getJtuser().getText();
+            String uname = signupview.getJtuser().getText();
             String password = String.valueOf(signupview.getJpass().getPassword());
             String confirm = String.valueOf(signupview.getJcpass().getPassword());
             int count = 0;
             if (name.equals("")) {
                 JOptionPane.showMessageDialog(null, "Add a name");
                 count += 1;
-            } else if (username.equals("")) {
+            } else if (uname.equals("")) {
                 JOptionPane.showMessageDialog(null, "Add a username");
                 count += 1;
             } else if (password.equals("") | password.equals("jPasswordField1")) {
@@ -75,7 +88,7 @@ public class HomklinngernController implements ActionListener {
                 if (count == 0) {
                     ps = MyConnection.getConnection().prepareStatement(query);
                     ps.setString(1, name);
-                    ps.setString(2, username);
+                    ps.setString(2, uname);
                     ps.setString(3, password);
                     ps.setString(4, confirm);
                     if (ps.executeUpdate() > 0) {
@@ -85,8 +98,8 @@ public class HomklinngernController implements ActionListener {
             } catch (SQLException ex) {
                 Logger.getLogger(SignupView.class.getName()).log(Level.SEVERE, null, ex);
             }
-        
-        // กดปุ่ม login ใน login
+
+            // กดปุ่ม login ใน login
         } else if (e.getSource() == (loginview.getJblogin())) {
             PreparedStatement ps;
             ResultSet rs;
@@ -99,11 +112,14 @@ public class HomklinngernController implements ActionListener {
                 ps.setString(2, pass);
                 rs = ps.executeQuery();
                 if (rs.next()) {
+                    //เก็บ username แลพ shopName ปัจจุบัน
+                    username = rs.getString("Username");
+                    shopName = rs.getString("ShopName");
                     //ตั้งให้ขึ้นชื่อร้าน
-                    homeview.getJlhname().setText(rs.getString("ShopName"));
-                    cashierview.getJlhtext().setText(rs.getString("ShopName")); 
-                    categoryview.getJltext().setText(rs.getString("ShopName")); 
-                    
+                    homeview.getJlhname().setText(shopName);
+                    cashierview.getJlhtext().setText(shopName);
+                    categoryview.getJltext().setText(shopName);
+
                     homeview.getJf().setVisible(true);
                     loginview.getJf().dispose();
                 } else {
@@ -113,49 +129,180 @@ public class HomklinngernController implements ActionListener {
                 Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         // ปุ่ม cashier ใน home
         if (e.getSource().equals(homeview.getJbcashier())) {
-            cashierview.getJf().setVisible(true);
+            //สร้างข้อมูลหน้า cashier
+
+            //ส่วน combobox
+            PreparedStatement ps;
+            ResultSet rs;
+            String query = "SELECT * FROM `category` WHERE `username_cate` =?";
+            //ดึง ตาราง category
+            try {
+                ps = MyConnection.getConnection().prepareStatement(query);
+                ps.setString(1, username);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String cate = rs.getString("category_cate"); //ดึง cloumn category_cate
+                    cashierview.getJcbmenu().addItem(cate);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(HomklinngernController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            //ส่วนตราง
+            Show_Menu_Cashier(); // method อยู่ด้านล่าง
+            
+            // เก็บเมนูส่วนที่คลิก
+            cashierview.getJtmenu().addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    int i = cashierview.getJtmenu().getSelectedRow();
+                    TableModel model = cashierview.getJtmenu().getModel();
+                    orderName = model.getValueAt(i, 0).toString();
+                    orderPrice = model.getValueAt(i, 1).toString();
+//                    System.out.println("Name " + orderName + " Price " + orderPrice);
+                }
+            }
+        );
+            
+        cashierview.getJf().setVisible(true);
+        homeview.getJf().dispose();
+    } 
+
+    // ปุ่ม get menu ใน chasier / สร้างตารางตาม category ที่เลือก
+    else if (e.getSource ().equals(cashierview.getJbmenu())) {
+        Show_Menu_Cashier(); // รันใหม่ตาม cat ใหม่
+    } 
+    
+    // ปุ่ม add ใน cashier
+    else if (e.getSource ().equals(cashierview.getJbadd())) {
+        Show_Order_Cashier();
+    } 
+    
+    // ปุ่ม clear ใน cashier
+    else if (e.getSource ().equals(cashierview.getJbclear())) {
+        DefaultTableModel model = (DefaultTableModel) cashierview.getJtorder().getModel();
+        model.setRowCount(0);
+    } 
+
+    // ปุ่ม menu ใน home
+    else if (e.getSource ().equals(homeview.getJbmenu())) {
+        categoryview.getJf().setVisible(true);
+        homeview.getJf().dispose();
+    } 
+
+    // ปุ่ม back ใน cashier
+    else if (e.getSource ().equals(cashierview.getJbback())) {
+        homeview.getJf().setVisible(true);
+        cashierview.getJf().dispose();
+    } 
+
+    // ปุ่ม back ใน category
+    else if (e.getSource ().equals(categoryview.getJbback())) {
+        homeview.getJf().setVisible(true);
+        categoryview.getJf().dispose();
+    } 
+
+    // ปุ่ม back ใน home
+    else if (e.getSource () 
+        .equals(homeview.getJbback())) {
+            selected = loginview.getJcheckb().isSelected();
+        //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
+//            System.out.println(selected); //test true, false
+        if (selected) { //true
+            loginview.getJf().setVisible(true);
             homeview.getJf().dispose();
+            System.out.println("Save password");
+        } else { //false
+            loginview.getJf().setVisible(true);
+            homeview.getJf().dispose();
+            loginview.getJtuser().setText("");
+            loginview.getJpass().setText("");
+        }
+    }
+}
+
+// สำหรับ menu ในหน้า cashier
+public ArrayList<Menu> getMenuList() {
+        //ดึง database ตาราง menu ใส่ array
+        ArrayList<Menu> menuList = new ArrayList<Menu>();
+        PreparedStatement ps;
+        ResultSet rs;
+        //ดึง ตาราง menu
+        String query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
+        try {
+            String cat = String.valueOf(cashierview.getJcbmenu().getSelectedItem());
+            ps = MyConnection.getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, cat);
+            rs = ps.executeQuery();
+            Menu menu;
+            while (rs.next()) {
+                menu = new Menu(rs.getString("name"), rs.getInt("price"));
+                menuList.add(menu);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return menuList;
+    }
+
+    public void Show_Menu_Cashier() {
+        // ดึงจาก array มาแสดง
+        ArrayList<Menu> list = getMenuList();
+        DefaultTableModel model = (DefaultTableModel) cashierview.getJtmenu().getModel();
+        model.setRowCount(0); //ถ้าไม่มีบรรทัดนี้ เมนูจะเพิ่มต่อกันเรื่อยๆ
+        Object[] row = new Object[2];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getName();
+            row[1] = list.get(i).getPrice();
+            model.addRow(row);
+        }
+    }
+
+    // สำหรับตารางอาหารที่เลือก  เก็บเป็น list ซ้อน list
+    public List<List> getOrderList() {
+        //ดึง database ตาราง menu ใส่ array
+        List<List> orderList = new ArrayList<>();
+        ArrayList order = new ArrayList();
+        boolean first = true;
+        
+        // loop หา order ซ้ำ
+        for(List innerlist : orderList){
+            System.out.println("hey");
+            if(innerlist.get(0).toString().equals(orderName)){
+                int num = (int)innerlist.get(2);
+                innerlist.set(2,num++);
+                first = false;
+            }
+        }
+        if(first){
+            System.out.println("first");
+            order.add(orderName);
+            order.add(orderPrice);
+            order.add(1);
+            orderList.add(order);
         }
         
-        // ปุ่ม cashier ใน home
-        else if (e.getSource().equals(homeview.getJbmenu())) {
-            categoryview.getJf().setVisible(true);
-            homeview.getJf().dispose();
-        } 
-        
-        // ปุ่ม back ใน cashier
-        else if (e.getSource().equals(cashierview.getJbback())) {
-            homeview.getJf().setVisible(true);
-            cashierview.getJf().dispose();
-        } 
-        
-        // ปุ่ม back ใน category
-        else if (e.getSource().equals(categoryview.getJbback())) {
-            homeview.getJf().setVisible(true);
-            categoryview.getJf().dispose();
-        } 
-        
-        // ปุ่ม back ใน home
-        else if (e.getSource().equals(homeview.getJbback())) {
-            selected = loginview.getJcheckb().isSelected(); 
-            //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
-//            System.out.println(selected); //test true, false
-            if (selected) { //true
-                loginview.getJf().setVisible(true);
-                homeview.getJf().dispose();
-                System.out.println("Save password");
-            } else { //false
-                loginview.getJf().setVisible(true);
-                homeview.getJf().dispose();
-                loginview.getJtuser().setText("");
-                loginview.getJpass().setText("");
+        return orderList;
+    }
 
+    // แสดงตารางตามข้อมูลใน list
+    public void Show_Order_Cashier() {
+        // ดึงจาก array มาแสดง
+        if(orderName != null){ //ต้องกดเลือกก่อน
+            List<List> list = getOrderList();
+            DefaultTableModel model = (DefaultTableModel) cashierview.getJtorder().getModel();
+            Object[] row = new Object[2];		
+            for(List innerlist : list){
+                row[0] = innerlist.get(0);
+                row[1] = innerlist.get(1);
+                model.addRow(row);
             }
         }
     }
+
 
     public static void main(String[] args) {
         new HomklinngernController();

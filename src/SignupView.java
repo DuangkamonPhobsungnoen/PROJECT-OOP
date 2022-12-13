@@ -15,7 +15,7 @@ public class SignupView {
     public SignupView() {
         jf = new JFrame();
         img = new ImageIcon("icon_username.png");
-        jlnameh = new JLabel("Name");
+        jlnameh = new JLabel("Restaurant Name");
         jlname = new JLabel("HOM KLIN NGERN");
         jlimg = new JLabel(img);
         jluser = new JLabel("Username");

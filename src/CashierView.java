@@ -1,8 +1,11 @@
+
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import javax.xml.parsers.FactoryConfigurationError;
 
 public class CashierView {
+
     private JFrame jf;
     private JPanel jphead, jphtext, jphback, jpcombo, jptable, jpbadd, jpleft, jpright, jpbill, jppay, jpbutton, jpgroup, jptable1, jgrouptable;
     private JComboBox jcbmenu;
@@ -10,11 +13,11 @@ public class CashierView {
     private JLabel jlhtext, jlpay;
     private JTextField jtfpay;
     private JTable jtmenu, jtorder;
-    private JButton jbback, jbadd, jbbill, jbclear, jbprint, jbdelete;
-    
-    public CashierView(){
+    private JButton jbmenu, jbback, jbadd, jbbill, jbclear, jbprint, jbdelete;
+
+    public CashierView() {
         jf = new JFrame();
-        
+
         jphead = new JPanel();
         jphtext = new JPanel();
         jphback = new JPanel();
@@ -29,91 +32,104 @@ public class CashierView {
         jpgroup = new JPanel();
         jptable1 = new JPanel();
         jgrouptable = new JPanel();
-        
+
         jcbmenu = new JComboBox();
-        jcbmenu.addItem("noodle");
-        
+
         jtabill = new JTextArea(20, 30);
-        JScrollPane jspbill = new JScrollPane(jtabill, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        
+//        JScrollPane jspbill = new JScrollPane(jtabill, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+
         jlhtext = new JLabel("HOM-KLIN-NGERN");
         jlpay = new JLabel("PAY");
-        
+
         jtfpay = new JTextField(10);
-        
+
         jbback = new JButton("BACK");
         jbadd = new JButton("ADD");
         jbbill = new JButton("BILL");
         jbclear = new JButton("CLEAR");
         jbprint = new JButton("PRINT BILL");
         jbdelete = new JButton("DELETE");
-        
+        jbmenu = new JButton("GET MENU");
+
         // tablemenu
         jptable.setLayout(new BoxLayout(jptable, BoxLayout.Y_AXIS));
-        String[] columnNames = { "Menu", "Price" };
-        Object[][] data = {{ "Soup", "45"},{"Coca - cola", "20"}};
-        jtmenu = new JTable(data, columnNames);
-
+        String[] columnNames = {"Menu", "Price"};
+        Object[][] data = {};
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            } // คำสั่งที่ทำให้แก้ไขตารางไม่ได้
+        };
+        jtmenu = new JTable(tableModel);
+        
         jptable.add(jtmenu.getTableHeader(), BorderLayout.PAGE_START);
         jptable.add(jtmenu);
-        
+
         jptable1.setLayout(new BoxLayout(jptable1, BoxLayout.Y_AXIS));
-        String[] columnNames1 = { "Menu", "Price" };
-        Object[][] data1 = {{ "Soup", "45"},{"Coca - cola", "20"}};
-        jtorder = new JTable(data1, columnNames1);
+        String[] columnNames2 = {"Menu", "Price"};
+        Object[][] data2 = {};
+        DefaultTableModel tableModel2 = new DefaultTableModel(data2, columnNames2) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            } // คำสั่งที่ทำให้แก้ไขตารางไม่ได้
+        };
+        jtorder = new JTable(tableModel2);
 
         jptable1.add(jtorder.getTableHeader(), BorderLayout.PAGE_START);
         jptable1.add(jtorder);
-        
+
         // head
         jphead.setLayout(new BorderLayout());
         jphtext.add(jlhtext);
         jphback.add(jbback);
         jphead.add(jphtext, BorderLayout.WEST);
         jphead.add(jphback, BorderLayout.EAST);
-        
+
         // option left
         jgrouptable.setLayout(new GridLayout());
         jgrouptable.add(jptable);
         jgrouptable.add(jptable1);
-        
+
         jpleft.setLayout(new BorderLayout());
         jpcombo.add(jcbmenu);
-        jptable.add(jtmenu);   
+        jpcombo.add(jbmenu);
+        jptable.add(jtmenu);
         jpbadd.setLayout(new FlowLayout());
         jpbadd.add(jbadd);
         jpbadd.add(jbdelete);
         jpleft.add(jpcombo, BorderLayout.NORTH);
         jpleft.add(jgrouptable, BorderLayout.CENTER);
         jpleft.add(jpbadd, BorderLayout.SOUTH);
-        
+
         //option right
         jppay.setLayout(new FlowLayout());
         jppay.add(jlpay);
         jppay.add(jtfpay);
         jppay.add(jbbill);
-        
+
         jpbutton.setLayout(new FlowLayout());
         jpbutton.add(jbclear);
         jpbutton.add(jbprint);
-                
+
         jpright.setLayout(new BorderLayout());
-        jpbill.add(jspbill); 
+        jpbill.add(jtabill);
         jpright.add(jpbill, BorderLayout.NORTH);
         jpright.add(jppay, BorderLayout.CENTER);
         jpright.add(jpbutton, BorderLayout.SOUTH);
-        
+
         // left + right
-        jpgroup.setLayout(new GridLayout(1,2));
+        jpgroup.setLayout(new GridLayout(1, 2));
         jpgroup.add(jpleft);
         jpgroup.add(jpright);
-        
+
         // setBackground
         jphead.setBackground(new Color(28, 64, 121));
         jphtext.setBackground(new Color(28, 64, 121));
         jphback.setBackground(new Color(28, 64, 121));
         jbback.setBackground(Color.WHITE);
-        
+
         jcbmenu.setBackground(new Color(255, 204, 0));
         jtmenu.setBackground(new Color(28, 64, 121));
         jtmenu.getTableHeader().setBackground(new Color(28, 64, 121));
@@ -123,24 +139,22 @@ public class CashierView {
         jptable1.setBackground(new Color(255, 204, 0));
         jtorder.setBackground(new Color(255, 204, 0));
         jtorder.getTableHeader().setBackground(new Color(255, 204, 0));
-        
+
         jtabill.setBackground(new Color(28, 64, 121));
         jbbill.setBackground(new Color(28, 64, 121));
         jbclear.setBackground(new Color(28, 64, 121));
         jbprint.setBackground(new Color(28, 64, 121));
-        
+
         jpcombo.setBackground(Color.WHITE);
         jpbadd.setBackground(Color.WHITE);
         jppay.setBackground(Color.WHITE);
         jpbutton.setBackground(Color.WHITE);
         jpbill.setBackground(Color.WHITE);
-        
-        
-        
+
         // set Font
         jlhtext.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
         jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        
+
         jcbmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jtmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jtmenu.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
@@ -148,15 +162,13 @@ public class CashierView {
         jbdelete.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jtorder.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jtorder.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        
+
         jtabill.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbbill.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbclear.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbprint.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jlpay.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-       
 
-        
         // set ColorFont
         jlhtext.setForeground(new Color(255, 204, 0));
         jtabill.setForeground(Color.WHITE);
@@ -166,14 +178,13 @@ public class CashierView {
         jtmenu.setForeground(Color.WHITE);
         jtmenu.getTableHeader().setForeground(Color.WHITE);
         jbdelete.setForeground(Color.WHITE);
-        
-        
+
         // set table grid
         jtmenu.setShowGrid(false);
         jtmenu.setRowHeight(25);
         jtorder.setShowGrid(false);
         jtorder.setRowHeight(25);
-        
+
         jf.add(jphead, BorderLayout.NORTH);
         jf.add(jpgroup);
         jf.setVisible(false);
@@ -181,8 +192,7 @@ public class CashierView {
         jf.setSize(820, 550);
         jf.setResizable(false);
         jf.setLocationRelativeTo(null);
-        
-        
+
         //Receipt bill
 //        jtabill.setText("-----------------------------------------------------------------------\n"
 //               + "\t" + "HOM  - GIN - GRUEN \n"
@@ -191,11 +201,8 @@ public class CashierView {
 //               + "\t" + "City Name, State 64321\n" 
 //               + "\t" + "       " + "023-334-2345\n"
 //               + "-----------------------------------------------------------------------\n");
-                     	   
-         
-        
-        
     }
+
     public static void main(String[] args) {
         new CashierView();
     }
@@ -391,6 +398,14 @@ public class CashierView {
     public void setJbprint(JButton jbprint) {
         this.jbprint = jbprint;
     }
+
+    public JButton getJbmenu() {
+        return jbmenu;
+    }
+
+    public JTable getJtorder() {
+        return jtorder;
+    }
     
-    
+
 }

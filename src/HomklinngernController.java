@@ -62,7 +62,7 @@ public class HomklinngernController implements ActionListener {
                 count += 1;
             }
             PreparedStatement ps;
-            String query = "INSERT INTO `member`(`Member_Name`, `Member_Username`, `Member_Password`, `Member_Comfirm`) VALUES (?, ?, ?, ?)";
+            String query = "INSERT INTO `member`(`ShopName`, `Username`, `Password`, `Comfirm`) VALUES (?, ?, ?, ?)";
             try {
                 if (count == 0) {
                     ps = MyConnection.getConnection().prepareStatement(query);
@@ -82,7 +82,7 @@ public class HomklinngernController implements ActionListener {
             ResultSet rs;
             String uname = loginview.getJtuser().getText();
             String pass = String.valueOf(loginview.getJpass().getPassword());
-            String query = "SELECT * FROM `member` WHERE `Member_Username` =? AND `Member_Password` =?";
+            String query = "SELECT * FROM `member` WHERE `Username` =? AND `Password` =?";
             try {
                 ps = MyConnection.getConnection().prepareStatement(query);
                 ps.setString(1, uname);

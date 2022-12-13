@@ -11,6 +11,7 @@ public class HomklinngernController implements ActionListener {
     private SignupView signupview;
     private HomeView homeview;
     private CashierView cashierview;
+    private CategoryView categoryview;
     private boolean selected;
 
     public HomklinngernController() {
@@ -18,11 +19,13 @@ public class HomklinngernController implements ActionListener {
         signupview = new SignupView();
         homeview = new HomeView();
         cashierview = new CashierView();
+        categoryview = new CategoryView();
 
         homeview.getJbcashier().addActionListener(this);
         homeview.getJbmenu().addActionListener(this);
         homeview.getJbback().addActionListener(this);
         cashierview.getJbback().addActionListener(this);
+        categoryview.getJbback().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
         loginview.getJcheckb().addActionListener(this);
@@ -96,6 +99,11 @@ public class HomklinngernController implements ActionListener {
                 ps.setString(2, pass);
                 rs = ps.executeQuery();
                 if (rs.next()) {
+                    //ตั้งให้ขึ้นชื่อร้าน
+                    homeview.getJlhname().setText(rs.getString("ShopName"));
+                    cashierview.getJlhtext().setText(rs.getString("ShopName")); 
+                    categoryview.getJltext().setText(rs.getString("ShopName")); 
+                    
                     homeview.getJf().setVisible(true);
                     loginview.getJf().dispose();
                 } else {
@@ -106,17 +114,34 @@ public class HomklinngernController implements ActionListener {
             }
         }
         
-        // ไป cashier
+        // ปุ่ม cashier ใน home
         if (e.getSource().equals(homeview.getJbcashier())) {
             cashierview.getJf().setVisible(true);
             homeview.getJf().dispose();
+        }
         
-        // 
-        } else if (e.getSource().equals(cashierview.getJbback())) {
+        // ปุ่ม cashier ใน home
+        else if (e.getSource().equals(homeview.getJbmenu())) {
+            categoryview.getJf().setVisible(true);
+            homeview.getJf().dispose();
+        } 
+        
+        // ปุ่ม back ใน cashier
+        else if (e.getSource().equals(cashierview.getJbback())) {
             homeview.getJf().setVisible(true);
             cashierview.getJf().dispose();
-        } else if (e.getSource().equals(homeview.getJbback())) {
-            selected = loginview.getJcheckb().isSelected(); //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
+        } 
+        
+        // ปุ่ม back ใน category
+        else if (e.getSource().equals(categoryview.getJbback())) {
+            homeview.getJf().setVisible(true);
+            categoryview.getJf().dispose();
+        } 
+        
+        // ปุ่ม back ใน home
+        else if (e.getSource().equals(homeview.getJbback())) {
+            selected = loginview.getJcheckb().isSelected(); 
+            //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
 //            System.out.println(selected); //test true, false
             if (selected) { //true
                 loginview.getJf().setVisible(true);

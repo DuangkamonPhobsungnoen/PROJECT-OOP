@@ -79,7 +79,7 @@ public class CategoryView {
         jf.add(jpbig);
 
         jf.setSize(820, 550);
-        jf.setVisible(true);
+        jf.setVisible(false);
         jf.setResizable(false);
         jf.setLocationRelativeTo(null);
 
@@ -121,7 +121,18 @@ public class CategoryView {
         jbdel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
     }
 
-    public static void main(String[] args) {
-        new CategoryView();
+    public JFrame getJf() {
+        return jf;
     }
+
+    public JButton getJbback() {
+        return jbback;
+    }
+
+    public JLabel getJltext() {
+        return jltext;
+    }
+
+    
+    
 }

@@ -84,6 +84,7 @@ public class HomeView {
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setSize(720, 400);
         jf.setResizable(false);
+        jf.setLocationRelativeTo(null);
         
     }
     public static void main(String[] args) {

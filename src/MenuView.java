@@ -179,6 +179,7 @@ public class MenuView {
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setSize(820, 550);
         jf.setResizable(false);
+        jf.setLocationRelativeTo(null);
         
         
         //Receipt bill

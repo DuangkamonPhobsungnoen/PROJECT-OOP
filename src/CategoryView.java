@@ -1,13 +1,14 @@
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class CategoryView {
 
     private JFrame jf;
     private JPanel jphead, jpleft, jp1, jp2, jp3, jp4, jpright, jpbig, jpback;
     private JComboBox cb;
-    private JButton jbdot, jbadd, jbup, jbdel, jbback;
+    private JButton jbdot, jbadd, jbup, jbdel, jbback, jbmenu;
     private JTextField jtname, jtprice;
     private JTable table;
     private JLabel jltext, jlname, jlprice;
@@ -28,6 +29,7 @@ public class CategoryView {
         jpbig = new JPanel();
         cb = new JComboBox();
         jbdot = new JButton("...");
+        jbmenu = new JButton("GET MENU");
         jbadd = new JButton("Add");
         jbup = new JButton("Update");
         jbdel = new JButton("Delete");
@@ -40,6 +42,7 @@ public class CategoryView {
         //left
         cb.addItem("Drink");
         jp1.add(cb);
+        jp1.add(jbmenu);
         jp1.add(jbdot);
         jp2.add(jlname);
         jp2.add(jtname);
@@ -61,8 +64,14 @@ public class CategoryView {
         //right 
         jpright.setLayout(new BoxLayout(jpright, BoxLayout.Y_AXIS));
         String[] columnNames = {"Menu", "Price"};
-        Object[][] data = {{"Soup", "45"}, {"Coca - cola", "20"}};
-        table = new JTable(data, columnNames);
+        Object[][] data = {};
+        DefaultTableModel tableModel = new DefaultTableModel(data, columnNames) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            } // คำสั่งที่ทำให้แก้ไขตารางไม่ได้
+        };
+        table = new JTable(tableModel);
         jpright.add(table.getTableHeader(), BorderLayout.PAGE_START);
         jpright.add(table);
 
@@ -151,10 +160,14 @@ public class CategoryView {
 
     public JButton getJbdel() {
         return jbdel;
-    }
+}
 
     public JTextField getJtname() {
         return jtname;
+    }
+    
+    public JButton getJbmenu() {
+        return jbmenu;
     }
 
     public JTextField getJtprice() {

@@ -39,6 +39,8 @@ public class HomklinngernController implements ActionListener {
         cashierview.getJbdelete().addActionListener(this);
         cashierview.getJbbill().addActionListener(this);
         categoryview.getJbback().addActionListener(this);
+        categoryview.getJbmenu().addActionListener(this);
+        categoryview.getJbup().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
         loginview.getJcheckb().addActionListener(this);
@@ -191,8 +193,40 @@ public class HomklinngernController implements ActionListener {
 
     // ปุ่ม menu ใน home
     else if (e.getSource ().equals(homeview.getJbmenu())) {
+        // สร้างข้อมูลหน้า category
+        
+        //ส่วน combobox
+            PreparedStatement ps;
+            ResultSet rs;
+            String query = "SELECT * FROM `category` WHERE `username_cate` =?";
+        //ดึง ตารางตาม category มาใส่ combo
+            try {
+                ps = model.getConnection().prepareStatement(query);
+                ps.setString(1, username);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    String cate = rs.getString("category_cate"); //ดึง cloumn category_cate
+                    categoryview.getCb().addItem(cate);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(HomklinngernController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        //ส่วนตาราง
+        model.Show_Menu_Cat(categoryview); 
+        model.setClick(categoryview); //กดแล้วขึ้นที่ textField
+        
         categoryview.getJf().setVisible(true);
         homeview.getJf().dispose();
+    } 
+    
+    // ปุ่ม get menu ใน category / สร้างตารางตาม category ที่เลือก
+    else if (e.getSource ().equals(categoryview.getJbmenu())) {
+        model.Show_Menu_Cat(categoryview); // รันใหม่ตาม cat ใหม่
+    } 
+    
+    // ปุ่ม update ใน category
+    else if (e.getSource ().equals(categoryview.getJbup())) {
+        model.updateMenu(categoryview); 
     } 
 
     // ปุ่ม back ใน cashier

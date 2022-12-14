@@ -11,6 +11,14 @@ import javax.swing.table.TableModel;
 public class HomklinngernModel {
     private String username;
     private String shopName;
+    
+    //ของฝั่ง category
+    private String selectName;
+    private int selectPrice;
+    private String selectCat;
+    private int idMenu = 0;
+    
+    //ของฝั่ง cashier
     List<List> orderList = new ArrayList<>();
     private String orderName;
     private String orderPrice;
@@ -29,7 +37,7 @@ public class HomklinngernModel {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hom_klin_ngern", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:4306/hom_klin_ngern", "root", "");
             System.out.println("Connect");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -199,6 +207,119 @@ public class HomklinngernModel {
                 orderPrice = model.getValueAt(i, 1).toString();
             }
         });
+    }
+    
+    
+    // สำหรับ menu ในหน้า category
+    public ArrayList<Menu> getMenuList(CategoryView view) {
+        //ดึง database ตาราง menu ใส่ array
+        ArrayList<Menu> menuList = new ArrayList<Menu>();
+        PreparedStatement ps;
+        ResultSet rs;
+        //ดึง ตาราง menu
+        String query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
+        try {
+            String cat = String.valueOf(view.getCb().getSelectedItem());
+            ps = getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, cat);
+            rs = ps.executeQuery();
+            Menu menu;
+            while (rs.next()) {
+                menu = new Menu(rs.getString("name"), rs.getInt("price"));
+                menuList.add(menu);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return menuList;
+    }
+
+    public void Show_Menu_Cat(CategoryView view) {
+        // ดึงจาก array มาแสดง
+        ArrayList<Menu> list = getMenuList(view);
+        DefaultTableModel model = (DefaultTableModel)view.getTable().getModel();
+        model.setRowCount(0); //ถ้าไม่มีบรรทัดนี้ เมนูจะเพิ่มต่อกันเรื่อยๆ
+        Object[] row = new Object[2];
+        for (int i = 0; i < list.size(); i++) {
+            row[0] = list.get(i).getName();
+            row[1] = list.get(i).getPrice();
+            model.addRow(row);
+        }
+    }
+
+    public void setClick(CategoryView view) {
+        // เก็บเมนูส่วนที่คลิก table menu
+        view.getTable().addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int i = view.getTable().getSelectedRow();
+                TableModel model = view.getTable().getModel();
+                view.getJtname().setText(model.getValueAt(i, 0).toString());
+                view.getJtprice().setText(model.getValueAt(i, 1).toString());
+
+                //เอาค่าจาก textField ปัจจุบัน
+                selectName = view.getJtname().getText();
+                selectPrice = Integer.parseInt(view.getJtprice().getText());
+                selectCat = String.valueOf(view.getCb().getSelectedItem());
+                String p = selectPrice+"";
+                // หา ID ใน database
+
+                PreparedStatement ps;
+                ResultSet rs;
+                String query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =? AND `name` =? AND `price` =?";
+                try {
+                    ps = getConnection().prepareStatement(query);
+                    ps.setString(1, username);
+                    ps.setString(2, selectCat);
+                    ps.setString(3, selectName);
+                    ps.setString(4,p );
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        idMenu = rs.getInt("ID");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    // Execute SQL Query for add update delete
+    public void executeSQLQuery(String query, String Message, CategoryView view) {
+        try {
+            Statement st = getConnection().createStatement();
+            if (st.executeUpdate(query) != 0) {
+                //refresh JTable
+                DefaultTableModel model = (DefaultTableModel) view.getTable().getModel();
+                model.setRowCount(0);
+                Show_Menu_Cat(view);
+                JOptionPane.showMessageDialog(null, "Data " + Message + " Success");
+            } else {
+                JOptionPane.showMessageDialog(null, "Data not " + Message);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Data not " + e);
+        }
+    }
+
+    public void addMenu(CategoryView view) {
+        String newName = view.getJtname().getText();
+        int newPrice =  Integer.parseInt(view.getJtprice().getText());
+//        String query = "INSERT INTO `menu`(`ID`, `Name`, `Surname`, `Age`) VALUES ('"+jTextField_ID.getText()+"','"+jTextField_Name.getText()+"','"+jTextField_Surname.getText()+"','"+jTextField_Age.getText()+"')";
+//        executeSQLQuery(query, "Added");
+    }
+
+    public void updateMenu(CategoryView view) {
+        String newName = view.getJtname().getText();
+        int newPrice =  Integer.parseInt(view.getJtprice().getText());
+        String query = "UPDATE `menu` SET `name`='"+newName+"',`price`='"+newPrice+"' WHERE `ID`="+idMenu;
+        executeSQLQuery(query, "Updated", view);
+        Show_Menu_Cat(view);
+    }
+
+    public void deleteMenu(CategoryView view) {
+
     }
     
 }

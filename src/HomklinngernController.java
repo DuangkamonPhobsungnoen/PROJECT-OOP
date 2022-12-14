@@ -90,7 +90,7 @@ public class HomklinngernController implements ActionListener {
             String query = "INSERT INTO `member`(`ShopName`, `Username`, `Password`, `Comfirm`) VALUES (?, ?, ?, ?)";
             try {
                 if (count == 0) {
-                    ps = MyConnection.getConnection().prepareStatement(query);
+                    ps = HomklinngernModel.getConnection().prepareStatement(query);
                     ps.setString(1, name);
                     ps.setString(2, uname);
                     ps.setString(3, password);
@@ -111,7 +111,7 @@ public class HomklinngernController implements ActionListener {
             String pass = String.valueOf(loginview.getJpass().getPassword());
             String query = "SELECT * FROM `member` WHERE `Username` =? AND `Password` =?";
             try {
-                ps = MyConnection.getConnection().prepareStatement(query);
+                ps = HomklinngernModel.getConnection().prepareStatement(query);
                 ps.setString(1, uname);
                 ps.setString(2, pass);
                 rs = ps.executeQuery();
@@ -144,7 +144,7 @@ public class HomklinngernController implements ActionListener {
             String query = "SELECT * FROM `category` WHERE `username_cate` =?";
             //ดึง ตาราง category
             try {
-                ps = MyConnection.getConnection().prepareStatement(query);
+                ps = HomklinngernModel.getConnection().prepareStatement(query);
                 ps.setString(1, username);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -278,7 +278,7 @@ public ArrayList<Menu> getMenuList() {
         String query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
         try {
             String cat = String.valueOf(cashierview.getJcbmenu().getSelectedItem());
-            ps = MyConnection.getConnection().prepareStatement(query);
+            ps = HomklinngernModel.getConnection().prepareStatement(query);
             ps.setString(1, username);
             ps.setString(2, cat);
             rs = ps.executeQuery();

@@ -284,12 +284,12 @@ public class Menu_Page extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        HOME_JFrame Hf = new HOME_JFrame();
-        Hf.setVisible(true);
-        Hf.pack();
-        Hf.setLocationRelativeTo(null);
-        Hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.dispose();
+////        HOME_JFrame Hf = new HOME_JFrame();
+//        Hf.setVisible(true);
+//        Hf.pack();
+//        Hf.setLocationRelativeTo(null);
+//        Hf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 
     private void jButton_EditCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_EditCategoryActionPerformed
@@ -350,7 +350,7 @@ public class Menu_Page extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EDIT_MENU().setVisible(true);
+//                new EDIT_MENU().setVisible(true);
             }
         });
     }

@@ -117,7 +117,7 @@ public class CategoryView {
         jltext.setForeground(new Color(255, 204, 0));
 
         jltext.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
-        jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
+        jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         table.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         table.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         cb.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));

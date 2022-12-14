@@ -8,7 +8,7 @@ public class UpdateOptionView {
     private JLabel jltxt;
     public UpdateOptionView(){
         jf = new JFrame();
-        jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jp1 = new JPanel();
         jp2 = new JPanel();
         jp3 = new JPanel();

@@ -10,7 +10,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-public class HomklinngernController implements ActionListener {
+public class HomklinngernController implements ActionListener{
 
     private LoginView loginview;
     private SignupView signupview;
@@ -291,4 +291,6 @@ public class HomklinngernController implements ActionListener {
     public static void main(String[] args) {
         new HomklinngernController();
     }
+
+    
 }

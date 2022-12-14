@@ -140,7 +140,7 @@ public class CashierView {
         jtorder.setBackground(new Color(255, 204, 0));
         jtorder.getTableHeader().setBackground(new Color(255, 204, 0));
 
-        jtabill.setBackground(new Color(28, 64, 121));
+        jtabill.setBackground(Color.WHITE);
         jbbill.setBackground(new Color(28, 64, 121));
         jbclear.setBackground(new Color(28, 64, 121));
         jbprint.setBackground(new Color(28, 64, 121));
@@ -163,7 +163,7 @@ public class CashierView {
         jtorder.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jtorder.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 
-        jtabill.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+        jtabill.setFont(new Font("browallia new", Font.BOLD, 15));
         jbbill.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbclear.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbprint.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
@@ -171,7 +171,7 @@ public class CashierView {
 
         // set ColorFont
         jlhtext.setForeground(new Color(255, 204, 0));
-        jtabill.setForeground(Color.WHITE);
+        jtabill.setForeground(Color.BLACK);
         jbbill.setForeground(Color.WHITE);
         jbclear.setForeground(Color.WHITE);
         jbprint.setForeground(Color.WHITE);

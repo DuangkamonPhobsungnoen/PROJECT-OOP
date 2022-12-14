@@ -1,6 +1,7 @@
 
 import java.util.List;
 import java.awt.event.*;
+import java.awt.print.PrinterException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -38,6 +39,7 @@ public class HomklinngernController implements ActionListener {
         cashierview.getJbclear().addActionListener(this);
         cashierview.getJbdelete().addActionListener(this);
         cashierview.getJbbill().addActionListener(this);
+        cashierview.getJbprint().addActionListener(this);
         categoryview.getJbback().addActionListener(this);
         categoryview.getJbmenu().addActionListener(this);
         categoryview.getJbup().addActionListener(this);
@@ -46,6 +48,7 @@ public class HomklinngernController implements ActionListener {
         loginview.getJcheckb().addActionListener(this);
         signupview.getJbb().addActionListener(this);
         signupview.getJbregis().addActionListener(this);
+        
     }
 
     @Override
@@ -228,6 +231,15 @@ public class HomklinngernController implements ActionListener {
     else if (e.getSource ().equals(categoryview.getJbup())) {
         model.updateMenu(categoryview); 
     } 
+    
+    // ปุ่ม print bill
+    else if (e.getSource().equals(cashierview.getJbprint())){
+        try {
+            cashierview.getJtabill().print();
+        } catch (PrinterException ex) {
+            System.out.println(ex);
+        }
+    }
 
     // ปุ่ม back ใน cashier
     else if (e.getSource ().equals(cashierview.getJbback())) {

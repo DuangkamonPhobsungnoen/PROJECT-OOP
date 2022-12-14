@@ -43,6 +43,8 @@ public class HomklinngernController implements ActionListener {
         categoryview.getJbback().addActionListener(this);
         categoryview.getJbmenu().addActionListener(this);
         categoryview.getJbup().addActionListener(this);
+        categoryview.getJbdel().addActionListener(this);
+        categoryview.getJbadd().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
         loginview.getJcheckb().addActionListener(this);
@@ -150,6 +152,7 @@ public class HomklinngernController implements ActionListener {
                 ps = model.getConnection().prepareStatement(query);
                 ps.setString(1, username);
                 rs = ps.executeQuery();
+                cashierview.getJcbmenu().removeAllItems();
                 while (rs.next()) {
                     String cate = rs.getString("category_cate"); //ดึง cloumn category_cate
                     cashierview.getJcbmenu().addItem(cate);
@@ -207,6 +210,7 @@ public class HomklinngernController implements ActionListener {
                 ps = model.getConnection().prepareStatement(query);
                 ps.setString(1, username);
                 rs = ps.executeQuery();
+                categoryview.getCb().removeAllItems();
                 while (rs.next()) {
                     String cate = rs.getString("category_cate"); //ดึง cloumn category_cate
                     categoryview.getCb().addItem(cate);
@@ -225,11 +229,21 @@ public class HomklinngernController implements ActionListener {
     // ปุ่ม get menu ใน category / สร้างตารางตาม category ที่เลือก
     else if (e.getSource ().equals(categoryview.getJbmenu())) {
         model.Show_Menu_Cat(categoryview); // รันใหม่ตาม cat ใหม่
-    } 
+    }
+    
+    // ปุ่ม add ใน category
+    else if (e.getSource ().equals(categoryview.getJbadd())) {
+        model.addMenu(categoryview);
+    }
     
     // ปุ่ม update ใน category
     else if (e.getSource ().equals(categoryview.getJbup())) {
         model.updateMenu(categoryview); 
+    } 
+    
+    // ปุ่ม delete ใน category
+    else if (e.getSource ().equals(categoryview.getJbdel())) {
+        model.deleteMenu(categoryview); 
     } 
     
     // ปุ่ม print bill

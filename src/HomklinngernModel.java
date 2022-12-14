@@ -17,6 +17,7 @@ public class HomklinngernModel {
     private int selectPrice;
     private String selectCat;
     private int idMenu = 0;
+    private int lastID = 0;
     
     //ของฝั่ง cashier
     List<List> orderList = new ArrayList<>();
@@ -37,7 +38,7 @@ public class HomklinngernModel {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hom_klin_ngern", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:4306/hom_klin_ngern", "root", "");
             System.out.println("Connect");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -157,13 +158,13 @@ public class HomklinngernModel {
     public void Show_Bill_Cashier(CashierView view) {
         int totalPrice = 0;
         String textBill = "";
-        textBill += ("-----------------------------------------------------------------------\n"
+        textBill += ("-------------------------------------\n"
                + "\t" + "HOM  - GIN - GRUEN \n"
                + "\t" + "   " + "1234 Main Street\n" 
                + "\t" + "         " + "Suite 567\n" 
                + "\t" + "City Name, State 64321\n" 
                + "\t" + "       " + "023-334-2345\n"
-               + "-----------------------------------------------------------------------\n\n");
+               + "-------------------------------------\n\n");
         
         for(List innerlist : orderList){
             // ปริ้นแต่ละออเด้อ
@@ -175,13 +176,13 @@ public class HomklinngernModel {
             totalPrice += price2;
             textBill += " x "+ qty + "\t"+name+"\t"+price2+"฿\n\n";
         }
-        textBill += "-----------------------------------------------------------------------\n";
-        textBill += "-----------------------------------------------------------------------\n";
+        textBill += "-------------------------------------\n";
+        textBill += "-------------------------------------\n";
         textBill += "\n TOTAL\t"+totalPrice;
         textBill += "\n CASH\t"+cash;
         textBill += "\n CHANGE "+(cash-totalPrice)+"\n";
-        textBill += "-----------------------------------------------------------------------\n";
-        textBill += "------------------------THANK YOU------------------------------";
+        textBill += "-------------------------------------\n";
+        textBill += "--------------THANK YOU--------------";
         view.getJtabill().setText(textBill);
     }
     
@@ -291,9 +292,7 @@ public class HomklinngernModel {
             Statement st = getConnection().createStatement();
             if (st.executeUpdate(query) != 0) {
                 //refresh JTable
-                DefaultTableModel model = (DefaultTableModel) view.getTable().getModel();
-                model.setRowCount(0);
-                Show_Menu_Cat(view);
+                 Show_Menu_Cat(view);
                 JOptionPane.showMessageDialog(null, "Data " + Message + " Success");
             } else {
                 JOptionPane.showMessageDialog(null, "Data not " + Message);
@@ -303,11 +302,35 @@ public class HomklinngernModel {
         }
     }
 
+    public int lastID(){
+        ArrayList<Menu> menuList = new ArrayList<Menu>();
+        PreparedStatement ps;
+        ResultSet rs;
+        String query = "SELECT * FROM `menu` WHERE `username_menu` =?";
+        try {
+            ps = getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                int thisID = rs.getInt("ID");
+                if (thisID > lastID){
+                    lastID = thisID;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return lastID;
+    }
+    
     public void addMenu(CategoryView view) {
         String newName = view.getJtname().getText();
         int newPrice =  Integer.parseInt(view.getJtprice().getText());
-//        String query = "INSERT INTO `menu`(`ID`, `Name`, `Surname`, `Age`) VALUES ('"+jTextField_ID.getText()+"','"+jTextField_Name.getText()+"','"+jTextField_Surname.getText()+"','"+jTextField_Age.getText()+"')";
-//        executeSQLQuery(query, "Added");
+        int lastID = lastID()+1;
+        selectCat = String.valueOf(view.getCb().getSelectedItem());
+        String query = "INSERT INTO `menu`(`username_menu`, `category_menu`, `name`, `price`, `ID`) "
+                + "VALUES ('"+username+"', '"+selectCat+"', '"+newName+"', '"+newPrice+"', '"+lastID+"')";
+        executeSQLQuery(query, "Added", view);
     }
 
     public void updateMenu(CategoryView view) {
@@ -315,11 +338,11 @@ public class HomklinngernModel {
         int newPrice =  Integer.parseInt(view.getJtprice().getText());
         String query = "UPDATE `menu` SET `name`='"+newName+"',`price`='"+newPrice+"' WHERE `ID`="+idMenu;
         executeSQLQuery(query, "Updated", view);
-        Show_Menu_Cat(view);
     }
 
     public void deleteMenu(CategoryView view) {
-
+        String query = "DELETE FROM `menu` WHERE id ="+idMenu;
+        executeSQLQuery(query, "Deleted", view);
     }
     
 }

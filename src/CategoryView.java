@@ -40,7 +40,6 @@ public class CategoryView {
         jlname = new JLabel("Name ");
         jlprice = new JLabel("Price ");
         //left
-        cb.addItem("Drink");
         jp1.add(cb);
         jp1.add(jbmenu);
         jp1.add(jbdot);

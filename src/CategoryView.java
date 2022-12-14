@@ -133,6 +133,48 @@ public class CategoryView {
         return jltext;
     }
 
+    public JComboBox getCb() {
+        return cb;
+    }
+
+    public JButton getJbdot() {
+        return jbdot;
+    }
+
+    public JButton getJbadd() {
+        return jbadd;
+    }
+
+    public JButton getJbup() {
+        return jbup;
+    }
+
+    public JButton getJbdel() {
+        return jbdel;
+    }
+
+    public JTextField getJtname() {
+        return jtname;
+    }
+
+    public JTextField getJtprice() {
+        return jtprice;
+    }
+
+    public JTable getTable() {
+        return table;
+    }
+
+    public JLabel getJlname() {
+        return jlname;
+    }
+
+    public JLabel getJlprice() {
+        return jlprice;
+    }
+
+   
+
     
     
 }

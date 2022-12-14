@@ -17,7 +17,6 @@ public class HomklinngernModel {
     private int selectPrice;
     private String selectCat;
     private int idMenu = 0;
-    private int lastID = 0;
     
     //ของฝั่ง cashier
     List<List> orderList = new ArrayList<>();
@@ -38,7 +37,7 @@ public class HomklinngernModel {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hom_klin_ngern", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:4306/hom_klin_ngern", "root", "");
             System.out.println("Connect");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -233,6 +232,7 @@ public class HomklinngernModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        selectCat = String.valueOf(view.getCb().getSelectedItem());
         return menuList;
     }
 
@@ -247,6 +247,27 @@ public class HomklinngernModel {
             row[1] = list.get(i).getPrice();
             model.addRow(row);
         }
+    }
+    
+    public void Show_Cat_Cat(CategoryView view){
+        //ส่วน combobox
+            PreparedStatement ps;
+            ResultSet rs;
+            String query = "SELECT * FROM `category` WHERE `username_cate` =?";
+            //ดึง ตารางตาม category มาใส่ combo
+            try {
+                ps = getConnection().prepareStatement(query);
+                ps.setString(1, username);
+                rs = ps.executeQuery();
+                view.getCb().removeAllItems(); // เคลียก่อนเผื่ออัพเดต
+                while (rs.next()) {
+                    String cate = rs.getString("category_cate"); //ดึง cloumn category_cate
+                    view.getCb().addItem(cate);
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(HomklinngernController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            selectCat = String.valueOf(view.getCb().getSelectedItem());
     }
 
     public void setClick(CategoryView view) {
@@ -302,31 +323,53 @@ public class HomklinngernModel {
         }
     }
 
-    public int lastID(){
-        ArrayList<Menu> menuList = new ArrayList<Menu>();
+    public int lastID(String table,String col_user){
         PreparedStatement ps;
         ResultSet rs;
-        String query = "SELECT * FROM `menu` WHERE `username_menu` =?";
+        int lastID = 0;
+        String query = "SELECT * FROM `"+table+"` WHERE `"+col_user+"` =?";
         try {
             ps = getConnection().prepareStatement(query);
             ps.setString(1, username);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int thisID = rs.getInt("ID");
+                System.out.println("inloop");
                 if (thisID > lastID){
                     lastID = thisID;
                 }
             }
+            System.out.println("outloop");
         } catch (Exception e) {
             e.printStackTrace();
         }
         return lastID;
     }
     
+    public int getIDCat(){
+        // หา ID ใน database
+                int id = 0;
+                PreparedStatement ps;
+                ResultSet rs;
+                String query = "SELECT * FROM `category` WHERE `username_cate` =? AND `category_cate` =?";
+                try {
+                    ps = getConnection().prepareStatement(query);
+                    ps.setString(1, username);
+                    ps.setString(2, selectCat);
+                    rs = ps.executeQuery();
+                    while (rs.next()) {
+                        id = rs.getInt("ID");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return id;
+    }
+    
     public void addMenu(CategoryView view) {
         String newName = view.getJtname().getText();
         int newPrice =  Integer.parseInt(view.getJtprice().getText());
-        int lastID = lastID()+1;
+        int lastID = lastID("menu","username_menu")+1;
         selectCat = String.valueOf(view.getCb().getSelectedItem());
         String query = "INSERT INTO `menu`(`username_menu`, `category_menu`, `name`, `price`, `ID`) "
                 + "VALUES ('"+username+"', '"+selectCat+"', '"+newName+"', '"+newPrice+"', '"+lastID+"')";
@@ -343,6 +386,90 @@ public class HomklinngernModel {
     public void deleteMenu(CategoryView view) {
         String query = "DELETE FROM `menu` WHERE id ="+idMenu;
         executeSQLQuery(query, "Deleted", view);
+    }
+    
+    // Execute SQL Query for Option
+    public void executeSQLQuery(String query, String Message) {
+        try {
+            Statement st = getConnection().createStatement();
+            if (st.executeUpdate(query) != 0) {
+                JOptionPane.showMessageDialog(null, "Category " + Message + " Success");
+            } else {
+                JOptionPane.showMessageDialog(null, "Category not " + Message);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Category not " + e);
+        }
+    }
+    
+    public void addNewCat(NewOptionView view){
+        String newCat = view.getJtcat().getText();
+        int lastID = lastID("category","username_cate")+1;
+        System.out.println(lastID);
+        String query = "INSERT INTO `category`(`username_cate`, `category_cate`, `ID`) "
+                + "VALUES ('"+username+"', '"+newCat+"', '"+lastID+"')";
+        executeSQLQuery(query, "Added");
+    }
+    
+    public void updateCat(UpdateOptionView view){
+        String newCat = view.getJtcat().getText();
+        String query = "";
+        int id = 0;
+        
+        //ต้องเปลี่ยน cat ในตาราง menu ก่อน
+        PreparedStatement ps;
+        ResultSet rs;
+        //ดึง ตาราง menu
+        query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
+        try {
+            ps = getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, selectCat);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("ID");
+                query = "UPDATE `menu` SET `category_menu`='"+newCat+"' WHERE `ID`="+id;
+                Statement st = getConnection().createStatement();
+                st.executeUpdate(query);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        // เปลี่ยนในตาราง category
+        id = getIDCat();
+        query = "UPDATE `category` SET `category_cate`='"+newCat+"' WHERE `ID`="+id;
+        executeSQLQuery(query, "Updated");
+        
+    }
+    
+    public void deleteCat(DeleteOptionView view){
+        String query = "";
+        int id = 0;
+        //ลบในตาราง menu ให้หมด
+        PreparedStatement ps;
+        ResultSet rs;
+        //ดึง ตาราง menu
+        query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
+        try {
+            ps = getConnection().prepareStatement(query);
+            ps.setString(1, username);
+            ps.setString(2, selectCat);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                id = rs.getInt("ID");
+                query = "DELETE FROM `menu` WHERE `ID`="+id;
+                Statement st = getConnection().createStatement();
+                st.executeUpdate(query);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        //ลบในตาราง cat
+        id = getIDCat();
+        query = "DELETE FROM `category` WHERE `ID`="+id;
+        executeSQLQuery(query, "Deleted");
     }
     
 }

@@ -90,8 +90,9 @@ public class LoginView {
         jlpass.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbsign.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jblogin.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-         jcheckb.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+        jcheckb.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         //ปรับสีพื้นหลัง
+        jf.getContentPane().setBackground(Color.red);
         jp.setBackground(new Color(255, 204, 0));
         jplefti.setBackground(new Color(255, 204, 0));
         jpleftn.setBackground(new Color(255, 204, 0));

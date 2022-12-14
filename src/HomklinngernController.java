@@ -18,9 +18,9 @@ public class HomklinngernController implements ActionListener{
     private CashierView cashierview;
     private CategoryView categoryview;
     private OptionView optionview;
-    private NewOptionView newoptionview;
-    private UpdateOptionView updateoptionview;
-    private DeleteOptionView deleteoptionview;
+    private NewOptionView newopview;
+    private UpdateOptionView updateopview;
+    private DeleteOptionView deleteopview;
     private HomklinngernModel model;
     private boolean selected;
     private String username;
@@ -34,13 +34,14 @@ public class HomklinngernController implements ActionListener{
         categoryview = new CategoryView();
         model = new HomklinngernModel();
         optionview = new OptionView();
-        newoptionview = new NewOptionView();
-        deleteoptionview = new DeleteOptionView();
-        updateoptionview = new UpdateOptionView();
+        newopview = new NewOptionView();
+        deleteopview = new DeleteOptionView();
+        updateopview = new UpdateOptionView();
 
         homeview.getJbcashier().addActionListener(this);
         homeview.getJbmenu().addActionListener(this);
         homeview.getJbback().addActionListener(this);
+        
         cashierview.getJbback().addActionListener(this);
         cashierview.getJbmenu().addActionListener(this);
         cashierview.getJbadd().addActionListener(this);
@@ -48,6 +49,7 @@ public class HomklinngernController implements ActionListener{
         cashierview.getJbdelete().addActionListener(this);
         cashierview.getJbbill().addActionListener(this);
         cashierview.getJbprint().addActionListener(this);
+        
         categoryview.getJbback().addActionListener(this);
         categoryview.getJbmenu().addActionListener(this);
         categoryview.getJbup().addActionListener(this);
@@ -58,9 +60,16 @@ public class HomklinngernController implements ActionListener{
         optionview.getJbnew().addActionListener(this);
         optionview.getJbup().addActionListener(this);
         optionview.getJbdel().addActionListener(this);
+        
+        newopview.getJbok().addActionListener(this);
+        updateopview.getJbok().addActionListener(this);
+        deleteopview.getJbyes().addActionListener(this);
+        deleteopview.getJbno().addActionListener(this);
+        
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
         loginview.getJcheckb().addActionListener(this);
+        
         signupview.getJbb().addActionListener(this);
         signupview.getJbregis().addActionListener(this);
 
@@ -199,26 +208,7 @@ public class HomklinngernController implements ActionListener{
             model.deleteOrderList(cashierview);
         } // ปุ่ม menu ใน home
         else if (e.getSource().equals(homeview.getJbmenu())) {
-            // สร้างข้อมูลหน้า category
-
-            //ส่วน combobox
-            PreparedStatement ps;
-            ResultSet rs;
-            String query = "SELECT * FROM `category` WHERE `username_cate` =?";
-            //ดึง ตารางตาม category มาใส่ combo
-            try {
-                ps = model.getConnection().prepareStatement(query);
-                ps.setString(1, username);
-                rs = ps.executeQuery();
-                categoryview.getCb().removeAllItems();
-                while (rs.next()) {
-                    String cate = rs.getString("category_cate"); //ดึง cloumn category_cate
-                    categoryview.getCb().addItem(cate);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(HomklinngernController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            //ส่วนตาราง
+            model.Show_Cat_Cat(categoryview);
             model.Show_Menu_Cat(categoryview);
             model.setClick(categoryview); //กดแล้วขึ้นที่ textField
 
@@ -238,23 +228,68 @@ public class HomklinngernController implements ActionListener{
             model.deleteMenu(categoryview);
         } 
         //Option of catagory
+        
         //btn ... in catagory
         else if (e.getSource().equals(categoryview.getJbdot())) {
             optionview.getJf().setVisible(true);
-        } //btn new in ...
+        } 
+
+        //btn new in ...
         else if (e.getSource().equals(optionview.getJbnew())) {
-            newoptionview.getJf().setVisible(true);
+            newopview.getJf().setVisible(true);
             optionview.getJf().dispose();
-        } //btn up in ...
+        } 
+        
+        //btn ok in new cat
+        else if (e.getSource().equals(newopview.getJbok())) {
+            model.addNewCat(newopview);
+            model.Show_Cat_Cat(categoryview);
+            
+            newopview.getJf().setVisible(false);
+            optionview.getJf().dispose();
+        } 
+
+        //btn up in ...
         else if (e.getSource().equals(optionview.getJbup())) {
-            updateoptionview.getJf().setVisible(true);
+            updateopview.getJf().setVisible(true);
             optionview.getJf().dispose();
-        } //btn delete in ...
+        } 
+        
+        //btn ok in update cat
+        else if (e.getSource().equals(updateopview.getJbok())) {
+            model.updateCat(updateopview);
+            model.Show_Cat_Cat(categoryview);
+            model.Show_Menu_Cat(categoryview);
+            
+            updateopview.getJf().setVisible(false);
+            optionview.getJf().dispose();
+        } 
+
+        //btn delete in ...
         else if (e.getSource().equals(optionview.getJbdel())) {
-            deleteoptionview.getJf().setVisible(true);
+            deleteopview.getJf().setVisible(true);
             optionview.getJf().dispose();
             
-        } // ปุ่ม print bill
+        } 
+        //btn yes in delete catgory
+        else if (e.getSource().equals(deleteopview.getJbyes())) {
+            model.deleteCat(deleteopview);
+            model.Show_Cat_Cat(categoryview);
+            model.Show_Menu_Cat(categoryview);
+            
+            deleteopview.getJf().setVisible(false);
+            optionview.getJf().dispose();
+            
+        } 
+        
+        //btn no in delete catgory
+        else if (e.getSource().equals(deleteopview.getJbno())) {
+            deleteopview.getJf().setVisible(false);
+            optionview.getJf().dispose();
+            
+        } 
+
+        // ปุ่ม print bill
         else if (e.getSource().equals(cashierview.getJbprint())) {
             try {
                 cashierview.getJtabill().print();

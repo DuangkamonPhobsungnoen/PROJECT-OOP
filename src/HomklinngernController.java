@@ -16,15 +16,10 @@ public class HomklinngernController implements ActionListener {
     private HomeView homeview;
     private CashierView cashierview;
     private CategoryView categoryview;
+    private HomklinngernModel model;
     private boolean selected;
     private String username;
     private String shopName;
-    
-    List<List> orderList = new ArrayList<>();
-    private String orderName;
-    private String orderPrice;
-    
-    private int cash = 0;
 
     public HomklinngernController() {
         loginview = new LoginView();
@@ -32,6 +27,7 @@ public class HomklinngernController implements ActionListener {
         homeview = new HomeView();
         cashierview = new CashierView();
         categoryview = new CategoryView();
+        model = new HomklinngernModel();
 
         homeview.getJbcashier().addActionListener(this);
         homeview.getJbmenu().addActionListener(this);
@@ -119,6 +115,8 @@ public class HomklinngernController implements ActionListener {
                     //เก็บ username แลพ shopName ปัจจุบัน
                     username = rs.getString("Username");
                     shopName = rs.getString("ShopName");
+                    model.setUsername(username);
+                    model.setShopName(shopName);
                     //ตั้งให้ขึ้นชื่อร้าน
                     homeview.getJlhname().setText(shopName);
                     cashierview.getJlhtext().setText(shopName);
@@ -144,7 +142,7 @@ public class HomklinngernController implements ActionListener {
             String query = "SELECT * FROM `category` WHERE `username_cate` =?";
             //ดึง ตาราง category
             try {
-                ps = HomklinngernModel.getConnection().prepareStatement(query);
+                ps = model.getConnection().prepareStatement(query);
                 ps.setString(1, username);
                 rs = ps.executeQuery();
                 while (rs.next()) {
@@ -154,81 +152,41 @@ public class HomklinngernController implements ActionListener {
             } catch (SQLException ex) {
                 Logger.getLogger(HomklinngernController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            
             //ส่วนตราง
-            Show_Menu_Cashier(); // method อยู่ด้านล่าง
+            model.clearOrderList(cashierview); // ล้างของเก่า
+            model.Show_Menu_Cashier(cashierview); 
+            model.setClick(cashierview);
             
             
-            
-            // เก็บเมนูส่วนที่คลิก table menu
-            cashierview.getJtmenu().addMouseListener(new java.awt.event.MouseAdapter() {
-                @Override
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    int i = cashierview.getJtmenu().getSelectedRow();
-                    TableModel model = cashierview.getJtmenu().getModel();
-                    orderName = model.getValueAt(i, 0).toString();
-                    orderPrice = model.getValueAt(i, 1).toString();
-                }
-            });
-                    
-            // เก็บเมนูส่วนที่คลิก table order
-            cashierview.getJtorder().addMouseListener(new java.awt.event.MouseAdapter() {
-                @Override
-                public void mouseClicked(java.awt.event.MouseEvent evt) {
-                    int i = cashierview.getJtorder().getSelectedRow();
-                    TableModel model = cashierview.getJtorder().getModel();
-                    orderName = model.getValueAt(i, 0).toString();
-                    orderPrice = model.getValueAt(i, 1).toString();
-                }
-            } 
-            
-            
-        );
-            
-        cashierview.getJf().setVisible(true);
-        homeview.getJf().dispose();
+            cashierview.getJf().setVisible(true);
+            homeview.getJf().dispose();
     } 
 
     // ปุ่ม get menu ใน chasier / สร้างตารางตาม category ที่เลือก
     else if (e.getSource ().equals(cashierview.getJbmenu())) {
-        Show_Menu_Cashier(); // รันใหม่ตาม cat ใหม่
+        model.Show_Menu_Cashier(cashierview); // รันใหม่ตาม cat ใหม่
     } 
     
     // ปุ่ม add ใน cashier
     else if (e.getSource ().equals(cashierview.getJbadd())) {
-        addOrderList();
+        model.addOrderList(cashierview);
     } 
     
     // ปุ่ม clear ใน cashier
     else if (e.getSource ().equals(cashierview.getJbclear())) {
-        // clear orderlist
-        orderList = new ArrayList<>();
-        // อัพเดตตาราง
-        Show_Order_Cashier();
+        model.clearOrderList(cashierview);
     } 
     
     // ปุ่ม pay ใน cashier
     else if (e.getSource ().equals(cashierview.getJbbill())) {
-        cash = Integer.parseInt(cashierview.getJtfpay().getText());
-        Show_Bill_Cashier();
+        model.setCash(Integer.parseInt(cashierview.getJtfpay().getText()));
+        model.Show_Bill_Cashier(cashierview);
     } 
     
     // ปุ่ม delete ใน cashier
     else if (e.getSource ().equals(cashierview.getJbdelete())) {
-        // loop หา order นั้นมาลบ
-        for(List innerlist : orderList){
-            if(innerlist.get(0).toString().equals(orderName)){
-                int num = (int)innerlist.get(2)-1; //ลดลง 1 ชิ้น
-                if(num==0){// หมดแล้ว
-                    boolean isRemoved = orderList.remove(innerlist);
-                }
-                else{// เปลี่ยนค่าจำนวน
-                    innerlist.set(2,num);
-                }
-                // อัพเดตตาราง
-                Show_Order_Cashier();
-                break;
-            }
-        }
+        model.deleteOrderList(cashierview);
     } 
 
     // ปุ่ม menu ใน home
@@ -267,122 +225,6 @@ public class HomklinngernController implements ActionListener {
         }
     }
 }
-
-// สำหรับ menu ในหน้า cashier
-public ArrayList<Menu> getMenuList() {
-        //ดึง database ตาราง menu ใส่ array
-        ArrayList<Menu> menuList = new ArrayList<Menu>();
-        PreparedStatement ps;
-        ResultSet rs;
-        //ดึง ตาราง menu
-        String query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
-        try {
-            String cat = String.valueOf(cashierview.getJcbmenu().getSelectedItem());
-            ps = HomklinngernModel.getConnection().prepareStatement(query);
-            ps.setString(1, username);
-            ps.setString(2, cat);
-            rs = ps.executeQuery();
-            Menu menu;
-            while (rs.next()) {
-                menu = new Menu(rs.getString("name"), rs.getInt("price"));
-                menuList.add(menu);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return menuList;
-    }
-
-    public void Show_Menu_Cashier() {
-        // ดึงจาก array มาแสดง
-        ArrayList<Menu> list = getMenuList();
-        DefaultTableModel model = (DefaultTableModel) cashierview.getJtmenu().getModel();
-        model.setRowCount(0); //ถ้าไม่มีบรรทัดนี้ เมนูจะเพิ่มต่อกันเรื่อยๆ
-        Object[] row = new Object[2];
-        for (int i = 0; i < list.size(); i++) {
-            row[0] = list.get(i).getName();
-            row[1] = list.get(i).getPrice();
-            model.addRow(row);
-        }
-    }
-
-    // สำหรับตารางอาหารที่เลือก  เก็บเป็น list ซ้อน list
-    public void addOrderList() {
-        //ดึง database ตาราง menu ใส่ array
-        ArrayList order = new ArrayList();
-        boolean first = true;
-        
-        // loop หา order ซ้ำ เพิ่ม qty
-        for(List innerlist : orderList){
-            if(innerlist.get(0).toString().equals(orderName)){
-                int num = (int)innerlist.get(2)+1;
-                innerlist.set(2,num);
-                first = false;
-            }
-        }
-        
-        if(first){
-            order.add(orderName);
-            order.add(orderPrice);
-            order.add(1);
-            orderList.add(order);
-        }
-        
-        // อัพเดตดาตาราง
-        Show_Order_Cashier();
-    }
-
-    // แสดงตารางตามข้อมูลใน list
-    public void Show_Order_Cashier() {
-        // ดึงจาก array มาแสดง
-        if(orderName != null){ //ต้องกดเลือกก่อน
-            DefaultTableModel model = (DefaultTableModel) cashierview.getJtorder().getModel();
-            model.setRowCount(0);
-            Object[] row = new Object[3];		
-            for(List innerlist : orderList){
-                row[0] = innerlist.get(0);
-                row[1] = innerlist.get(1);
-                row[2] = innerlist.get(2);
-                model.addRow(row);
-            }
-            // อัพเดตบิล
-            Show_Bill_Cashier();
-        }
-        
-        
-    }
-    
-    public void Show_Bill_Cashier() {
-        int totalPrice = 0;
-        String textBill = "";
-        textBill += ("-----------------------------------------------------------------------\n"
-               + "\t" + "HOM  - GIN - GRUEN \n"
-               + "\t" + "   " + "1234 Main Street\n" 
-               + "\t" + "         " + "Suite 567\n" 
-               + "\t" + "City Name, State 64321\n" 
-               + "\t" + "       " + "023-334-2345\n"
-               + "-----------------------------------------------------------------------\n\n");
-        
-        for(List innerlist : orderList){
-            // ปริ้นแต่ละออเด้อ
-            String name = innerlist.get(0).toString();
-            int price = Integer.parseInt(innerlist.get(1).toString());
-            int qty = Integer.parseInt(innerlist.get(2).toString());
-            int price2 = price*qty;
-            
-            totalPrice += price2;
-            textBill += " x "+ qty + "\t"+name+"\t"+price2+"฿\n\n";
-        }
-        textBill += "-----------------------------------------------------------------------\n";
-        textBill += "-----------------------------------------------------------------------\n";
-        textBill += "\n TOTAL\t"+totalPrice;
-        textBill += "\n CASH\t"+cash;
-        textBill += "\n CHANGE "+(cash-totalPrice)+"\n";
-        textBill += "-----------------------------------------------------------------------\n";
-        textBill += "------------------------THANK YOU------------------------------";
-        cashierview.getJtabill().setText(textBill);
-    }
-
 
     public static void main(String[] args) {
         new HomklinngernController();

@@ -67,7 +67,7 @@ public class CashierView {
         jptable.add(jtmenu);
 
         jptable1.setLayout(new BoxLayout(jptable1, BoxLayout.Y_AXIS));
-        String[] columnNames2 = {"Menu", "Price"};
+        String[] columnNames2 = {"Menu", "Price", "Qty"};
         Object[][] data2 = {};
         DefaultTableModel tableModel2 = new DefaultTableModel(data2, columnNames2) {
             @Override
@@ -405,6 +405,10 @@ public class CashierView {
 
     public JTable getJtorder() {
         return jtorder;
+    }
+
+    public JButton getJbdelete() {
+        return jbdelete;
     }
     
 

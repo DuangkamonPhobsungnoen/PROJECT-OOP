@@ -81,11 +81,7 @@ public class LoginView {
         jprightgu.setBackground(new Color(255, 204, 0));
         jprighttop.setBackground(new Color(255, 204, 0));
         jcheckb.setBackground(new Color(255, 204, 0));
-        //ปรับสีปุ่ม
-        jbsign.setBackground(new Color(28, 64, 121));
-        jblogin.setBackground(new Color(28, 64, 121));
-        jbsign.setOpaque(true);
-        jblogin.setOpaque(true);
+        
         //ปรับสีฟ้อนต์
         jlsign.setForeground(Color.black);
         jlpass.setForeground(new Color(28, 64, 121));
@@ -94,6 +90,14 @@ public class LoginView {
         jlsign.setForeground(new Color(28, 64, 121));
         jbsign.setForeground(Color.white);
         jblogin.setForeground(Color.white);
+        
+        //ปรับสีปุ่ม
+        jbsign.setBackground(new Color(28, 64, 121));
+        jblogin.setBackground(new Color(28, 64, 121));
+        jbsign.setOpaque(true);
+        jblogin.setOpaque(true);
+        
+        
         //ปรับสี JTextField
         jtuser.setBackground(new Color(255, 251, 235));
         jpass.setBackground(new Color(255, 251, 235));

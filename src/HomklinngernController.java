@@ -19,10 +19,12 @@ public class HomklinngernController implements ActionListener {
     private boolean selected;
     private String username;
     private String shopName;
-
-    private String[][] myOrder = {};
+    
+    List<List> orderList = new ArrayList<>();
     private String orderName;
     private String orderPrice;
+    
+    private int cash = 0;
 
     public HomklinngernController() {
         loginview = new LoginView();
@@ -38,6 +40,8 @@ public class HomklinngernController implements ActionListener {
         cashierview.getJbmenu().addActionListener(this);
         cashierview.getJbadd().addActionListener(this);
         cashierview.getJbclear().addActionListener(this);
+        cashierview.getJbdelete().addActionListener(this);
+        cashierview.getJbbill().addActionListener(this);
         categoryview.getJbback().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
@@ -153,7 +157,9 @@ public class HomklinngernController implements ActionListener {
             //ส่วนตราง
             Show_Menu_Cashier(); // method อยู่ด้านล่าง
             
-            // เก็บเมนูส่วนที่คลิก
+            
+            
+            // เก็บเมนูส่วนที่คลิก table menu
             cashierview.getJtmenu().addMouseListener(new java.awt.event.MouseAdapter() {
                 @Override
                 public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -161,9 +167,21 @@ public class HomklinngernController implements ActionListener {
                     TableModel model = cashierview.getJtmenu().getModel();
                     orderName = model.getValueAt(i, 0).toString();
                     orderPrice = model.getValueAt(i, 1).toString();
-//                    System.out.println("Name " + orderName + " Price " + orderPrice);
                 }
-            }
+            });
+                    
+            // เก็บเมนูส่วนที่คลิก table order
+            cashierview.getJtorder().addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override
+                public void mouseClicked(java.awt.event.MouseEvent evt) {
+                    int i = cashierview.getJtorder().getSelectedRow();
+                    TableModel model = cashierview.getJtorder().getModel();
+                    orderName = model.getValueAt(i, 0).toString();
+                    orderPrice = model.getValueAt(i, 1).toString();
+                }
+            } 
+            
+            
         );
             
         cashierview.getJf().setVisible(true);
@@ -177,13 +195,40 @@ public class HomklinngernController implements ActionListener {
     
     // ปุ่ม add ใน cashier
     else if (e.getSource ().equals(cashierview.getJbadd())) {
-        Show_Order_Cashier();
+        addOrderList();
     } 
     
     // ปุ่ม clear ใน cashier
     else if (e.getSource ().equals(cashierview.getJbclear())) {
-        DefaultTableModel model = (DefaultTableModel) cashierview.getJtorder().getModel();
-        model.setRowCount(0);
+        // clear orderlist
+        orderList = new ArrayList<>();
+        // อัพเดตตาราง
+        Show_Order_Cashier();
+    } 
+    
+    // ปุ่ม pay ใน cashier
+    else if (e.getSource ().equals(cashierview.getJbbill())) {
+        cash = Integer.parseInt(cashierview.getJtfpay().getText());
+        Show_Bill_Cashier();
+    } 
+    
+    // ปุ่ม delete ใน cashier
+    else if (e.getSource ().equals(cashierview.getJbdelete())) {
+        // loop หา order นั้นมาลบ
+        for(List innerlist : orderList){
+            if(innerlist.get(0).toString().equals(orderName)){
+                int num = (int)innerlist.get(2)-1; //ลดลง 1 ชิ้น
+                if(num==0){// หมดแล้ว
+                    boolean isRemoved = orderList.remove(innerlist);
+                }
+                else{// เปลี่ยนค่าจำนวน
+                    innerlist.set(2,num);
+                }
+                // อัพเดตตาราง
+                Show_Order_Cashier();
+                break;
+            }
+        }
     } 
 
     // ปุ่ม menu ใน home
@@ -262,45 +307,70 @@ public ArrayList<Menu> getMenuList() {
     }
 
     // สำหรับตารางอาหารที่เลือก  เก็บเป็น list ซ้อน list
-    public List<List> getOrderList() {
+    public void addOrderList() {
         //ดึง database ตาราง menu ใส่ array
-        List<List> orderList = new ArrayList<>();
         ArrayList order = new ArrayList();
         boolean first = true;
         
-        // loop หา order ซ้ำ
+        // loop หา order ซ้ำ เพิ่ม qty
         for(List innerlist : orderList){
-            System.out.println("hey");
             if(innerlist.get(0).toString().equals(orderName)){
-                int num = (int)innerlist.get(2);
-                innerlist.set(2,num++);
+                int num = (int)innerlist.get(2)+1;
+                innerlist.set(2,num);
                 first = false;
             }
         }
+        
         if(first){
-            System.out.println("first");
             order.add(orderName);
             order.add(orderPrice);
             order.add(1);
             orderList.add(order);
         }
         
-        return orderList;
+        // อัพเดตดาตาราง
+        Show_Order_Cashier();
     }
 
     // แสดงตารางตามข้อมูลใน list
     public void Show_Order_Cashier() {
         // ดึงจาก array มาแสดง
         if(orderName != null){ //ต้องกดเลือกก่อน
-            List<List> list = getOrderList();
             DefaultTableModel model = (DefaultTableModel) cashierview.getJtorder().getModel();
-            Object[] row = new Object[2];		
-            for(List innerlist : list){
+            model.setRowCount(0);
+            Object[] row = new Object[3];		
+            for(List innerlist : orderList){
                 row[0] = innerlist.get(0);
                 row[1] = innerlist.get(1);
+                row[2] = innerlist.get(2);
                 model.addRow(row);
             }
+            // อัพเดตบิล
+            Show_Bill_Cashier();
         }
+        
+        
+    }
+    
+    public void Show_Bill_Cashier() {
+        int totalPrice = 0;
+        String textBill = "";
+        
+        for(List innerlist : orderList){
+            // ปริ้นแต่ละออเด้อ
+            String name = innerlist.get(0).toString();
+            int price = Integer.parseInt(innerlist.get(1).toString());
+            int qty = Integer.parseInt(innerlist.get(2).toString());
+            int price2 = price*qty;
+            
+            totalPrice += price2;
+            textBill += "x "+ qty + "\t"+name+"\t"+price2+"฿\n";
+        }
+        
+        textBill += "\n\n\nTOTAL\t"+totalPrice;
+        textBill += "\nCASH\t"+cash;
+        textBill += "\nCHANGE\t"+(cash-totalPrice);
+        cashierview.getJtabill().setText(textBill);
     }
 
 

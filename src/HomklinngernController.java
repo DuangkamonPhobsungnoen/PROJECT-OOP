@@ -355,6 +355,13 @@ public ArrayList<Menu> getMenuList() {
     public void Show_Bill_Cashier() {
         int totalPrice = 0;
         String textBill = "";
+        textBill += ("-----------------------------------------------------------------------\n"
+               + "\t" + "HOM  - GIN - GRUEN \n"
+               + "\t" + "   " + "1234 Main Street\n" 
+               + "\t" + "         " + "Suite 567\n" 
+               + "\t" + "City Name, State 64321\n" 
+               + "\t" + "       " + "023-334-2345\n"
+               + "-----------------------------------------------------------------------\n\n");
         
         for(List innerlist : orderList){
             // ปริ้นแต่ละออเด้อ
@@ -364,12 +371,15 @@ public ArrayList<Menu> getMenuList() {
             int price2 = price*qty;
             
             totalPrice += price2;
-            textBill += "x "+ qty + "\t"+name+"\t"+price2+"฿\n";
+            textBill += " x "+ qty + "\t"+name+"\t"+price2+"฿\n\n";
         }
-        
-        textBill += "\n\n\nTOTAL\t"+totalPrice;
-        textBill += "\nCASH\t"+cash;
-        textBill += "\nCHANGE\t"+(cash-totalPrice);
+        textBill += "-----------------------------------------------------------------------\n";
+        textBill += "-----------------------------------------------------------------------\n";
+        textBill += "\n TOTAL\t"+totalPrice;
+        textBill += "\n CASH\t"+cash;
+        textBill += "\n CHANGE "+(cash-totalPrice)+"\n";
+        textBill += "-----------------------------------------------------------------------\n";
+        textBill += "------------------------THANK YOU------------------------------";
         cashierview.getJtabill().setText(textBill);
     }
 

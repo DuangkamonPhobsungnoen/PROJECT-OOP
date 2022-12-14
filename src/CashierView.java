@@ -36,7 +36,7 @@ public class CashierView {
         jcbmenu = new JComboBox();
 
         jtabill = new JTextArea(20, 30);
-//        JScrollPane jspbill = new JScrollPane(jtabill, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        JScrollPane jspbill = new JScrollPane(jtabill, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         jlhtext = new JLabel("HOM-KLIN-NGERN");
         jlpay = new JLabel("PAY");
@@ -114,7 +114,7 @@ public class CashierView {
         jpbutton.add(jbprint);
 
         jpright.setLayout(new BorderLayout());
-        jpbill.add(jtabill);
+        jpbill.add(jspbill);
         jpright.add(jpbill, BorderLayout.NORTH);
         jpright.add(jppay, BorderLayout.CENTER);
         jpright.add(jpbutton, BorderLayout.SOUTH);

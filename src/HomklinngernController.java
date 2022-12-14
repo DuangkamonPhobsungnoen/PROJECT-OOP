@@ -17,6 +17,10 @@ public class HomklinngernController implements ActionListener {
     private HomeView homeview;
     private CashierView cashierview;
     private CategoryView categoryview;
+    private OptionView optionview;
+    private NewOptionView newoptionview;
+    private UpdateOptionView updateoptionview;
+    private DeleteOptionView deleteoptionview;
     private HomklinngernModel model;
     private boolean selected;
     private String username;
@@ -29,6 +33,10 @@ public class HomklinngernController implements ActionListener {
         cashierview = new CashierView();
         categoryview = new CategoryView();
         model = new HomklinngernModel();
+        optionview = new OptionView();
+        newoptionview = new NewOptionView();
+        deleteoptionview = new DeleteOptionView();
+        updateoptionview = new UpdateOptionView();
 
         homeview.getJbcashier().addActionListener(this);
         homeview.getJbmenu().addActionListener(this);
@@ -45,12 +53,17 @@ public class HomklinngernController implements ActionListener {
         categoryview.getJbup().addActionListener(this);
         categoryview.getJbdel().addActionListener(this);
         categoryview.getJbadd().addActionListener(this);
+        categoryview.getJbdot().addActionListener(this);
+        //small frame of category
+        optionview.getJbnew().addActionListener(this);
+        optionview.getJbup().addActionListener(this);
+        optionview.getJbdel().addActionListener(this);
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
         loginview.getJcheckb().addActionListener(this);
         signupview.getJbb().addActionListener(this);
         signupview.getJbregis().addActionListener(this);
-        
+
     }
 
     @Override
@@ -160,52 +173,39 @@ public class HomklinngernController implements ActionListener {
             } catch (SQLException ex) {
                 Logger.getLogger(HomklinngernController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             //ส่วนตราง
             model.clearOrderList(cashierview); // ล้างของเก่า
-            model.Show_Menu_Cashier(cashierview); 
+            model.Show_Menu_Cashier(cashierview);
             model.setClick(cashierview);
-            
-            
+
             cashierview.getJf().setVisible(true);
             homeview.getJf().dispose();
-    } 
+        } // ปุ่ม get menu ใน chasier / สร้างตารางตาม category ที่เลือก
+        else if (e.getSource().equals(cashierview.getJbmenu())) {
+            model.Show_Menu_Cashier(cashierview); // รันใหม่ตาม cat ใหม่
+        } // ปุ่ม add ใน cashier
+        else if (e.getSource().equals(cashierview.getJbadd())) {
+            model.addOrderList(cashierview);
+        } // ปุ่ม clear ใน cashier
+        else if (e.getSource().equals(cashierview.getJbclear())) {
+            model.clearOrderList(cashierview);
+        } // ปุ่ม pay ใน cashier
+        else if (e.getSource().equals(cashierview.getJbbill())) {
+            model.setCash(Integer.parseInt(cashierview.getJtfpay().getText()));
+            model.Show_Bill_Cashier(cashierview);
+        } // ปุ่ม delete ใน cashier
+        else if (e.getSource().equals(cashierview.getJbdelete())) {
+            model.deleteOrderList(cashierview);
+        } // ปุ่ม menu ใน home
+        else if (e.getSource().equals(homeview.getJbmenu())) {
+            // สร้างข้อมูลหน้า category
 
-    // ปุ่ม get menu ใน chasier / สร้างตารางตาม category ที่เลือก
-    else if (e.getSource ().equals(cashierview.getJbmenu())) {
-        model.Show_Menu_Cashier(cashierview); // รันใหม่ตาม cat ใหม่
-    } 
-    
-    // ปุ่ม add ใน cashier
-    else if (e.getSource ().equals(cashierview.getJbadd())) {
-        model.addOrderList(cashierview);
-    } 
-    
-    // ปุ่ม clear ใน cashier
-    else if (e.getSource ().equals(cashierview.getJbclear())) {
-        model.clearOrderList(cashierview);
-    } 
-    
-    // ปุ่ม pay ใน cashier
-    else if (e.getSource ().equals(cashierview.getJbbill())) {
-        model.setCash(Integer.parseInt(cashierview.getJtfpay().getText()));
-        model.Show_Bill_Cashier(cashierview);
-    } 
-    
-    // ปุ่ม delete ใน cashier
-    else if (e.getSource ().equals(cashierview.getJbdelete())) {
-        model.deleteOrderList(cashierview);
-    } 
-
-    // ปุ่ม menu ใน home
-    else if (e.getSource ().equals(homeview.getJbmenu())) {
-        // สร้างข้อมูลหน้า category
-        
-        //ส่วน combobox
+            //ส่วน combobox
             PreparedStatement ps;
             ResultSet rs;
             String query = "SELECT * FROM `category` WHERE `username_cate` =?";
-        //ดึง ตารางตาม category มาใส่ combo
+            //ดึง ตารางตาม category มาใส่ combo
             try {
                 ps = model.getConnection().prepareStatement(query);
                 ps.setString(1, username);
@@ -218,73 +218,75 @@ public class HomklinngernController implements ActionListener {
             } catch (SQLException ex) {
                 Logger.getLogger(HomklinngernController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        //ส่วนตาราง
-        model.Show_Menu_Cat(categoryview); 
-        model.setClick(categoryview); //กดแล้วขึ้นที่ textField
-        
-        categoryview.getJf().setVisible(true);
-        homeview.getJf().dispose();
-    } 
-    
-    // ปุ่ม get menu ใน category / สร้างตารางตาม category ที่เลือก
-    else if (e.getSource ().equals(categoryview.getJbmenu())) {
-        model.Show_Menu_Cat(categoryview); // รันใหม่ตาม cat ใหม่
-    }
-    
-    // ปุ่ม add ใน category
-    else if (e.getSource ().equals(categoryview.getJbadd())) {
-        model.addMenu(categoryview);
-    }
-    
-    // ปุ่ม update ใน category
-    else if (e.getSource ().equals(categoryview.getJbup())) {
-        model.updateMenu(categoryview); 
-    } 
-    
-    // ปุ่ม delete ใน category
-    else if (e.getSource ().equals(categoryview.getJbdel())) {
-        model.deleteMenu(categoryview); 
-    } 
-    
-    // ปุ่ม print bill
-    else if (e.getSource().equals(cashierview.getJbprint())){
-        try {
-            cashierview.getJtabill().print();
-        } catch (PrinterException ex) {
-            System.out.println(ex);
-        }
-    }
+            //ส่วนตาราง
+            model.Show_Menu_Cat(categoryview);
+            model.setClick(categoryview); //กดแล้วขึ้นที่ textField
 
-    // ปุ่ม back ใน cashier
-    else if (e.getSource ().equals(cashierview.getJbback())) {
-        homeview.getJf().setVisible(true);
-        cashierview.getJf().dispose();
-    } 
-
-    // ปุ่ม back ใน category
-    else if (e.getSource ().equals(categoryview.getJbback())) {
-        homeview.getJf().setVisible(true);
-        categoryview.getJf().dispose();
-    } 
-
-    // ปุ่ม back ใน home
-    else if (e.getSource () 
-        .equals(homeview.getJbback())) {
+            categoryview.getJf().setVisible(true);
+            homeview.getJf().dispose();
+        } // ปุ่ม get menu ใน category / สร้างตารางตาม category ที่เลือก
+        else if (e.getSource().equals(categoryview.getJbmenu())) {
+            model.Show_Menu_Cat(categoryview); // รันใหม่ตาม cat ใหม่
+        } // ปุ่ม add ใน category
+        else if (e.getSource().equals(categoryview.getJbadd())) {
+            model.addMenu(categoryview);
+        } // ปุ่ม update ใน category
+        else if (e.getSource().equals(categoryview.getJbup())) {
+            model.updateMenu(categoryview);
+        } // ปุ่ม delete ใน category
+        else if (e.getSource().equals(categoryview.getJbdel())) {
+            model.deleteMenu(categoryview);
+        } 
+        //Option of catagory
+        //btn ... in catagory
+        else if (e.getSource().equals(categoryview.getJbdot())) {
+            optionview.getJf().setVisible(true);
+        } //btn new in ...
+        else if (e.getSource().equals(optionview.getJbnew())) {
+            newoptionview.getJf().setVisible(true);
+            optionview.getJf().dispose();
+        } //btn up in ...
+        else if (e.getSource().equals(optionview.getJbup())) {
+            updateoptionview.getJf().setVisible(true);
+            optionview.getJf().dispose();
+        } //btn delete in ...
+        else if (e.getSource().equals(optionview.getJbdel())) {
+            deleteoptionview.getJf().setVisible(true);
+            optionview.getJf().dispose();
+            
+        } // ปุ่ม print bill
+        else if (e.getSource().equals(cashierview.getJbprint())) {
+            try {
+                cashierview.getJtabill().print();
+            } catch (PrinterException ex) {
+                System.out.println(ex);
+            }
+        } // ปุ่ม back ใน cashier
+        else if (e.getSource().equals(cashierview.getJbback())) {
+            homeview.getJf().setVisible(true);
+            cashierview.getJf().dispose();
+        } // ปุ่ม back ใน category
+        else if (e.getSource().equals(categoryview.getJbback())) {
+            homeview.getJf().setVisible(true);
+            categoryview.getJf().dispose();
+        } // ปุ่ม back ใน home
+        else if (e.getSource()
+                .equals(homeview.getJbback())) {
             selected = loginview.getJcheckb().isSelected();
-        //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
+            //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
 //            System.out.println(selected); //test true, false
-        if (selected) { //true
-            loginview.getJf().setVisible(true);
-            homeview.getJf().dispose();
-            System.out.println("Save password");
-        } else { //false
-            loginview.getJf().setVisible(true);
-            homeview.getJf().dispose();
-            loginview.getJtuser().setText("");
-            loginview.getJpass().setText("");
+            if (selected) { //true
+                loginview.getJf().setVisible(true);
+                homeview.getJf().dispose();
+                System.out.println("Save password");
+            } else { //false
+                loginview.getJf().setVisible(true);
+                homeview.getJf().dispose();
+                loginview.getJtuser().setText("");
+                loginview.getJpass().setText("");
+            }
         }
     }
-}
 
     public static void main(String[] args) {
         new HomklinngernController();

@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -7,10 +6,10 @@ import javax.xml.parsers.FactoryConfigurationError;
 public class CashierView {
 
     private JFrame jf;
-    private JPanel jphead, jphtext, jphback, jpcombo, jptable, jpbadd, jpleft, jpright, jpbill, jppay, jpbutton, jpgroup, jptable1, jgrouptable;
+    private JPanel jphead, jphtext, jphback, jpcombo, jptable, jpbadd, jpleft, jpright, jpbill, jppay, jpbutton, jpgroup, jptable1, jpcenter, jporder, jpdelete;
     private JComboBox jcbmenu;
     private JTextArea jtabill;
-    private JLabel jlhtext, jlpay;
+    private JLabel jlhtext, jlpay, jlorder;
     private JTextField jtfpay;
     private JTable jtmenu, jtorder;
     private JButton jbmenu, jbback, jbadd, jbbill, jbclear, jbprint, jbdelete;
@@ -31,16 +30,19 @@ public class CashierView {
         jpbutton = new JPanel();
         jpgroup = new JPanel();
         jptable1 = new JPanel();
-        jgrouptable = new JPanel();
+//        jgrouptable = new JPanel();
+        jpcenter = new JPanel();
+        jporder = new JPanel();
+        jpdelete = new JPanel();
 
         jcbmenu = new JComboBox();
 
-        jtabill = new JTextArea(20, 30);
+        jtabill = new JTextArea(20, 24);
         JScrollPane jspbill = new JScrollPane(jtabill, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         jlhtext = new JLabel("HOM-KLIN-NGERN");
         jlpay = new JLabel("PAY");
-
+        jlorder = new JLabel("ORDER");
         jtfpay = new JTextField(10);
 
         jbback = new JButton("BACK");
@@ -50,7 +52,7 @@ public class CashierView {
         jbprint = new JButton("PRINT BILL");
         jbdelete = new JButton("DELETE");
         jbmenu = new JButton("GET MENU");
-
+        
         // tablemenu
         jptable.setLayout(new BoxLayout(jptable, BoxLayout.Y_AXIS));
         String[] columnNames = {"Menu", "Price"};
@@ -88,9 +90,9 @@ public class CashierView {
         jphead.add(jphback, BorderLayout.EAST);
 
         // option left
-        jgrouptable.setLayout(new GridLayout());
-        jgrouptable.add(jptable);
-        jgrouptable.add(jptable1);
+//        jgrouptable.setLayout(new GridLayout());
+//        jgrouptable.add(jptable);
+//        jgrouptable.add(jptable1);
 
         jpleft.setLayout(new BorderLayout());
         jpcombo.add(jcbmenu);
@@ -100,7 +102,7 @@ public class CashierView {
         jpbadd.add(jbadd);
         jpbadd.add(jbdelete);
         jpleft.add(jpcombo, BorderLayout.NORTH);
-        jpleft.add(jgrouptable, BorderLayout.CENTER);
+        jpleft.add(jptable, BorderLayout.CENTER);
         jpleft.add(jpbadd, BorderLayout.SOUTH);
 
         //option right
@@ -118,10 +120,21 @@ public class CashierView {
         jpright.add(jpbill, BorderLayout.NORTH);
         jpright.add(jppay, BorderLayout.CENTER);
         jpright.add(jpbutton, BorderLayout.SOUTH);
+        
+        //option ตรงกลาง
+        jpcenter.setLayout(new BorderLayout());
+        jporder.setLayout(new FlowLayout());
+        jpdelete.setLayout(new FlowLayout());
+        jpdelete.add(jbdelete);
+        jporder.add(jlorder);
+        jpcenter.add(jporder, BorderLayout.NORTH);
+        jpcenter.add(jptable1);
+        jpcenter.add(jpdelete, BorderLayout.SOUTH);
 
         // left + right
-        jpgroup.setLayout(new GridLayout(1, 2));
+        jpgroup.setLayout(new GridLayout(1, 3));
         jpgroup.add(jpleft);
+        jpgroup.add(jpcenter);
         jpgroup.add(jpright);
 
         // setBackground
@@ -150,6 +163,9 @@ public class CashierView {
         jppay.setBackground(Color.WHITE);
         jpbutton.setBackground(Color.WHITE);
         jpbill.setBackground(Color.WHITE);
+        
+        jporder.setBackground(Color.WHITE);
+        jpdelete.setBackground(Color.WHITE);
 
         // set Font
         jlhtext.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
@@ -168,6 +184,7 @@ public class CashierView {
         jbclear.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbprint.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jlpay.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+        jlorder.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 20));
 
         // set ColorFont
         jlhtext.setForeground(new Color(255, 204, 0));

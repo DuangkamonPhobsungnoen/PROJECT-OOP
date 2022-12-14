@@ -158,13 +158,13 @@ public class HomklinngernModel {
     public void Show_Bill_Cashier(CashierView view) {
         int totalPrice = 0;
         String textBill = "";
-        textBill += ("-------------------------------------\n"
+        textBill += ("-----------------------------------------------------------------------\n"
                + "\t" + "HOM  - GIN - GRUEN \n"
                + "\t" + "   " + "1234 Main Street\n" 
                + "\t" + "         " + "Suite 567\n" 
                + "\t" + "City Name, State 64321\n" 
                + "\t" + "       " + "023-334-2345\n"
-               + "-------------------------------------\n\n");
+               + "-----------------------------------------------------------------------\n\n");
         
         for(List innerlist : orderList){
             // ปริ้นแต่ละออเด้อ
@@ -176,13 +176,13 @@ public class HomklinngernModel {
             totalPrice += price2;
             textBill += " x "+ qty + "\t"+name+"\t"+price2+"฿\n\n";
         }
-        textBill += "-------------------------------------\n";
-        textBill += "-------------------------------------\n";
+        textBill += "-----------------------------------------------------------------------\n";
+        textBill += "-----------------------------------------------------------------------\n";
         textBill += "\n TOTAL\t"+totalPrice;
         textBill += "\n CASH\t"+cash;
         textBill += "\n CHANGE "+(cash-totalPrice)+"\n";
-        textBill += "-------------------------------------\n";
-        textBill += "--------------THANK YOU--------------";
+        textBill += "-----------------------------------------------------------------------\n";
+        textBill += "----------------------THANK YOU------------------------------";
         view.getJtabill().setText(textBill);
     }
     

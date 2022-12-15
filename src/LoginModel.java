@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 
-public class LoginModel {
+public class LoginModel extends HomklinngernModel{
     public void login(LoginView view,HomeView hview ,HomklinngernModel model){
         PreparedStatement ps;
             ResultSet rs;
@@ -15,7 +15,7 @@ public class LoginModel {
             String pass = String.valueOf(view.getJpass().getPassword());
             String query = "SELECT * FROM `member` WHERE `Username` =? AND `Password` =?";
             try {
-                ps = HomklinngernModel.getConnection().prepareStatement(query);
+                ps = getConnection().prepareStatement(query);
                 ps.setString(1, uname);
                 ps.setString(2, pass);
                 rs = ps.executeQuery();

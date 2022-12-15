@@ -149,7 +149,7 @@ public class CashierModel extends HomklinngernModel {
         int totalPrice = 0;
         String textBill = "";
         textBill += ("-----------------------------------------------------------------------\n"
-               + "\t" + "HOM  - GIN - GRUEN \n"
+               + "\t" + "HOM  - KLIN - NGERN \n"
                + "\t" + "   " + "1234 Main Street\n" 
                + "\t" + "         " + "Suite 567\n" 
                + "\t" + "City Name, State 64321\n" 

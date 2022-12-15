@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
-public class SignupModel {
+public class SignupModel extends HomklinngernModel{
     public void backSignup(SignupView view){
         view.getJf().dispose();
         view.getJtname().setText("");

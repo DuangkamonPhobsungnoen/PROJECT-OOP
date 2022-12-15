@@ -6,7 +6,7 @@ import javax.swing.table.DefaultTableModel;
 public class CategoryView {
 
     private JFrame jf;
-    private JPanel jphead, jpleft, jp1, jp2, jp3, jp4, jpright, jpbig, jpback;
+    private JPanel jphead, jpleft, jp1, jp2, jp3, jp4, jpright, jpbig, jpback, jpgap, jpgap1, jpgap2,  jpgap3, jpbig1, jptxt1, jptxt2;
     private JComboBox cb;
     private JButton jbdot, jbadd, jbup, jbdel, jbback, jbmenu;
     private JTextField jtname, jtprice;
@@ -27,6 +27,13 @@ public class CategoryView {
         jpright = new JPanel();
 //        jpright1 = new JPanel();
         jpbig = new JPanel();
+        jpbig1 = new JPanel();
+        jpgap = new JPanel();
+        jpgap1 = new JPanel();
+        jpgap2 = new JPanel();
+        jpgap3 = new JPanel();
+        jptxt1 = new JPanel();
+        jptxt2 = new JPanel();
         cb = new JComboBox();
         jbdot = new JButton("...");
         jbmenu = new JButton("GET MENU");
@@ -40,19 +47,38 @@ public class CategoryView {
         jlname = new JLabel("Name ");
         jlprice = new JLabel("Price ");
 //        cb.setSelectedItem("Category");
+
+        //text field
+        jtname.setPreferredSize(new Dimension(200,30));
+        jtprice.setPreferredSize(new Dimension(200,30));
+        jptxt1.setLayout(new BorderLayout());
+        jptxt2.setLayout(new BorderLayout());
+        jptxt1.add(jtname);
+        jptxt2.add(jtprice);
+        //button 
+        cb.setFocusable(false);
+        jbdot.setFocusable(false);
+        jbadd.setFocusable(false);
+        jbup.setFocusable(false);
+        jbdel.setFocusable(false);
+        jbback.setFocusable(false);
+        jbmenu.setFocusable(false);
+        
+
         //left
         jp1.add(cb);
         jp1.add(jbmenu);
         jp1.add(jbdot);
         jp2.add(jlname);
-        jp2.add(jtname);
+        jp2.add(jptxt1);
         jp3.add(jlprice);
-        jp3.add(jtprice);
+        jp3.add(jptxt2);
         jp4.add(jbadd);
         jp4.add(jbup);
         jp4.add(jbdel);
         jpleft.setLayout(new GridLayout(6, 1));
-        jpleft.add(jp1);
+        jpleft.add(jpgap1);
+        jpleft.add(jp1);        
         jpleft.add(jp2);
         jpleft.add(jp3);
         jpleft.add(jp4);
@@ -69,7 +95,7 @@ public class CategoryView {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
-            } // คำสั่งที่ทำให้แก้ไขตารางไม่ได้
+            } // à¸„à¸³à¸ªà¸±à¹ˆà¸‡à¸—à¸µà¹ˆà¸—à¸³à¹ƒà¸«à¹‰à¹à¸à¹‰à¹„à¸‚à¸•à¸²à¸£à¸²à¸‡à¹„à¸¡à¹ˆà¹„à¸”à¹‰
         };
         table = new JTable(tableModel);
         jpright.add(table.getTableHeader(), BorderLayout.PAGE_START);
@@ -78,14 +104,19 @@ public class CategoryView {
         //big frame
         table.setShowGrid(false);
         table.setRowHeight(25);
-//        jpright1.setLayout(new GridLayout());
-//        jpright1.add(jpright);
 
         jpbig.setLayout(new GridLayout(1, 2));
         jpbig.add(jpleft);
         jpbig.add(jpright);
+        //addgap
+        jpbig1.setLayout(new BorderLayout());
+        jpbig1.add(jpgap, BorderLayout.NORTH);
+        jpbig1.add(jpgap2, BorderLayout.EAST);
+        jpbig1.add(jpgap3, BorderLayout.SOUTH);
+        jpbig1.add(jpbig);
+        
         jf.add(jphead, BorderLayout.NORTH);
-        jf.add(jpbig);
+        jf.add(jpbig1);
 
         jf.setSize(820, 550);
         jf.setVisible(false);
@@ -100,6 +131,10 @@ public class CategoryView {
         jpright.setBackground(new Color(28, 64, 121));
         jbback.setBackground(Color.WHITE);
         jpbig.setBackground(Color.WHITE);
+        jpgap.setBackground(Color.WHITE);
+        jpgap1.setBackground(Color.WHITE);
+        jpgap2.setBackground(Color.WHITE);
+        jpgap3.setBackground(Color.WHITE);
         jpleft.setBackground(Color.WHITE);
         jp1.setBackground(Color.WHITE);
         jp2.setBackground(Color.WHITE);

@@ -46,7 +46,7 @@ public class CategoryModel extends HomklinngernModel {
         return menuList;
     }
     
-    public void Show_Menu_Cat(CategoryView view) {
+    public void showMenuCat(CategoryView view) {
         // ดึงจาก array มาแสดง
         ArrayList<Menu> list = getMenuList(view);
         DefaultTableModel model = (DefaultTableModel)view.getTable().getModel();
@@ -59,7 +59,7 @@ public class CategoryModel extends HomklinngernModel {
         }
     }
     
-    public void Show_Cat_Cat(CategoryView view){
+    public void showCatCat(CategoryView view){
         //ส่วน combobox
             PreparedStatement ps;
             ResultSet rs;
@@ -78,6 +78,7 @@ public class CategoryModel extends HomklinngernModel {
                 ex.printStackTrace();
             }
             selectCat = String.valueOf(view.getCb().getSelectedItem());
+            showMenuCat(view);
     }
     
     public void setClick(CategoryView view) {
@@ -144,7 +145,7 @@ public class CategoryModel extends HomklinngernModel {
             Statement st = getConnection().createStatement();
             if (st.executeUpdate(query) != 0) {
                 //refresh JTable
-                 Show_Menu_Cat(view);
+                 showMenuCat(view);
                 JOptionPane.showMessageDialog(null, "Data " + Message + " Success");
             } else {
                 JOptionPane.showMessageDialog(null, "Data not " + Message);

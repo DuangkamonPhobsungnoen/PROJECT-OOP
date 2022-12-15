@@ -20,6 +20,7 @@ public class HomklinngernController implements ActionListener{
     
     private HomklinngernModel model;
     private LoginModel loginmodel;
+    private SignupModel signupmodel;
     private CashierModel cashiermodel;
     private CategoryModel categorymodel;
     private OptionModel optionmodel;
@@ -98,120 +99,41 @@ public class HomklinngernController implements ActionListener{
             // กดปุ่ม back ใน sign up
         } else if (e.getSource() == (signupview.getJbb())) {
             loginview.getJf().setVisible(true);
-            signupview.getJf().dispose();
-            signupview.getJtname().setText("");
-            signupview.getJtuser().setText("");
-            signupview.getJpass().setText("");
-            signupview.getJcpass().setText("");
+            signupmodel.backSignup(signupview);
 
             // กดปุ่ม register ใน sign up
         } else if (e.getSource() == (signupview.getJbregis())) {
-            String name = signupview.getJtname().getText();
-            String uname = signupview.getJtuser().getText();
-            String password = String.valueOf(signupview.getJpass().getPassword());
-            String confirm = String.valueOf(signupview.getJcpass().getPassword());
-            int count = 0;
-            if (name.equals("")) {
-                JOptionPane.showMessageDialog(null, "Add a name");
-                count += 1;
-            } else if (uname.equals("")) {
-                JOptionPane.showMessageDialog(null, "Add a username");
-                count += 1;
-            } else if (password.equals("") | password.equals("jPasswordField1")) {
-                JOptionPane.showMessageDialog(null, "Add a password");
-                count += 1;
-            } else if (!password.equals(confirm)) {
-                JOptionPane.showMessageDialog(null, "Retype the password again");
-                count += 1;
-            }
-            PreparedStatement ps;
-            String query = "INSERT INTO `member`(`ShopName`, `Username`, `Password`, `Comfirm`) VALUES (?, ?, ?, ?)";
-            try {
-                if (count == 0) {
-                    ps = HomklinngernModel.getConnection().prepareStatement(query);
-                    ps.setString(1, name);
-                    ps.setString(2, uname);
-                    ps.setString(3, password);
-                    ps.setString(4, confirm);
-                    if (ps.executeUpdate() > 0) {
-                        JOptionPane.showMessageDialog(null, "New User Add");
-                    }
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(SignupView.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
+            signupmodel.register(signupview);
+            
             // กดปุ่ม login ใน login
         } else if (e.getSource() == (loginview.getJblogin())) {
-            PreparedStatement ps;
-            ResultSet rs;
-            String uname = loginview.getJtuser().getText();
-            String pass = String.valueOf(loginview.getJpass().getPassword());
-            String query = "SELECT * FROM `member` WHERE `Username` =? AND `Password` =?";
-            try {
-                ps = HomklinngernModel.getConnection().prepareStatement(query);
-                ps.setString(1, uname);
-                ps.setString(2, pass);
-                rs = ps.executeQuery();
-                if (rs.next()) {
-                    //เก็บ username แลพ shopName ปัจจุบัน ให้ทุก model
-                    model.setUsername(uname);
-                    model.setShopName(rs.getString("ShopName"));
-                    categorymodel.setUsername(uname);
-                    categorymodel.setShopName(rs.getString("ShopName"));
-                    cashiermodel.setUsername(uname);
-                    cashiermodel.setShopName(rs.getString("ShopName"));
-                    optionmodel.setUsername(uname);
-                    newopmodel.setUsername(uname);
-                    deleteopmodel.setUsername(uname);
-                    updateopmodel.setUsername(uname);
-                    //ตั้งให้ขึ้นชื่อร้าน
-                    homeview.getJlhname().setText(model.getShopName());
-                    cashierview.getJlhtext().setText(model.getShopName());
-                    categoryview.getJltext().setText(model.getShopName());
-                    
-                    homeview.getJf().setVisible(true);
-                    loginview.getJf().dispose();
-                    } else {
-                    JOptionPane.showMessageDialog(null, "Incorrect Username or Password", "Login Failed", 2);
-                }
-            } catch (SQLException ex) {
-                Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            loginmodel.login(loginview, homeview, model);
+            // ทุก model จำ user
+            String uname = model.getUsername();
+            categorymodel.setUsername(uname);
+            cashiermodel.setUsername(uname);
+            newopmodel.setUsername(uname);
+            deleteopmodel.setUsername(uname);
+            updateopmodel.setUsername(uname);
+            //ตั้งให้ขึ้นชื่อร้าน
+            homeview.getJlhname().setText(model.getShopName());
+            cashierview.getJlhtext().setText(model.getShopName());
+            categoryview.getJltext().setText(model.getShopName());
         }
 
         // ปุ่ม cashier ใน home
         if (e.getSource().equals(homeview.getJbcashier())) {
             //สร้างข้อมูลหน้า cashier
-
-            //ส่วน combobox
-            PreparedStatement ps;
-            ResultSet rs;
-            String query = "SELECT * FROM `category` WHERE `username_cate` =?";
-            //ดึง ตาราง category
-            try {
-                ps = model.getConnection().prepareStatement(query);
-                ps.setString(1, model.getUsername());
-                rs = ps.executeQuery();
-                cashierview.getJcbmenu().removeAllItems();
-                while (rs.next()) {
-                    String cate = rs.getString("category_cate"); //ดึง cloumn category_cate
-                    cashierview.getJcbmenu().addItem(cate);
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-
-            //ส่วนตราง
+            cashiermodel.showComboCashier(cashierview);
             cashiermodel.clearOrderList(cashierview); // ล้างของเก่า
-            cashiermodel.Show_Menu_Cashier(cashierview);
+            cashiermodel.showMenuCashier(cashierview);
             cashiermodel.setClick(cashierview);
 
             cashierview.getJf().setVisible(true);
             homeview.getJf().dispose();
         } // ปุ่ม get menu ใน chasier / สร้างตารางตาม category ที่เลือก
         else if (e.getSource().equals(cashierview.getJbmenu())) {
-            cashiermodel.Show_Menu_Cashier(cashierview); // รันใหม่ตาม cat ใหม่
+            cashiermodel.showMenuCashier(cashierview); // รันใหม่ตาม cat ใหม่
         } // ปุ่ม add ใน cashier
         else if (e.getSource().equals(cashierview.getJbadd())) {
             cashiermodel.addOrderList(cashierview);
@@ -221,21 +143,20 @@ public class HomklinngernController implements ActionListener{
         } // ปุ่ม pay ใน cashier
         else if (e.getSource().equals(cashierview.getJbbill())) {
             cashiermodel.setCash(Integer.parseInt(cashierview.getJtfpay().getText()));
-            cashiermodel.Show_Bill_Cashier(cashierview);
+            cashiermodel.showBillCashier(cashierview);
         } // ปุ่ม delete ใน cashier
         else if (e.getSource().equals(cashierview.getJbdelete())) {
             cashiermodel.deleteOrderList(cashierview);
         } // ปุ่ม menu ใน home
         else if (e.getSource().equals(homeview.getJbmenu())) {
-            categorymodel.Show_Cat_Cat(categoryview);
-            categorymodel.Show_Menu_Cat(categoryview);
+            categorymodel.showCatCat(categoryview);
             categorymodel.setClick(categoryview); //กดแล้วขึ้นที่ textField
 
             categoryview.getJf().setVisible(true);
             homeview.getJf().dispose();
         } // ปุ่ม get menu ใน category / สร้างตารางตาม category ที่เลือก
         else if (e.getSource().equals(categoryview.getJbmenu())) {
-            categorymodel.Show_Menu_Cat(categoryview); // รันใหม่ตาม cat ใหม่
+            categorymodel.showMenuCat(categoryview); // รันใหม่ตาม cat ใหม่
         } // ปุ่ม add ใน category
         else if (e.getSource().equals(categoryview.getJbadd())) {
             categorymodel.addMenu(categoryview);
@@ -268,7 +189,7 @@ public class HomklinngernController implements ActionListener{
         //btn ok in new cat
         else if (e.getSource().equals(newopview.getJbok())) {
             newopmodel.addNewCat(newopview);
-            categorymodel.Show_Cat_Cat(categoryview);
+            categorymodel.showCatCat(categoryview);
             
             newopview.getJf().setVisible(false);
             optionview.getJf().dispose();
@@ -283,8 +204,7 @@ public class HomklinngernController implements ActionListener{
         //btn ok in update cat
         else if (e.getSource().equals(updateopview.getJbok())) {
             updateopmodel.updateCat(updateopview);
-            categorymodel.Show_Cat_Cat(categoryview);
-            categorymodel.Show_Menu_Cat(categoryview);
+            categorymodel.showCatCat(categoryview);
             
             updateopview.getJf().setVisible(false);
             optionview.getJf().dispose();
@@ -299,8 +219,7 @@ public class HomklinngernController implements ActionListener{
         //btn yes in delete catgory
         else if (e.getSource().equals(deleteopview.getJbyes())) {
             deleteopmodel.deleteCat(deleteopview);
-            categorymodel.Show_Cat_Cat(categoryview);
-            categorymodel.Show_Menu_Cat(categoryview);
+            categorymodel.showCatCat(categoryview);
             
             deleteopview.getJf().setVisible(false);
             optionview.getJf().dispose();

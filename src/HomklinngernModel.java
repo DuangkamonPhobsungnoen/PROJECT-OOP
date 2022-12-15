@@ -21,8 +21,6 @@ public class HomklinngernModel {
         this.shopName = shopName;
     }
     
-    
-    
     // create a function to connect with mysql database
     public static Connection getConnection() {
         Connection con = null;

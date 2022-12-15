@@ -1,6 +1,7 @@
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +45,27 @@ public class CashierModel extends HomklinngernModel {
         return menuList;
     }
     
-    public void Show_Menu_Cashier(CashierView view) {
+    public void showComboCashier(CashierView view){
+        //ส่วน combobox
+            PreparedStatement ps;
+            ResultSet rs;
+            String query = "SELECT * FROM `category` WHERE `username_cate` =?";
+            //ดึง ตาราง category
+            try {
+                ps = getConnection().prepareStatement(query);
+                ps.setString(1, getUsername());
+                rs = ps.executeQuery();
+                view.getJcbmenu().removeAllItems();
+                while (rs.next()) {
+                    String cate = rs.getString("category_cate"); //ดึง cloumn category_cate
+                    view.getJcbmenu().addItem(cate);
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+    }
+    
+    public void showMenuCashier(CashierView view) {
         // ดึงจาก array มาแสดง
         ArrayList<Menu> list = getMenuList(view);
         DefaultTableModel model = (DefaultTableModel) view.getJtmenu().getModel();
@@ -80,12 +101,12 @@ public class CashierModel extends HomklinngernModel {
         }
         
         // อัพเดตดาตาราง
-        Show_Order_Cashier(view);
+        showOrderCashier(view);
     }
     
     public void clearOrderList(CashierView view){
         orderList = new ArrayList<>();
-        Show_Order_Cashier(view);
+        showOrderCashier(view);
     }
     
     public void deleteOrderList(CashierView view){
@@ -99,7 +120,7 @@ public class CashierModel extends HomklinngernModel {
                     innerlist.set(2,num);
                 }
                 // อัพเดตตาราง
-                Show_Order_Cashier(view);
+                showOrderCashier(view);
                 break;
             }
         }
@@ -107,7 +128,7 @@ public class CashierModel extends HomklinngernModel {
     
     
     // แสดงตารางตามข้อมูลใน list
-    public void Show_Order_Cashier(CashierView view) {
+    public void showOrderCashier(CashierView view) {
         // ดึงจาก array มาแสดง
         if(orderName != null){ //ต้องกดเลือกก่อน
             DefaultTableModel model = (DefaultTableModel) view.getJtorder().getModel();
@@ -120,11 +141,11 @@ public class CashierModel extends HomklinngernModel {
                 model.addRow(row);
             }
             // อัพเดตบิล
-            Show_Bill_Cashier(view);
+            showBillCashier(view);
         }
     }
     
-    public void Show_Bill_Cashier(CashierView view) {
+    public void showBillCashier(CashierView view) {
         int totalPrice = 0;
         String textBill = "";
         textBill += ("-----------------------------------------------------------------------\n"

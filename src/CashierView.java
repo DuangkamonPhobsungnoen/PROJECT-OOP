@@ -171,13 +171,13 @@ public class CashierView {
         jlhtext.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
         jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 
-        jcbmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jtmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jtmenu.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+        jcbmenu.setFont(new Font("browallia new", Font.BOLD, 18));
+        jtmenu.setFont(new Font("browallia new", Font.BOLD, 18));
+        jtmenu.getTableHeader().setFont(new Font("browallia new", Font.BOLD, 18));
         jbadd.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbdelete.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jtorder.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jtorder.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+        jtorder.setFont(new Font("browallia new", Font.BOLD, 18));
+        jtorder.getTableHeader().setFont(new Font("browallia new", Font.BOLD, 18));
 
         jtabill.setFont(new Font("browallia new", Font.BOLD, 15));
         jbbill.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));

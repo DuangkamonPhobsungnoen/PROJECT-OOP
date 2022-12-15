@@ -37,7 +37,7 @@ public class HomklinngernModel {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:4306/hom_klin_ngern", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost/hom_klin_ngern", "root", "");
             System.out.println("Connect");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
@@ -173,13 +173,13 @@ public class HomklinngernModel {
             int price2 = price*qty;
             
             totalPrice += price2;
-            textBill += " x "+ qty + "\t"+name+"\t"+price2+"฿\n\n";
+            textBill += " x "+ qty + "  " +name+"\t"+price2+"฿\n\n";
         }
         textBill += "-----------------------------------------------------------------------\n";
         textBill += "-----------------------------------------------------------------------\n";
         textBill += "\n TOTAL\t"+totalPrice;
         textBill += "\n CASH\t"+cash;
-        textBill += "\n CHANGE "+(cash-totalPrice)+"\n";
+        textBill += "\n CHANGE\t "+(cash-totalPrice)+"\n";
         textBill += "-----------------------------------------------------------------------\n";
         textBill += "----------------------THANK YOU------------------------------";
         view.getJtabill().setText(textBill);

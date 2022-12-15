@@ -28,8 +28,6 @@ public class HomklinngernController implements ActionListener{
     private DeleteOptionModel deleteopmodel;
     
     private boolean selected;
-    private String username;
-    private String shopName;
 
     public HomklinngernController() {
         loginview = new LoginView();
@@ -156,20 +154,25 @@ public class HomklinngernController implements ActionListener{
                 ps.setString(2, pass);
                 rs = ps.executeQuery();
                 if (rs.next()) {
-                    //เก็บ username แลพ shopName ปัจจุบัน
-                    username = rs.getString("Username");
-                    shopName = rs.getString("ShopName");
-                    model.setUsername(username);
-                    model.setShopName(shopName);
-                    System.out.println(model.getUsername());
+                    //เก็บ username แลพ shopName ปัจจุบัน ให้ทุก model
+                    model.setUsername(uname);
+                    model.setShopName(rs.getString("ShopName"));
+                    categorymodel.setUsername(uname);
+                    categorymodel.setShopName(rs.getString("ShopName"));
+                    cashiermodel.setUsername(uname);
+                    cashiermodel.setShopName(rs.getString("ShopName"));
+                    optionmodel.setUsername(uname);
+                    newopmodel.setUsername(uname);
+                    deleteopmodel.setUsername(uname);
+                    updateopmodel.setUsername(uname);
                     //ตั้งให้ขึ้นชื่อร้าน
-                    homeview.getJlhname().setText(shopName);
-                    cashierview.getJlhtext().setText(shopName);
-                    categoryview.getJltext().setText(shopName);
-
+                    homeview.getJlhname().setText(model.getShopName());
+                    cashierview.getJlhtext().setText(model.getShopName());
+                    categoryview.getJltext().setText(model.getShopName());
+                    
                     homeview.getJf().setVisible(true);
                     loginview.getJf().dispose();
-                } else {
+                    } else {
                     JOptionPane.showMessageDialog(null, "Incorrect Username or Password", "Login Failed", 2);
                 }
             } catch (SQLException ex) {
@@ -188,7 +191,7 @@ public class HomklinngernController implements ActionListener{
             //ดึง ตาราง category
             try {
                 ps = model.getConnection().prepareStatement(query);
-                ps.setString(1, username);
+                ps.setString(1, model.getUsername());
                 rs = ps.executeQuery();
                 cashierview.getJcbmenu().removeAllItems();
                 while (rs.next()) {
@@ -196,7 +199,7 @@ public class HomklinngernController implements ActionListener{
                     cashierview.getJcbmenu().addItem(cate);
                 }
             } catch (SQLException ex) {
-                Logger.getLogger(HomklinngernController.class.getName()).log(Level.SEVERE, null, ex);
+                ex.printStackTrace();
             }
 
             //ส่วนตราง
@@ -344,10 +347,4 @@ public class HomklinngernController implements ActionListener{
             }
         }
     }
-
-    public static void main(String[] args) {
-        new HomklinngernController();
-    }
-
-    
 }

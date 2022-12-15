@@ -20,8 +20,6 @@ public class CategoryModel extends HomklinngernModel {
         return selectCat;
     }
     
-    
-    
     // สำหรับ menu ในหน้า category
     public ArrayList<Menu> getMenuList(CategoryView view) {
         //ดึง database ตาราง menu ใส่  array

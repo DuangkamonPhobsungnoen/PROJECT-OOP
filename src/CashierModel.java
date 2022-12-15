@@ -20,9 +20,11 @@ public class CashierModel extends HomklinngernModel {
     // สำหรับ menu ในหน้า cashier
     public ArrayList<Menu> getMenuList(CashierView view) {
         //ดึง database ตาราง menu ใส่ array
+        System.out.println("get menu : "+ getUsername());
         ArrayList<Menu> menuList = new ArrayList<Menu>();
         PreparedStatement ps;
         ResultSet rs;
+//        String user = lview.getJtuser().getText();
         //ดึง ตาราง menu
         String query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
         try {

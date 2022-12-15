@@ -5,17 +5,11 @@ public class HomklinngernModel {
     private String username;
     private String shopName;
 
-    public void setUsername(String username) {
+    public void setUsername(String username){
         this.username = username;
-        System.out.println("set user = " + this.username);
-    }
-
-    public void setShopName(String shopName) {
-        this.shopName = shopName;
     }
 
     public String getUsername() {
-        System.out.println("get user = "+username);
         return username;
     }
 
@@ -23,6 +17,12 @@ public class HomklinngernModel {
         return shopName;
     }
 
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+    
+    
+    
     // create a function to connect with mysql database
     public static Connection getConnection() {
         Connection con = null;
@@ -59,16 +59,6 @@ public class HomklinngernModel {
         }
         return lastID;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
 }

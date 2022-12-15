@@ -179,7 +179,12 @@ public class HomklinngernModel {
         textBill += "-----------------------------------------------------------------------\n";
         textBill += "\n TOTAL\t"+totalPrice;
         textBill += "\n CASH\t"+cash;
-        textBill += "\n CHANGE\t "+(cash-totalPrice)+"\n";
+        if (cash == 0){
+            textBill += "\n CHANGE\t 0" + "\n";
+        }
+        else if(cash > totalPrice){
+            textBill += "\n CHANGE\t "+(cash-totalPrice)+"\n";
+        }
         textBill += "-----------------------------------------------------------------------\n";
         textBill += "----------------------THANK YOU------------------------------";
         view.getJtabill().setText(textBill);

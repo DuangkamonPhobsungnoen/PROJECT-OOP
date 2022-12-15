@@ -220,12 +220,18 @@ public class HomklinngernController implements ActionListener{
         } // ปุ่ม add ใน category
         else if (e.getSource().equals(categoryview.getJbadd())) {
             model.addMenu(categoryview);
+            categoryview.getJtname().setText("");
+            categoryview.getJtprice().setText("");
         } // ปุ่ม update ใน category
         else if (e.getSource().equals(categoryview.getJbup())) {
             model.updateMenu(categoryview);
+            categoryview.getJtname().setText("");
+            categoryview.getJtprice().setText("");
         } // ปุ่ม delete ใน category
         else if (e.getSource().equals(categoryview.getJbdel())) {
             model.deleteMenu(categoryview);
+            categoryview.getJtname().setText("");
+            categoryview.getJtprice().setText("");
         } 
         //Option of catagory
         

@@ -81,6 +81,11 @@ public class SignupView {
         jlcpass.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
         jbb.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
         jbregis.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 12));
+        
+        jtname.setFont(new Font("browallia new", Font.BOLD, 15));
+        jtuser.setFont(new Font("browallia new", Font.BOLD, 15));
+        jpass.setFont(new Font("browallia new", Font.BOLD, 12));
+        jcpass.setFont(new Font("browallia new", Font.BOLD, 12));
         //ปรับสีพื้นหลัง
         jpleftn.setBackground(new Color(255, 204, 0));
         jplefti.setBackground(new Color(255, 204, 0));

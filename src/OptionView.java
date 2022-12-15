@@ -5,7 +5,7 @@ public class OptionView{
     private JPanel jp1, jp2, jp3, jp;
     private JButton jbnew, jbup, jbdel;
     public OptionView(){
-        jf = new JFrame();
+        jf = new JFrame("Option page");
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jp1 = new JPanel();
         jp2 = new JPanel();

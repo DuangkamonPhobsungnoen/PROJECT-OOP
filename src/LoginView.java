@@ -14,14 +14,14 @@ public class LoginView {
     private JCheckBox jcheckb;
 
     public LoginView() {
-        jf = new JFrame();
+        jf = new JFrame("Login page");
         img = new ImageIcon("icon_noodle.png");
         jlimg = new JLabel(img);
         jluser = new JLabel("Username");
         jlpass = new JLabel("Password");
         jlname = new JLabel("HOM KLIN NGERN");
-        jtuser = new JTextField(23);
-        jpass = new JPasswordField(23);
+        jtuser = new JTextField(15);
+        jpass = new JPasswordField(15);
         jbsign = new JButton("Sign up");
         jblogin = new JButton("Login");
         jp = new JPanel();
@@ -85,12 +85,14 @@ public class LoginView {
         jf.setLocationRelativeTo(null);
         jf.setVisible(true);
          //ฟ้อนต์
-        jlname.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 24));
-        jluser.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jlpass.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jbsign.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jblogin.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jcheckb.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+        jlname.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
+        jluser.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+        jlpass.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+        jbsign.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+        jblogin.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+        jcheckb.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 14));
+        jtuser.setFont(new Font("browallia new", Font.BOLD, 18));
+        jpass.setFont(new Font("browallia new", Font.BOLD, 18));
         //ปรับสีพื้นหลัง
         jf.getContentPane().setBackground(Color.red);
         jp.setBackground(new Color(255, 204, 0));

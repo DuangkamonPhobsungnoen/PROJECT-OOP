@@ -7,7 +7,7 @@ public class NewOptionView {
     private JButton jbok;
     private JLabel jltxt;
     public NewOptionView(){
-        jf = new JFrame();
+        jf = new JFrame("NewOption page");
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jp1 = new JPanel();
         jp2 = new JPanel();
@@ -35,6 +35,7 @@ public class NewOptionView {
         //font
         jbok.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jltxt.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 20));
+        jtcat.setFont(new Font("browallia new", Font.BOLD, 18));
         
         jbok.setForeground(Color.WHITE);
         jltxt.setForeground(new Color(28, 64, 121));

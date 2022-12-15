@@ -7,7 +7,7 @@ public class DeleteOptionView {
     private JButton jbyes, jbno;
     private JLabel jltxt;
     public DeleteOptionView(){
-        jf = new JFrame();
+        jf = new JFrame(" DeleteOption page");
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jp1 = new JPanel();
         jp2 = new JPanel();

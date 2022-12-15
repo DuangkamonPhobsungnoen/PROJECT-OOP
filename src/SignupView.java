@@ -13,7 +13,7 @@ public class SignupView {
     private JPanel jp, jpgroup, jpleft, jplefts, jplefti, jpright, jprightgn, jprightgu, jprightgp, jprightgcp, jprightgbt,jpleftn;
 
     public SignupView() {
-        jf = new JFrame();
+        jf = new JFrame("Signup page");
         img = new ImageIcon("icon_username.png");
         jlnameh = new JLabel("Restaurant Name");
         jlname = new JLabel("HOM KLIN NGERN");

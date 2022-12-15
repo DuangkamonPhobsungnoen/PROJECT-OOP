@@ -14,7 +14,7 @@ public class CategoryView {
     private JLabel jltext, jlname, jlprice;
 
     public CategoryView() {
-        jf = new JFrame();
+        jf = new JFrame("Category page");
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         jphead = new JPanel();
@@ -39,6 +39,7 @@ public class CategoryView {
         jltext = new JLabel("HOM-KLIN-NGERN");
         jlname = new JLabel("Name ");
         jlprice = new JLabel("Price ");
+//        cb.setSelectedItem("Category");
         //left
         jp1.add(cb);
         jp1.add(jbmenu);
@@ -110,23 +111,33 @@ public class CategoryView {
         jbup.setBackground(new Color(255, 204, 0));
         jbdel.setBackground(new Color(255, 204, 0));
         jbdot.setBackground(new Color(255, 204, 0));
+        jbmenu.setBackground(new Color(255, 204, 0));
 
         //font color
         table.getTableHeader().setForeground(Color.WHITE);
         table.setForeground(Color.WHITE);
         jltext.setForeground(new Color(255, 204, 0));
-
-        jltext.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
+        
+        cb.setFont(new Font("browallia new", Font.BOLD, 15));
+        jltext.setFont(new Font("browallia new", Font.BOLD, 30));
+        jtname.setFont(new Font("browallia new", Font.BOLD, 15));
+        jtprice.setFont(new Font("browallia new", Font.BOLD, 15));
+        cb.setFont(new Font("browallia new", Font.BOLD, 15));
         jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         table.getTableHeader().setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         table.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        cb.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jlname.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jlprice.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbdot.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbadd.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbup.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbdel.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+        jbmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
+         table.setFont(new Font("browallia new", Font.BOLD, 18));
+    }
+    
+    public static void main(String[] args) {
+        new CategoryView();
     }
 
     public JFrame getJf() {

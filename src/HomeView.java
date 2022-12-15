@@ -7,7 +7,7 @@ public class HomeView {
     private JLabel jlhname, jlcashier, jlmenu;
     
     public HomeView(){
-        jf = new JFrame("Menu");
+        jf = new JFrame("Home page");
         
         jphead = new JPanel();
         jphback  = new JPanel();
@@ -67,7 +67,7 @@ public class HomeView {
         jptext2.setBackground(Color.white);
         
         // Font
-        jlhname.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
+        jlhname.setFont(new Font("browallia new", Font.BOLD, 30));
         jlcashier.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
         jlmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
         jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));

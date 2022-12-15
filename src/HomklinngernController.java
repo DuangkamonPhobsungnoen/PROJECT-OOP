@@ -1,14 +1,10 @@
 
-import java.util.List;
 import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 
 public class HomklinngernController implements ActionListener{
 
@@ -21,7 +17,16 @@ public class HomklinngernController implements ActionListener{
     private NewOptionView newopview;
     private UpdateOptionView updateopview;
     private DeleteOptionView deleteopview;
+    
     private HomklinngernModel model;
+    private LoginModel loginmodel;
+    private CashierModel cashiermodel;
+    private CategoryModel categorymodel;
+    private OptionModel optionmodel;
+    private NewOptionModel newopmodel;
+    private UpdateOptionModel updateopmodel;
+    private DeleteOptionModel deleteopmodel;
+    
     private boolean selected;
     private String username;
     private String shopName;
@@ -32,11 +37,21 @@ public class HomklinngernController implements ActionListener{
         homeview = new HomeView();
         cashierview = new CashierView();
         categoryview = new CategoryView();
-        model = new HomklinngernModel();
         optionview = new OptionView();
         newopview = new NewOptionView();
         deleteopview = new DeleteOptionView();
         updateopview = new UpdateOptionView();
+        
+        model = new HomklinngernModel();
+        loginmodel = new LoginModel();
+        cashiermodel = new CashierModel();
+        categorymodel = new CategoryModel();
+        optionmodel = new OptionModel();
+        newopmodel = new NewOptionModel();
+        updateopmodel = new UpdateOptionModel();
+        deleteopmodel = new DeleteOptionModel();
+        
+        
 
         homeview.getJbcashier().addActionListener(this);
         homeview.getJbmenu().addActionListener(this);
@@ -146,6 +161,7 @@ public class HomklinngernController implements ActionListener{
                     shopName = rs.getString("ShopName");
                     model.setUsername(username);
                     model.setShopName(shopName);
+                    System.out.println(model.getUsername());
                     //ตั้งให้ขึ้นชื่อร้าน
                     homeview.getJlhname().setText(shopName);
                     cashierview.getJlhtext().setText(shopName);
@@ -184,52 +200,52 @@ public class HomklinngernController implements ActionListener{
             }
 
             //ส่วนตราง
-            model.clearOrderList(cashierview); // ล้างของเก่า
-            model.Show_Menu_Cashier(cashierview);
-            model.setClick(cashierview);
+            cashiermodel.clearOrderList(cashierview); // ล้างของเก่า
+            cashiermodel.Show_Menu_Cashier(cashierview);
+            cashiermodel.setClick(cashierview);
 
             cashierview.getJf().setVisible(true);
             homeview.getJf().dispose();
         } // ปุ่ม get menu ใน chasier / สร้างตารางตาม category ที่เลือก
         else if (e.getSource().equals(cashierview.getJbmenu())) {
-            model.Show_Menu_Cashier(cashierview); // รันใหม่ตาม cat ใหม่
+            cashiermodel.Show_Menu_Cashier(cashierview); // รันใหม่ตาม cat ใหม่
         } // ปุ่ม add ใน cashier
         else if (e.getSource().equals(cashierview.getJbadd())) {
-            model.addOrderList(cashierview);
+            cashiermodel.addOrderList(cashierview);
         } // ปุ่ม clear ใน cashier
         else if (e.getSource().equals(cashierview.getJbclear())) {
-            model.clearOrderList(cashierview);
+            cashiermodel.clearOrderList(cashierview);
         } // ปุ่ม pay ใน cashier
         else if (e.getSource().equals(cashierview.getJbbill())) {
-            model.setCash(Integer.parseInt(cashierview.getJtfpay().getText()));
-            model.Show_Bill_Cashier(cashierview);
+            cashiermodel.setCash(Integer.parseInt(cashierview.getJtfpay().getText()));
+            cashiermodel.Show_Bill_Cashier(cashierview);
         } // ปุ่ม delete ใน cashier
         else if (e.getSource().equals(cashierview.getJbdelete())) {
-            model.deleteOrderList(cashierview);
+            cashiermodel.deleteOrderList(cashierview);
         } // ปุ่ม menu ใน home
         else if (e.getSource().equals(homeview.getJbmenu())) {
-            model.Show_Cat_Cat(categoryview);
-            model.Show_Menu_Cat(categoryview);
-            model.setClick(categoryview); //กดแล้วขึ้นที่ textField
+            categorymodel.Show_Cat_Cat(categoryview);
+            categorymodel.Show_Menu_Cat(categoryview);
+            categorymodel.setClick(categoryview); //กดแล้วขึ้นที่ textField
 
             categoryview.getJf().setVisible(true);
             homeview.getJf().dispose();
         } // ปุ่ม get menu ใน category / สร้างตารางตาม category ที่เลือก
         else if (e.getSource().equals(categoryview.getJbmenu())) {
-            model.Show_Menu_Cat(categoryview); // รันใหม่ตาม cat ใหม่
+            categorymodel.Show_Menu_Cat(categoryview); // รันใหม่ตาม cat ใหม่
         } // ปุ่ม add ใน category
         else if (e.getSource().equals(categoryview.getJbadd())) {
-            model.addMenu(categoryview);
+            categorymodel.addMenu(categoryview);
             categoryview.getJtname().setText("");
             categoryview.getJtprice().setText("");
         } // ปุ่ม update ใน category
         else if (e.getSource().equals(categoryview.getJbup())) {
-            model.updateMenu(categoryview);
+            categorymodel.updateMenu(categoryview);
             categoryview.getJtname().setText("");
             categoryview.getJtprice().setText("");
         } // ปุ่ม delete ใน category
         else if (e.getSource().equals(categoryview.getJbdel())) {
-            model.deleteMenu(categoryview);
+            categorymodel.deleteMenu(categoryview);
             categoryview.getJtname().setText("");
             categoryview.getJtprice().setText("");
         } 
@@ -248,8 +264,8 @@ public class HomklinngernController implements ActionListener{
         
         //btn ok in new cat
         else if (e.getSource().equals(newopview.getJbok())) {
-            model.addNewCat(newopview);
-            model.Show_Cat_Cat(categoryview);
+            newopmodel.addNewCat(newopview);
+            categorymodel.Show_Cat_Cat(categoryview);
             
             newopview.getJf().setVisible(false);
             optionview.getJf().dispose();
@@ -263,9 +279,9 @@ public class HomklinngernController implements ActionListener{
         
         //btn ok in update cat
         else if (e.getSource().equals(updateopview.getJbok())) {
-            model.updateCat(updateopview);
-            model.Show_Cat_Cat(categoryview);
-            model.Show_Menu_Cat(categoryview);
+            updateopmodel.updateCat(updateopview);
+            categorymodel.Show_Cat_Cat(categoryview);
+            categorymodel.Show_Menu_Cat(categoryview);
             
             updateopview.getJf().setVisible(false);
             optionview.getJf().dispose();
@@ -279,9 +295,9 @@ public class HomklinngernController implements ActionListener{
         } 
         //btn yes in delete catgory
         else if (e.getSource().equals(deleteopview.getJbyes())) {
-            model.deleteCat(deleteopview);
-            model.Show_Cat_Cat(categoryview);
-            model.Show_Menu_Cat(categoryview);
+            deleteopmodel.deleteCat(deleteopview);
+            categorymodel.Show_Cat_Cat(categoryview);
+            categorymodel.Show_Menu_Cat(categoryview);
             
             deleteopview.getJf().setVisible(false);
             optionview.getJf().dispose();

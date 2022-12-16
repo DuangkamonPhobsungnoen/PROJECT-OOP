@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.*;
 
 public class HomklinngernController implements ActionListener{
-
+    //view
     private LoginView loginview;
     private SignupView signupview;
     private HomeView homeview;
@@ -17,7 +17,7 @@ public class HomklinngernController implements ActionListener{
     private NewOptionView newopview;
     private UpdateOptionView updateopview;
     private DeleteOptionView deleteopview;
-    
+    //model
     private HomklinngernModel model;
     private LoginModel loginmodel;
     private SignupModel signupmodel;
@@ -28,7 +28,10 @@ public class HomklinngernController implements ActionListener{
     private UpdateOptionModel updateopmodel;
     private DeleteOptionModel deleteopmodel;
     
+    private Login login;
     private boolean selected;
+    
+    
 
     public HomklinngernController() {
         loginview = new LoginView();
@@ -50,8 +53,8 @@ public class HomklinngernController implements ActionListener{
         updateopmodel = new UpdateOptionModel();
         deleteopmodel = new DeleteOptionModel();
         
+        login = new Login();
         
-
         homeview.getJbcashier().addActionListener(this);
         homeview.getJbmenu().addActionListener(this);
         homeview.getJbback().addActionListener(this);
@@ -83,9 +86,14 @@ public class HomklinngernController implements ActionListener{
         loginview.getJbsign().addActionListener(this);
         loginview.getJblogin().addActionListener(this);
         loginview.getJcheckb().addActionListener(this);
+        loginview.getJtuser().addActionListener(this);
+        loginview.getJpass().addActionListener(this);
+        
         
         signupview.getJbb().addActionListener(this);
         signupview.getJbregis().addActionListener(this);
+        
+        
 
     }
 
@@ -267,3 +275,4 @@ public class HomklinngernController implements ActionListener{
         }
     }
 }
+

@@ -113,8 +113,22 @@ public class HomklinngernController implements ActionListener{
             // กดปุ่ม register ใน sign up
         } else if (e.getSource() == (signupview.getJbregis())) {
             signupmodel.register(signupview);
+            
+        // กดปุ่ม login ใน login
+        } else if (e.getSource() == (loginview.getJblogin())) {
+            loginmodel.login(loginview, homeview, model);
+            // ทุก model จำ user
+            String uname = model.getUsername();
+            categorymodel.setUsername(uname);
+            cashiermodel.setUsername(uname);
+            newopmodel.setUsername(uname);
+            deleteopmodel.setUsername(uname);
+            updateopmodel.setUsername(uname);
+            //ตั้งให้ขึ้นชื่อร้าน
+            homeview.getJlhname().setText(model.getShopName());
+            cashierview.getJlhtext().setText(model.getShopName());
+            categoryview.getJltext().setText(model.getShopName());
         }
-        
         // ปุ่ม cashier ใน home
         if (e.getSource().equals(homeview.getJbcashier())) {
             //สร้างข้อมูลหน้า cashier

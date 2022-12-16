@@ -6,7 +6,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 
-public class HomklinngernController implements ActionListener{
+public class HomklinngernController implements ActionListener, MouseListener{
     //view
     private LoginView loginview;
     private SignupView signupview;
@@ -89,7 +89,7 @@ public class HomklinngernController implements ActionListener{
         loginview.getJcheckb().addActionListener(this);
         loginview.getJtuser().addActionListener(this);
         loginview.getJpass().addActionListener(this);
-        
+        loginview.getJtuser().addMouseListener(this); //จำรหัสผ่าน
         
         signupview.getJbb().addActionListener(this);
         signupview.getJbregis().addActionListener(this);
@@ -128,6 +128,19 @@ public class HomklinngernController implements ActionListener{
             homeview.getJlhname().setText(model.getShopName());
             cashierview.getJlhtext().setText(model.getShopName());
             categoryview.getJltext().setText(model.getShopName());
+              //เงื่อนไข savefile
+            selected = loginview.getJcheckb().isSelected(); //selected ใช้ตรวจสอบ Jcheckb ว่ามีการเลือกมั้ย
+            login.username = loginview.getJtuser().getText(); //ให้ login.username เก็บค่า .....
+            login.password = String.valueOf(loginview.getJpass().getPassword());  //ให้ login.password เก็บค่า .....
+            if (selected && (login.username.equals(uname))) { //true -> มันจะเข้าเงื่อนไข ต้องติ้กที่  Jcheckbox ก่อน
+                try {
+                    loginmodel.savefile(login, "saveflie"); //เรียกใช้ฟังก์ชั่น savefile ใน loginmodel ให้มัน save ชื่อ savefile
+                    System.out.println(login.username);
+                    System.out.println("save file");
+                } catch (Exception en) {
+                    System.out.println("Couldn't save " + en.getMessage());
+                }
+            }
         }
         // ปุ่ม cashier ใน home
         if (e.getSource().equals(homeview.getJbcashier())) {
@@ -272,7 +285,28 @@ public class HomklinngernController implements ActionListener{
                 loginview.getJtuser().setText("");
                 loginview.getJpass().setText("");
             }
-        }
+        }  
     }
+    
+    @Override
+    public void mouseClicked(MouseEvent e) {
+                    //เงื่อนไข loadfile
+            try {
+                login = (Login) loginmodel.loadfile("saveflie"); //เรียกใช่ฟังก์ชัน loadfile ใน loginmodel เพื่อให้ทำการโหลดไฟล์ที่ชื่อ saveflie
+                loginview.getJtuser().setText(login.username); //ให้ settext ใน username เป็น login.username (มันอยู่ใน savefile)
+                loginview.getJpass().setText(login.password);
+                System.out.println("load file");
+            } catch (Exception en) {
+                System.out.println("Couldn't load " + en.getMessage());
+            }
+    }
+    @Override
+    public void mousePressed(MouseEvent e) {}
+    @Override
+    public void mouseReleased(MouseEvent e) {}
+    @Override
+    public void mouseEntered(MouseEvent e) {}
+    @Override
+    public void mouseExited(MouseEvent e) {}
 }
 

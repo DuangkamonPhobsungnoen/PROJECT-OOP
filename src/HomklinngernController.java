@@ -224,6 +224,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
         
         //btn ok in update cat
         else if (e.getSource().equals(updateopview.getJbok())) {
+            System.out.println("click ok in update");
             updateopmodel.updateCat(updateopview);
             categorymodel.showCatCat(categoryview);
             

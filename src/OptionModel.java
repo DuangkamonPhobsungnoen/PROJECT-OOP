@@ -7,6 +7,7 @@ public class OptionModel extends CategoryModel {
     
     // Execute SQL Query for Option add update delete category
     public void executeSQLQuery(String query, String Message) {
+        System.out.println("in execute");
         try {
             Statement st = getConnection().createStatement();
             if (st.executeUpdate(query) != 0) {

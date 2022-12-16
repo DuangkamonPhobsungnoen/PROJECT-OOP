@@ -37,7 +37,7 @@ public class SignupModel extends HomklinngernModel{
             String query = "INSERT INTO `member`(`ShopName`, `Username`, `Password`, `Comfirm`) VALUES (?, ?, ?, ?)";
             try {
                 if (count == 0) {
-                    ps = HomklinngernModel.getConnection().prepareStatement(query);
+                    ps = getConnection().prepareStatement(query);
                     ps.setString(1, name);
                     ps.setString(2, uname);
                     ps.setString(3, password);

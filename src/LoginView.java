@@ -177,5 +177,5 @@ public class LoginView {
     public void setJcheckb(JCheckBox jcheckb) {
         this.jcheckb = jcheckb;
     }
-
+    
 }

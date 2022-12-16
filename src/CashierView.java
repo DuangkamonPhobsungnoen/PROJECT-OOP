@@ -187,7 +187,7 @@ public class CashierView {
         jbclear.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbprint.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jlpay.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jlorder.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 20));
+        jlorder.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 24));
 
         // set ColorFont
         jlhtext.setForeground(new Color(255, 204, 0));

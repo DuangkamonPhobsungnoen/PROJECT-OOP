@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 public class HomeView {
     private JFrame jf;
-    private JPanel jphead, jphtext, jpicon, jptext1, jptext2, jpgrouptext, jphback;
+    private JPanel jphead, jphtext, jpicon1, jpicon2, jptext1, jptext2, jpgrouptext, jphback, jpgroupicon, jpimg1, jpimg2;
     private JButton jbcashier, jbmenu, jbback;
     private JLabel jlhname, jlcashier, jlmenu;
     
@@ -12,10 +12,14 @@ public class HomeView {
         jphead = new JPanel();
         jphback  = new JPanel();
         jphtext = new JPanel();
-        jpicon = new JPanel();
+        jpicon1 = new JPanel();
+        jpicon2 = new JPanel();
         jptext1 = new JPanel();
         jptext2 = new JPanel();
         jpgrouptext = new JPanel();
+        jpgroupicon = new JPanel();
+        jpimg1 = new JPanel();
+        jpimg2 = new JPanel();
         
         
         ImageIcon imgcashier = new ImageIcon("cashier.png");
@@ -37,18 +41,21 @@ public class HomeView {
        
         
         // button select menu/cashier
-        jpicon.setLayout(new FlowLayout());
-        jpicon.add(jbcashier);
-        jpicon.add(jbmenu);
+        jpimg1.add(jbcashier);
+        jpimg2.add(jbmenu);
+        jpicon1.setLayout(new FlowLayout(0, 20, 0));
+        jpicon1.add(jpimg1);
+        jpicon2.setLayout(new FlowLayout());
+        jpicon2.add(jpimg2);
+        
+        jpgroupicon.add(jpicon1);
+        jpgroupicon.add(jpicon2);
         
         // text cashier/menu
-        jptext1.setLayout(new FlowLayout());
         jptext1.add(jlcashier);
-        
-        jptext2.setLayout(new FlowLayout());
         jptext2.add(jlmenu);
         
-        jpgrouptext.setLayout(new GridLayout(1,2));
+        jpgrouptext.setLayout(new FlowLayout(0,145, 25));
         jpgrouptext.add(jptext1);
         jpgrouptext.add(jptext2);
         
@@ -61,10 +68,14 @@ public class HomeView {
         jbcashier.setBackground(new Color(255, 204, 0));
         jbmenu.setBackground(new Color(255, 204, 0));
         
-        jpicon.setBackground(Color.white);
+        jpicon1.setBackground(Color.white);
+        jpicon2.setBackground(Color.white);
         jpgrouptext.setBackground(Color.white);
+        jpgroupicon.setBackground(Color.white);
         jptext1.setBackground(Color.white);
         jptext2.setBackground(Color.white);
+        jpimg1.setBackground(Color.white);
+        jpimg2.setBackground(Color.white);
         
         // Font
         jlhname.setFont(new Font("browallia new", Font.BOLD, 30));
@@ -78,7 +89,7 @@ public class HomeView {
         jlmenu.setForeground(Color.BLACK);
         
         jf.add(jphead, BorderLayout.NORTH);
-        jf.add(jpicon, BorderLayout.CENTER);
+        jf.add(jpgroupicon, BorderLayout.CENTER);
         jf.add(jpgrouptext, BorderLayout.SOUTH);
         jf.setVisible(false);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -115,12 +126,12 @@ public class HomeView {
         this.jphtext = jphtext;
     }
 
-    public JPanel getJpicon() {
-        return jpicon;
+    public JPanel getJpicon1() {
+        return jpicon1;
     }
 
-    public void setJpicon(JPanel jpicon) {
-        this.jpicon = jpicon;
+    public void setJpicon1(JPanel jpicon) {
+        this.jpicon1 = jpicon;
     }
 
     public JPanel getJptext1() {

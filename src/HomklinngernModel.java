@@ -1,4 +1,6 @@
 
+
+
 import java.sql.*;
 
 public class HomklinngernModel {
@@ -26,7 +28,7 @@ public class HomklinngernModel {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost/hom_klin_ngern", "root", "");
+            con = DriverManager.getConnection("jdbc:mysql://localhost:4306/hom_klin_ngern", "root", "");
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
             System.out.println("Not Connect");
@@ -34,24 +36,21 @@ public class HomklinngernModel {
         return con;
     }
     
-    public int lastID(String table,String col_user){
+    public int lastID(String table){
         // หาไอดีสุดท้ายในตารางนั้นๆ
         PreparedStatement ps;
         ResultSet rs;
         int lastID = 0;
-        String query = "SELECT * FROM `"+table+"` WHERE `"+col_user+"` =?";
+        String query = "SELECT * FROM `"+table+"`";
         try {
             ps = getConnection().prepareStatement(query);
-            ps.setString(1, username);
             rs = ps.executeQuery();
             while (rs.next()) {
                 int thisID = rs.getInt("ID");
-                System.out.println("inloop");
                 if (thisID > lastID){
                     lastID = thisID;
                 }
             }
-            System.out.println("outloop");
         } catch (Exception e) {
             e.printStackTrace();
         }

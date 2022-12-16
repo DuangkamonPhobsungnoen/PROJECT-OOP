@@ -158,7 +158,7 @@ public class CategoryModel extends HomklinngernModel {
     public void addMenu(CategoryView view) {
         String newName = view.getJtname().getText();
         int newPrice =  Integer.parseInt(view.getJtprice().getText());
-        int lastID = lastID("menu","username_menu")+1;
+        int lastID = lastID("menu")+1;
         selectCat = String.valueOf(view.getCb().getSelectedItem());
         String query = "INSERT INTO `menu`(`username_menu`, `category_menu`, `name`, `price`, `ID`) "
                 + "VALUES ('"+getUsername()+"', '"+selectCat+"', '"+newName+"', '"+newPrice+"', '"+lastID+"')";

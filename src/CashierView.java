@@ -223,9 +223,9 @@ public class CashierView {
 //               + "-----------------------------------------------------------------------\n");
     }
 
-    public static void main(String[] args) {
-        new CashierView();
-    }
+//    public static void main(String[] args) {
+//        new CashierView();
+//    }
 
     public JFrame getJf() {
         return jf;

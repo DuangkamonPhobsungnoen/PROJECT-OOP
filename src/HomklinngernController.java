@@ -17,6 +17,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
     private NewOptionView newopview;
     private UpdateOptionView updateopview;
     private DeleteOptionView deleteopview;
+    private UserView userview;
     //model
     private HomklinngernModel model;
     private LoginModel loginmodel;
@@ -43,6 +44,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
         newopview = new NewOptionView();
         deleteopview = new DeleteOptionView();
         updateopview = new UpdateOptionView();
+        userview = new UserView();
         
         model = new HomklinngernModel();
         loginmodel = new LoginModel();
@@ -286,7 +288,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
                 loginview.getJtuser().setText("");
                 loginview.getJpass().setText("");
             }
-        }  
+        }
     }
     
     @Override

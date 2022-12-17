@@ -2,7 +2,7 @@ import java.awt.*;
 import javax.swing.*;
 public class HomeView {
     private JFrame jf;
-    private JPanel jphead, jphtext, jpicon1, jpicon2, jptext1, jptext2, jpgrouptext, jphback, jpgroupicon, jpimg1, jpimg2;
+    private JPanel jphead, jphtext, jpicon1, jpicon2, jptext1, jptext2, jpgrouptext, jphback, jpgroupicon;
     private JButton jbcashier, jbmenu, jbback;
     private JLabel jlhname, jlcashier, jlmenu;
     
@@ -18,8 +18,6 @@ public class HomeView {
         jptext2 = new JPanel();
         jpgrouptext = new JPanel();
         jpgroupicon = new JPanel();
-        jpimg1 = new JPanel();
-        jpimg2 = new JPanel();
         
         
         ImageIcon imgcashier = new ImageIcon("cashier.png");
@@ -29,8 +27,8 @@ public class HomeView {
         jbback = new JButton("BACK");
         
         jlhname = new JLabel("HOM-KLIN-NGERN");
-        jlcashier = new JLabel("CASHIER");
-        jlmenu = new JLabel("EDIT MENU");
+        jlcashier = new JLabel("                             CASHIER");
+        jlmenu = new JLabel("                 EDIT MENU");
                  
         // head
         jphead.setLayout(new BorderLayout());
@@ -41,12 +39,12 @@ public class HomeView {
        
         
         // button select menu/cashier
-        jpimg1.add(jbcashier);
-        jpimg2.add(jbmenu);
-        jpicon1.setLayout(new FlowLayout(0, 20, 0));
-        jpicon1.add(jpimg1);
+//        jpimg1.add(jbcashier);
+//        jpimg2.add(jbmenu);
+        jpicon1.setLayout(new FlowLayout(0, 15, 30));
+        jpicon1.add(jbcashier);
         jpicon2.setLayout(new FlowLayout());
-        jpicon2.add(jpimg2);
+        jpicon2.add(jbmenu);
         
         jpgroupicon.add(jpicon1);
         jpgroupicon.add(jpicon2);
@@ -55,7 +53,7 @@ public class HomeView {
         jptext1.add(jlcashier);
         jptext2.add(jlmenu);
         
-        jpgrouptext.setLayout(new FlowLayout(0,145, 25));
+        jpgrouptext.setLayout(new FlowLayout(0,0, 26));
         jpgrouptext.add(jptext1);
         jpgrouptext.add(jptext2);
         
@@ -74,13 +72,13 @@ public class HomeView {
         jpgroupicon.setBackground(Color.white);
         jptext1.setBackground(Color.white);
         jptext2.setBackground(Color.white);
-        jpimg1.setBackground(Color.white);
-        jpimg2.setBackground(Color.white);
+//        jpimg1.setBackground(Color.white);
+//        jpimg2.setBackground(Color.white);
         
         // Font
         jlhname.setFont(new Font("browallia new", Font.BOLD, 30));
-        jlcashier.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
-        jlmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
+        jlcashier.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 24));
+        jlmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 24));
         jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         
         // Font color

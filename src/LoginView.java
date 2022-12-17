@@ -15,7 +15,7 @@ public class LoginView {
 
     public LoginView() {
         jf = new JFrame("Login page");
-        img = new ImageIcon("icon_noodle.png");
+        img = new ImageIcon("icon_food1.png");
         jlimg = new JLabel(img);
         jluser = new JLabel("Username");
         jlpass = new JLabel("Password");

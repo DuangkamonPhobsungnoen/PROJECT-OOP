@@ -69,6 +69,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
         cashierview.getJbdelete().addActionListener(this);
         cashierview.getJbbill().addActionListener(this);
         cashierview.getJbprint().addActionListener(this);
+        cashierview.getJbuser().addActionListener(this);
         
         categoryview.getJbback().addActionListener(this);
         categoryview.getJbmenu().addActionListener(this);
@@ -96,7 +97,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
         signupview.getJbb().addActionListener(this);
         signupview.getJbregis().addActionListener(this);
         
-        
+        userview.getJbback().addActionListener(this);
 
     }
 
@@ -130,6 +131,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
             homeview.getJlhname().setText(model.getShopName());
             cashierview.getJlhtext().setText(model.getShopName());
             categoryview.getJltext().setText(model.getShopName());
+            userview.getJlhtext().setText(model.getShopName());
               //เงื่อนไข savefile
             selected = loginview.getJcheckb().isSelected(); //selected ใช้ตรวจสอบ Jcheckb ว่ามีการเลือกมั้ย
             login.username = loginview.getJtuser().getText(); //ให้ login.username เก็บค่า .....
@@ -288,6 +290,16 @@ public class HomklinngernController implements ActionListener, MouseListener{
                 loginview.getJtuser().setText("");
                 loginview.getJpass().setText("");
             }
+        }
+        //ปุ่ม user ใน cashierview
+        else if (e.getSource().equals(cashierview.getJbuser())) {
+            userview.getJf().setVisible(true);
+            cashierview.getJf().dispose();
+        }
+        // ปุ่ม back ใน userview
+         else if (e.getSource().equals(userview.getJbback())) {
+            cashierview.getJf().setVisible(true);
+            userview.getJf().dispose();
         }
     }
     

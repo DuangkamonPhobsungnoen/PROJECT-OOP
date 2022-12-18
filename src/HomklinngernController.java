@@ -74,7 +74,6 @@ public class HomklinngernController implements ActionListener, MouseListener{
         cashierview.getJbdelete().addActionListener(this);
         cashierview.getJbbill().addActionListener(this);
         cashierview.getJbprint().addActionListener(this);
-        cashierview.getJbuser().addActionListener(this);
         
         categoryview.getJbback().addActionListener(this);
         categoryview.getJbmenu().addActionListener(this);
@@ -101,9 +100,6 @@ public class HomklinngernController implements ActionListener, MouseListener{
         
         signupview.getJbb().addActionListener(this);
         signupview.getJbregis().addActionListener(this);
-        
-        userview.getJbback().addActionListener(this);
-
     }
     
     public static void main(String[] args) {
@@ -170,8 +166,12 @@ public class HomklinngernController implements ActionListener, MouseListener{
             cashiermodel.clearOrderList(cashierview); // ล้างของเก่า
             cashiermodel.showMenuCashier(cashierview);
             cashiermodel.setClick(cashierview);
-
+            
+            String bill = cashierview.getJtabill().getText();
+            usermodel.showBill(userview, bill);
+            
             cashierview.getJf().setVisible(true);
+            userview.getJf().setVisible(true);
             homeview.getJf().dispose();
         } // ปุ่ม get menu ใน chasier / สร้างตารางตาม category ที่เลือก
         else if (e.getSource().equals(cashierview.getJbmenu())) {
@@ -179,16 +179,28 @@ public class HomklinngernController implements ActionListener, MouseListener{
         } // ปุ่ม add ใน cashier
         else if (e.getSource().equals(cashierview.getJbadd())) {
             cashiermodel.addOrderList(cashierview);
+            
+            String bill = cashierview.getJtabill().getText();
+            usermodel.showBill(userview, bill);
         } // ปุ่ม clear ใน cashier
         else if (e.getSource().equals(cashierview.getJbclear())) {
             cashiermodel.clearOrderList(cashierview);
+            
+            String bill = cashierview.getJtabill().getText();
+            usermodel.showBill(userview, bill);
         } // ปุ่ม pay ใน cashier
         else if (e.getSource().equals(cashierview.getJbbill())) {
             cashiermodel.setCash(Integer.parseInt(cashierview.getJtfpay().getText()));
             cashiermodel.showBillCashier(cashierview);
+            
+            String bill = cashierview.getJtabill().getText();
+            usermodel.showBill(userview, bill);
         } // ปุ่ม delete ใน cashier
         else if (e.getSource().equals(cashierview.getJbdelete())) {
             cashiermodel.deleteOrderList(cashierview);
+            
+            String bill = cashierview.getJtabill().getText();
+            usermodel.showBill(userview, bill);
         } // ปุ่ม menu ใน home
         else if (e.getSource().equals(homeview.getJbmenu())) {
             categorymodel.showCatCat(categoryview);
@@ -287,6 +299,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
         else if (e.getSource().equals(cashierview.getJbback())) {
             homeview.getJf().setVisible(true);
             cashierview.getJf().dispose();
+            userview.getJf().dispose();
         } // ปุ่ม back ใน category
         else if (e.getSource().equals(categoryview.getJbback())) {
             homeview.getJf().setVisible(true);
@@ -310,20 +323,6 @@ public class HomklinngernController implements ActionListener, MouseListener{
             }
         }
         
-        //ปุ่ม user ใน cashierview
-        else if (e.getSource().equals(cashierview.getJbuser())) {
-            //สร้างบิล
-            String bill = cashierview.getJtabill().getText();
-            usermodel.showBill(userview, bill);
-            
-            userview.getJf().setVisible(true);
-            cashierview.getJf().dispose();
-        }
-        // ปุ่ม back ใน userview
-         else if (e.getSource().equals(userview.getJbback())) {
-            cashierview.getJf().setVisible(true);
-            userview.getJf().dispose();
-        }
     }
     
     @Override

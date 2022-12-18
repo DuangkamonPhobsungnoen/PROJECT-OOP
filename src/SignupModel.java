@@ -47,6 +47,7 @@ public class SignupModel extends HomklinngernModel{
                     }
                 }
             } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "This username is already taken");
                 Logger.getLogger(SignupView.class.getName()).log(Level.SEVERE, null, ex);
             }
 

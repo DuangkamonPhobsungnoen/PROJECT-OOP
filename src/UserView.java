@@ -8,7 +8,6 @@ public class UserView {
 
     private JFrame jf;
     private JPanel jp, jphead, jphback, jphtext, jpleft,  jpright,  jpbill, jpleftn, jpleftc, jplefts, jp1, gap;
-    private JButton jbback;
     private JLabel jlhtext, jlname, jllower, jlimg;
     private JTextArea jtabill;
     private ImageIcon img;
@@ -29,7 +28,6 @@ public class UserView {
         jplefts = new JPanel();
         jp1 = new JPanel();
         gap = new JPanel();
-        jbback = new JButton("Back");
         jlhtext = new JLabel("HOM-KLIN-NGERN");
         jlname = new JLabel("SCAN TO PAY");
         jllower = new JLabel("Thank you for using the service");
@@ -41,7 +39,6 @@ public class UserView {
         // head
         jphead.setLayout(new BorderLayout());
         jphtext.add(jlhtext);
-        jphback.add(jbback);
         jphead.add(jphtext, BorderLayout.WEST);
         jphead.add(jphback, BorderLayout.EAST);
         //lower
@@ -66,12 +63,12 @@ public class UserView {
         jp1.add(jp);
         jf.add(jphead, BorderLayout.NORTH);
         jf.add(jp1, BorderLayout.CENTER);
-        jf.setVisible(true);
+        jf.setVisible(false);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        jf.setSize(820, 550);
         jf.setResizable(false);
 //        jf.setLocationRelativeTo(null);
-        jf.setBounds(50,100, 820, 550);
+        jf.setBounds(100,150, 500, 550);
         
         //se tBackground
         jpright.setBackground(new Color(255, 204, 0));
@@ -82,7 +79,6 @@ public class UserView {
         jphead.setBackground(new Color(28, 64, 121));
         jphback.setBackground(new Color(28, 64, 121));
         jphtext.setBackground(new Color(28, 64, 121));
-        jbback.setBackground(Color.WHITE);
         
         // set ColorFont
         jlhtext.setForeground(new Color(255, 204, 0));
@@ -90,7 +86,6 @@ public class UserView {
        // set Font
         jlhtext.setFont(new Font("browallia new", Font.BOLD, 30));
         jtabill.setFont(new Font("browallia new", Font.BOLD, 15));
-        jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jlname.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
         jllower.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
     }
@@ -105,14 +100,6 @@ public class UserView {
 
     public void setJf(JFrame jf) {
         this.jf = jf;
-    }
-
-    public JButton getJbback() {
-        return jbback;
-    }
-
-    public void setJbback(JButton jbback) {
-        this.jbback = jbback;
     }
 
     public JLabel getJlhtext() {

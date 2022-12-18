@@ -1,7 +1,6 @@
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.xml.parsers.FactoryConfigurationError;
 
 public class CashierView {
 
@@ -12,7 +11,7 @@ public class CashierView {
     private JLabel jlhtext, jlpay, jlorder;
     private JTextField jtfpay;
     private JTable jtmenu, jtorder;
-    private JButton jbmenu, jbback, jbadd, jbbill, jbclear, jbprint, jbdelete, jbuser;
+    private JButton jbmenu, jbback, jbadd, jbbill, jbclear, jbprint, jbdelete;
 
     public CashierView() {
         jf = new JFrame("Cashier page");
@@ -52,7 +51,6 @@ public class CashierView {
         jbprint = new JButton("PRINT BILL");
         jbdelete = new JButton("DELETE");
         jbmenu = new JButton("GET MENU");
-        jbuser = new JButton("USER");
         // tablemenu
         jptable.setLayout(new BoxLayout(jptable, BoxLayout.Y_AXIS));
         String[] columnNames = {"Menu", "Price"};
@@ -85,7 +83,6 @@ public class CashierView {
         // head
         jphead.setLayout(new BorderLayout());
         jphtext.add(jlhtext);
-        jphback.add(jbuser);
         jphback.add(jbback);
         jphead.add(jphtext, BorderLayout.WEST);
         jphead.add(jphback, BorderLayout.EAST);
@@ -155,7 +152,6 @@ public class CashierView {
         jtorder.getTableHeader().setBackground(new Color(255, 204, 0));
 
         jtabill.setBackground(Color.WHITE);
-        jbuser.setBackground(Color.WHITE);
         jbbill.setBackground(new Color(28, 64, 121));
         jbclear.setBackground(new Color(28, 64, 121));
         jbprint.setBackground(new Color(28, 64, 121));
@@ -173,7 +169,6 @@ public class CashierView {
         // set Font
         jlhtext.setFont(new Font("browallia new", Font.BOLD, 30));
         jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
-        jbuser.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jbmenu.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
 
         jcbmenu.setFont(new Font("browallia new", Font.BOLD, 18));
@@ -212,9 +207,8 @@ public class CashierView {
         jf.add(jpgroup);
         jf.setVisible(false);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.setSize(820, 550);
         jf.setResizable(false);
-        jf.setLocationRelativeTo(null);
+        jf.setBounds(700,150, 820, 550);
 
         //Receipt bill
 //        jtabill.setText("-----------------------------------------------------------------------\n"
@@ -432,14 +426,6 @@ public class CashierView {
 
     public JButton getJbdelete() {
         return jbdelete;
-    }
-
-    public JButton getJbuser() {
-        return jbuser;
-    }
-
-    public void setJbuser(JButton jbuser) {
-        this.jbuser = jbuser;
     }
     
     

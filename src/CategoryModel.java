@@ -156,25 +156,60 @@ public class CategoryModel extends HomklinngernModel {
     }
     
     public void addMenu(CategoryView view) {
-        String newName = view.getJtname().getText();
-        int newPrice =  Integer.parseInt(view.getJtprice().getText());
-        int lastID = lastID("menu")+1;
-        selectCat = String.valueOf(view.getCb().getSelectedItem());
-        String query = "INSERT INTO `menu`(`username_menu`, `category_menu`, `name`, `price`, `ID`) "
-                + "VALUES ('"+getUsername()+"', '"+selectCat+"', '"+newName+"', '"+newPrice+"', '"+lastID+"')";
-        executeSQLQuery(query, "Added", view);
+        if(checkedInput(view)){
+            String newName = view.getJtname().getText();
+            int newPrice =  Integer.parseInt(view.getJtprice().getText());
+            int lastID = lastID("menu")+1;
+            selectCat = String.valueOf(view.getCb().getSelectedItem());
+            String query = "INSERT INTO `menu`(`username_menu`, `category_menu`, `name`, `price`, `ID`) "
+                    + "VALUES ('"+getUsername()+"', '"+selectCat+"', '"+newName+"', '"+newPrice+"', '"+lastID+"')";
+            executeSQLQuery(query, "Added", view);
+        }
     }
 
     public void updateMenu(CategoryView view) {
-        String newName = view.getJtname().getText();
-        int newPrice =  Integer.parseInt(view.getJtprice().getText());
-        String query = "UPDATE `menu` SET `name`='"+newName+"',`price`='"+newPrice+"' WHERE `ID`="+idMenu;
-        executeSQLQuery(query, "Updated", view);
+        if(checkedInput(view)){
+            String newName = view.getJtname().getText();
+            int newPrice =  Integer.parseInt(view.getJtprice().getText());
+            String query = "UPDATE `menu` SET `name`='"+newName+"',`price`='"+newPrice+"' WHERE `ID`="+idMenu;
+            executeSQLQuery(query, "Updated", view);
+        }
     }
 
     public void deleteMenu(CategoryView view) {
-        String query = "DELETE FROM `menu` WHERE id ="+idMenu;
-        executeSQLQuery(query, "Deleted", view);
+        String name = view.getJtname().getText();
+        if(name.equals("")){
+            JOptionPane.showMessageDialog(null, "Please select menu.");
+        }
+        else{
+            String query = "DELETE FROM `menu` WHERE id ="+idMenu;
+            executeSQLQuery(query, "Deleted", view);
+        }
+    }
+    
+    public boolean checkedInput(CategoryView view){
+        
+        String inputName = view.getJtname().getText();
+        String inputPrice = view.getJtprice().getText();
+        
+        
+        if(inputName.trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Name must not be empty.");
+            return false;
+        }
+        else if(true){
+            try{
+                Integer.parseInt(inputPrice);
+                return true;
+            } 
+            catch (NumberFormatException ex){
+                JOptionPane.showMessageDialog(null, "Price must be integer.");
+                return false;
+        }
+        }
+        else{
+            return true;
+        }
     }
     
 }

@@ -105,6 +105,10 @@ public class HomklinngernController implements ActionListener, MouseListener{
         userview.getJbback().addActionListener(this);
 
     }
+    
+    public static void main(String[] args) {
+        new HomklinngernController();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -305,8 +309,13 @@ public class HomklinngernController implements ActionListener, MouseListener{
                 loginview.getJpass().setText("");
             }
         }
+        
         //ปุ่ม user ใน cashierview
         else if (e.getSource().equals(cashierview.getJbuser())) {
+            //สร้างบิล
+            String bill = cashierview.getJtabill().getText();
+            usermodel.showBill(userview, bill);
+            
             userview.getJf().setVisible(true);
             cashierview.getJf().dispose();
         }

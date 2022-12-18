@@ -115,5 +115,8 @@ public class UserView {
         this.jlhtext = jlhtext;
     }
 
+    public JTextArea getJtabill() {
+        return jtabill;
+    }
     
     }

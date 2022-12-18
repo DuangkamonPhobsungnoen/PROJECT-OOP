@@ -106,6 +106,7 @@ public class CashierModel extends HomklinngernModel {
     
     public void clearOrderList(CashierView view){
         orderList = new ArrayList<>();
+        cash = 0;
         showOrderCashier(view);
     }
     

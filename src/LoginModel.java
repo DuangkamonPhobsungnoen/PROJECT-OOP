@@ -1,4 +1,5 @@
 
+import java.awt.*;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,4 +45,17 @@ public class LoginModel extends HomklinngernModel{
             return ois.readObject();
         }
     }
+    
+    public void ButtonColorLogin(LoginView view) {
+        view.getJblogin().setBackground(new Color(155, 0, 0));
+        view.getJbsign().setBackground(new Color(28, 64, 121));
+}
+        public void ButtonColorSignup(LoginView view) {
+        view.getJblogin().setBackground(new Color(28, 64, 121));
+        view.getJbsign().setBackground(new Color(155, 0, 02));
+}
+       public void ButtonColorBackHome(LoginView view) {
+        view.getJblogin().setBackground(new Color(28, 64, 121));
+        view.getJbsign().setBackground(new Color(28, 64, 121));
+}
 }

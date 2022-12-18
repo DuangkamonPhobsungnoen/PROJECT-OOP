@@ -114,6 +114,6 @@ public class UserView {
     public void setJlhtext(JLabel jlhtext) {
         this.jlhtext = jlhtext;
     }
+
     
-    
-}
+    }

@@ -1,4 +1,5 @@
 
+import java.awt.Color;
 import java.awt.event.*;
 import java.awt.print.PrinterException;
 import java.sql.*;
@@ -28,6 +29,8 @@ public class HomklinngernController implements ActionListener, MouseListener{
     private NewOptionModel newopmodel;
     private UpdateOptionModel updateopmodel;
     private DeleteOptionModel deleteopmodel;
+    private UserModel usermodel;
+    private HomeModel homemodel;
     
     private Login login;
     private boolean selected;
@@ -55,6 +58,8 @@ public class HomklinngernController implements ActionListener, MouseListener{
         newopmodel = new NewOptionModel();
         updateopmodel = new UpdateOptionModel();
         deleteopmodel = new DeleteOptionModel();
+        usermodel = new UserModel();
+        homemodel = new HomeModel();
         
         login = new Login();
         
@@ -105,9 +110,10 @@ public class HomklinngernController implements ActionListener, MouseListener{
     public void actionPerformed(ActionEvent e) {
         // กดปุ่ม sign up ใน login
         if (e.getSource() == (loginview.getJbsign())) {
+            loginmodel.ButtonColorSignup(loginview); 
             signupview.getJf().setVisible(true);
             loginview.getJf().dispose();
-
+            
             // กดปุ่ม back ใน sign up
         } else if (e.getSource() == (signupview.getJbb())) {
             loginview.getJf().setVisible(true);
@@ -119,6 +125,13 @@ public class HomklinngernController implements ActionListener, MouseListener{
             
         // กดปุ่ม login ใน login
         } else if (e.getSource() == (loginview.getJblogin())) {
+            //เปลี่ยนสีปุ่มตอนเม้าท์ไปโดน
+            homemodel.MouseEnteredCashier(homeview);
+            homemodel.MouseExitedCashier(homeview);
+            homemodel.MouseEnteredMenu(homeview);
+            homemodel.MouseExitedMenu(homeview);
+            //เปลี่ยนสีปุ่ม
+            loginmodel.ButtonColorLogin(loginview); 
             loginmodel.login(loginview, homeview, model);
             // ทุก model จำ user
             String uname = model.getUsername();
@@ -277,6 +290,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
         } // ปุ่ม back ใน home
         else if (e.getSource()
                 .equals(homeview.getJbback())) {
+            loginmodel.ButtonColorBackHome(loginview); 
             selected = loginview.getJcheckb().isSelected();
             //isSelected ใช้ตรวจสอบ loginview.getJcheckb() ว่าถูกเลือกอยู่หรือไม่ (ถ้าถูกเลือก => true)
 //            System.out.println(selected); //test true, false

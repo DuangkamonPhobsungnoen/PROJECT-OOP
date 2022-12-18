@@ -18,14 +18,13 @@ public class CashierModel extends HomklinngernModel {
         this.cash = cash;
     }
     
-    // สำหรับ menu ในหน้า cashier
+    // สำหรับดึง menu จาก database
     public ArrayList<Menu> getMenuList(CashierView view) {
-        //ดึง database ตาราง menu ใส่ array
+        //เก็บข้อมูลเป็น ArrayList
         System.out.println("get menu : "+ getUsername());
         ArrayList<Menu> menuList = new ArrayList<Menu>();
         PreparedStatement ps;
         ResultSet rs;
-//        String user = lview.getJtuser().getText();
         //ดึง ตาราง menu
         String query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
         try {
@@ -46,7 +45,7 @@ public class CashierModel extends HomklinngernModel {
     }
     
     public void showComboCashier(CashierView view){
-        //ส่วน combobox
+        //สร้างส่วน combobox
             PreparedStatement ps;
             ResultSet rs;
             String query = "SELECT * FROM `category` WHERE `username_cate` =?";
@@ -79,6 +78,7 @@ public class CashierModel extends HomklinngernModel {
     }
     
     // สำหรับตารางอาหารที่เลือก  เก็บเป็น list ซ้อน list
+    
     public void addOrderList(CashierView view) {
         //ดึง database ตาราง menu ใส่ array
         ArrayList order = new ArrayList();
@@ -129,6 +129,7 @@ public class CashierModel extends HomklinngernModel {
     
     
     // แสดงตารางตามข้อมูลใน list
+
     public void showOrderCashier(CashierView view) {
         // ดึงจาก array มาแสดง
         if(orderName != null){ //ต้องกดเลือกก่อน

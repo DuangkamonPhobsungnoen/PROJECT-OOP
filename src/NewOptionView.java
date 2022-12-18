@@ -66,20 +66,5 @@ public class NewOptionView {
         return jltxt;
     }
 
-    public void setJf(JFrame jf) {
-        this.jf = jf;
-    }
-
-    public void setJtcat(JTextField jtcat) {
-        this.jtcat = jtcat;
-    }
-
-    public void setJbok(JButton jbok) {
-        this.jbok = jbok;
-    }
-
-    public void setJltxt(JLabel jltxt) {
-        this.jltxt = jltxt;
-    }
     
 }

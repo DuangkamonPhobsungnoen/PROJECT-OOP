@@ -145,7 +145,8 @@ public class HomklinngernController implements ActionListener, MouseListener{
             cashierview.getJlhtext().setText(model.getShopName());
             categoryview.getJltext().setText(model.getShopName());
             userview.getJlhtext().setText(model.getShopName());
-              //เงื่อนไข savefile
+            
+            //เงื่อนไข savefile
             selected = loginview.getJcheckb().isSelected(); //selected ใช้ตรวจสอบ Jcheckb ว่ามีการเลือกมั้ย
             login.username = loginview.getJtuser().getText(); //ให้ login.username เก็บค่า .....
             login.password = String.valueOf(loginview.getJpass().getPassword());  //ให้ login.password เก็บค่า .....
@@ -158,6 +159,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
                     System.out.println("Couldn't save " + en.getMessage());
                 }
             }
+
         }
         // ปุ่ม cashier ใน home
         if (e.getSource().equals(homeview.getJbcashier())) {
@@ -327,16 +329,21 @@ public class HomklinngernController implements ActionListener, MouseListener{
     
     @Override
     public void mouseClicked(MouseEvent e) {
-                    //เงื่อนไข loadfile
+
+            //เงื่อนไข loadfile
             try {
-                login = (Login) loginmodel.loadfile("saveflie"); //เรียกใช่ฟังก์ชัน loadfile ใน loginmodel เพื่อให้ทำการโหลดไฟล์ที่ชื่อ saveflie
-                loginview.getJtuser().setText(login.username); //ให้ settext ใน username เป็น login.username (มันอยู่ใน savefile)
+                //เรียกใช่ฟังก์ชัน loadfile ใน loginmodel เพื่อให้ทำการโหลดไฟล์ที่ชื่อ saveflie
+                login = (Login) loginmodel.loadfile("saveflie"); 
+                //ให้ settext ใน username เป็น login.username (มันอยู่ใน savefile)
+                loginview.getJtuser().setText(login.username); 
                 loginview.getJpass().setText(login.password);
                 System.out.println("load file");
             } catch (Exception en) {
                 System.out.println("Couldn't load " + en.getMessage());
             }
     }
+
+
     @Override
     public void mousePressed(MouseEvent e) {}
     @Override

@@ -95,7 +95,7 @@ public class SignupView {
         jf.setResizable(false);
         jf.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         jf.setLocationRelativeTo(null);
-        jf.setVisible(true);
+        jf.setVisible(false);
         //ฟ้อนต์
         jlsign.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jlname.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 25));
@@ -154,34 +154,6 @@ public class SignupView {
         return jf;
     }
 
-    public JLabel getJlsign() {
-        return jlsign;
-    }
-
-    public JLabel getJlname() {
-        return jlname;
-    }
-
-    public JLabel getJlimg() {
-        return jlimg;
-    }
-
-    public JLabel getJluser() {
-        return jluser;
-    }
-
-    public JLabel getJlpass() {
-        return jlpass;
-    }
-
-    public JLabel getJlcpass() {
-        return jlcpass;
-    }
-
-    public JLabel getJlnameh() {
-        return jlnameh;
-    }
-
     public JTextField getJtuser() {
         return jtuser;
     }
@@ -204,24 +176,6 @@ public class SignupView {
 
     public JButton getJbb() {
         return jbb;
-    }
-
-    public ImageIcon getImg() {
-        return img;
-    }
-
-    public JPanel getJpleft() {
-        return jpleft;
-    }
-
-    public JPanel getJplefti() {
-        return jplefti;
-    }
-
-   
-    
-    public static void main(String[] args) {
-        new SignupView();
     }
 
 }

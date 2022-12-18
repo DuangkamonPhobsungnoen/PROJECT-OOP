@@ -3,6 +3,7 @@ import java.sql.*;
 
 
 public class DeleteOptionModel extends OptionModel {
+
     public void deleteCat(DeleteOptionView view){
         String query = "";
         int id = 0;
@@ -31,4 +32,5 @@ public class DeleteOptionModel extends OptionModel {
         query = "DELETE FROM `category` WHERE `ID`="+id;
         executeSQLQuery(query, "Deleted");
     }
+    
 }

@@ -125,57 +125,31 @@ public class LoginView {
         jtuser.setBackground(new Color(255, 251, 235));
         jpass.setBackground(new Color(255, 251, 235));
     }
-    
-    public static void main(String[] args) {
-        new LoginView();
-    }
 
     public JFrame getJf() {
         return jf;
-    }
-
-    public void setJf(JFrame jf) {
-        this.jf = jf;
     }
 
     public JTextField getJtuser() {
         return jtuser;
     }
 
-    public void setJtuser(JTextField jtuser) {
-        this.jtuser = jtuser;
-    }
-
     public JPasswordField getJpass() {
         return jpass;
-    }
-
-    public void setJpass(JPasswordField jpass) {
-        this.jpass = jpass;
     }
 
     public JButton getJbsign() {
         return jbsign;
     }
 
-    public void setJbsign(JButton jbsign) {
-        this.jbsign = jbsign;
-    }
-
     public JButton getJblogin() {
         return jblogin;
-    }
-
-    public void setJblogin(JButton jblogin) {
-        this.jblogin = jblogin;
     }
 
     public JCheckBox getJcheckb() {
         return jcheckb;
     }
-
-    public void setJcheckb(JCheckBox jcheckb) {
-        this.jcheckb = jcheckb;
-    }
+    
+    
     
 }

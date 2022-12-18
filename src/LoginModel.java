@@ -33,9 +33,11 @@ public class LoginModel extends HomklinngernModel{
                 Logger.getLogger(LoginView.class.getName()).log(Level.SEVERE, null, ex);
             }
     }
+
+
     //ฟังก์ชัน savefile
     public static void savefile(Serializable data, String fileName) throws Exception {
-        try(ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) { //Paths.get(fileName))) การสร้าง path ไฟล์ใน Java
+        try(ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(fileName)))) { 
             oos.writeObject(data);
         }
      }

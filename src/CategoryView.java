@@ -171,10 +171,6 @@ public class CategoryView {
          table.setFont(new Font("browallia new", Font.BOLD, 18));
     }
     
-    public static void main(String[] args) {
-        new CategoryView();
-    }
-
     public JFrame getJf() {
         return jf;
     }
@@ -222,17 +218,5 @@ public class CategoryView {
     public JTable getTable() {
         return table;
     }
-
-    public JLabel getJlname() {
-        return jlname;
-    }
-
-    public JLabel getJlprice() {
-        return jlprice;
-    }
-
-   
-
-    
     
 }

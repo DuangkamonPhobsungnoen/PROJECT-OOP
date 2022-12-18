@@ -20,9 +20,9 @@ public class CategoryModel extends HomklinngernModel {
         return selectCat;
     }
     
-    // สำหรับ menu ในหน้า category
+    // สำหรับดึง menu จาก database
     public ArrayList<Menu> getMenuList(CategoryView view) {
-        //ดึง database ตาราง menu ใส่  array
+        //เก็บข้อมูลเป็น ArrayList
         ArrayList<Menu> menuList = new ArrayList<Menu>();
         PreparedStatement ps;
         ResultSet rs;
@@ -188,11 +188,8 @@ public class CategoryModel extends HomklinngernModel {
     }
     
     public boolean checkedInput(CategoryView view){
-        
         String inputName = view.getJtname().getText();
         String inputPrice = view.getJtprice().getText();
-        
-        
         if(inputName.trim().isEmpty()){
             JOptionPane.showMessageDialog(null, "Name must not be empty.");
             return false;
@@ -205,7 +202,7 @@ public class CategoryModel extends HomklinngernModel {
             catch (NumberFormatException ex){
                 JOptionPane.showMessageDialog(null, "Price must be integer.");
                 return false;
-        }
+            }
         }
         else{
             return true;

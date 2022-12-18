@@ -96,113 +96,27 @@ public class HomeView {
         jf.setLocationRelativeTo(null);
         
     }
-    public static void main(String[] args) {
-        new HomeView();
-    }
 
     public JFrame getJf() {
         return jf;
-    }
-
-    public void setJf(JFrame jf) {
-        this.jf = jf;
-    }
-
-    public JPanel getJphead() {
-        return jphead;
-    }
-
-    public void setJphead(JPanel jphead) {
-        this.jphead = jphead;
-    }
-
-    public JPanel getJphtext() {
-        return jphtext;
-    }
-
-    public void setJphtext(JPanel jphtext) {
-        this.jphtext = jphtext;
-    }
-
-    public JPanel getJpicon1() {
-        return jpicon1;
-    }
-
-    public void setJpicon1(JPanel jpicon) {
-        this.jpicon1 = jpicon;
-    }
-
-    public JPanel getJptext1() {
-        return jptext1;
-    }
-
-    public void setJptext1(JPanel jptext1) {
-        this.jptext1 = jptext1;
-    }
-
-    public JPanel getJptext2() {
-        return jptext2;
-    }
-
-    public void setJptext2(JPanel jptext2) {
-        this.jptext2 = jptext2;
-    }
-
-    public JPanel getJpgrouptext() {
-        return jpgrouptext;
-    }
-
-    public void setJpgrouptext(JPanel jpgrouptext) {
-        this.jpgrouptext = jpgrouptext;
     }
 
     public JButton getJbcashier() {
         return jbcashier;
     }
 
-    public void setJbcashier(JButton jbcashier) {
-        this.jbcashier = jbcashier;
-    }
-
     public JButton getJbmenu() {
         return jbmenu;
-    }
-
-    public void setJbmenu(JButton jbmenu) {
-        this.jbmenu = jbmenu;
-    }
-
-    public JLabel getJlhname() {
-        return jlhname;
-    }
-
-    public void setJlhname(JLabel jlhname) {
-        this.jlhname = jlhname;
-    }
-
-    public JLabel getJlcashier() {
-        return jlcashier;
-    }
-
-    public void setJlcashier(JLabel jlcashier) {
-        this.jlcashier = jlcashier;
-    }
-
-    public JLabel getJlmenu() {
-        return jlmenu;
-    }
-
-    public void setJlmenu(JLabel jlmenu) {
-        this.jlmenu = jlmenu;
     }
 
     public JButton getJbback() {
         return jbback;
     }
 
-    public void setJbback(JButton jbback) {
-        this.jbback = jbback;
+    public JLabel getJlhname() {
+        return jlhname;
     }
+    
     
     
 }

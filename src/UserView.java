@@ -90,24 +90,13 @@ public class UserView {
         jllower.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));
     }
 
-    public static void main(String[] args) {
-        new UserView();
-    }
-
     public JFrame getJf() {
         return jf;
     }
 
-    public void setJf(JFrame jf) {
-        this.jf = jf;
-    }
 
     public JLabel getJlhtext() {
         return jlhtext;
-    }
-
-    public void setJlhtext(JLabel jlhtext) {
-        this.jlhtext = jlhtext;
     }
 
     public JTextArea getJtabill() {

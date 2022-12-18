@@ -68,28 +68,5 @@ public class DeleteOptionView {
         return jbno;
     }
 
-    public JLabel getJltxt() {
-        return jltxt;
-    }
-
-    public void setJf(JFrame jf) {
-        this.jf = jf;
-    }
-
-    public void setJtcat(JTextField jtcat) {
-        this.jtcat = jtcat;
-    }
-
-    public void setJbyes(JButton jbyes) {
-        this.jbyes = jbyes;
-    }
-
-    public void setJbno(JButton jbno) {
-        this.jbno = jbno;
-    }
-
-    public void setJltxt(JLabel jltxt) {
-        this.jltxt = jltxt;
-    }
     
 }

@@ -13,7 +13,7 @@ public class UpdateOptionModel extends OptionModel {
         else{
             String query = "";
             int id = 0;
-            //ต้องเปลี่ยน cat ในตาราง menu ก่อน
+            //ต้องเปลี่ยน category ในตาราง menu ก่อน
             PreparedStatement ps;
             ResultSet rs;
             //ดึง ตาราง menu
@@ -40,7 +40,6 @@ public class UpdateOptionModel extends OptionModel {
             query = "UPDATE `category` SET `category_cate`='"+newCat+"' WHERE `ID`="+id;
             executeSQLQuery(query, "Updated");
         }
-        
     }
     
 }

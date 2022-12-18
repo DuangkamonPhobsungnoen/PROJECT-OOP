@@ -7,7 +7,7 @@ import javax.xml.parsers.FactoryConfigurationError;
 public class UserView {
 
     private JFrame jf;
-    private JPanel jp, jphead, jphback, jphtext, jpleft,  jpright,  jpbill, jpleftn, jpleftc, jplefts;
+    private JPanel jp, jphead, jphback, jphtext, jpleft,  jpright,  jpbill, jpleftn, jpleftc, jplefts, jp1, gap;
     private JButton jbback;
     private JLabel jlhtext, jlname, jllower, jlimg;
     private JTextArea jtabill;
@@ -27,13 +27,15 @@ public class UserView {
         jpleftn = new JPanel();
         jpleftc = new JPanel();
         jplefts = new JPanel();
+        jp1 = new JPanel();
+        gap = new JPanel();
         jbback = new JButton("Back");
         jlhtext = new JLabel("HOM-KLIN-NGERN");
         jlname = new JLabel("SCAN TO PAY");
         jllower = new JLabel("Thank you for using the service");
        
         
-        jtabill = new JTextArea(28, 42);
+        jtabill = new JTextArea(22, 26);
         JScrollPane jspbill = new JScrollPane(jtabill, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jf.setLayout(new BorderLayout());
         // head
@@ -59,19 +61,24 @@ public class UserView {
         
         jp.add(jpleft);
         jp.add(jpright);
+        jp1.setLayout(new BorderLayout());
+        jp1.add(gap, BorderLayout.NORTH);
+        jp1.add(jp);
         jf.add(jphead, BorderLayout.NORTH);
-        jf.add(jp, BorderLayout.CENTER);
-        jf.setVisible(false);
+        jf.add(jp1, BorderLayout.CENTER);
+        jf.setVisible(true);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jf.setSize(820, 550);
+//        jf.setSize(820, 550);
         jf.setResizable(false);
-        jf.setLocationRelativeTo(null);
+//        jf.setLocationRelativeTo(null);
+        jf.setBounds(50,100, 820, 550);
         
         //se tBackground
         jpright.setBackground(new Color(255, 204, 0));
         jpleftn.setBackground(new Color(255, 204, 0));
         jpleftc.setBackground(new Color(255, 204, 0));
         jplefts.setBackground(new Color(255, 204, 0));
+        gap.setBackground(new Color(255, 204, 0));
         jphead.setBackground(new Color(28, 64, 121));
         jphback.setBackground(new Color(28, 64, 121));
         jphtext.setBackground(new Color(28, 64, 121));
@@ -82,6 +89,7 @@ public class UserView {
         
        // set Font
         jlhtext.setFont(new Font("browallia new", Font.BOLD, 30));
+        jtabill.setFont(new Font("browallia new", Font.BOLD, 15));
         jbback.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 15));
         jlname.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 30));
         jllower.setFont(new Font("Arial Rounded MT Bold", Font.BOLD, 18));

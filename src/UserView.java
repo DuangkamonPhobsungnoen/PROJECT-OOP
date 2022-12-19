@@ -68,7 +68,7 @@ public class UserView {
 //        jf.setSize(820, 550);
         jf.setResizable(false);
 //        jf.setLocationRelativeTo(null);
-        jf.setBounds(100,150, 500, 550);
+        jf.setBounds(80,150, 600, 550);
         
         //se tBackground
         jpright.setBackground(new Color(255, 204, 0));

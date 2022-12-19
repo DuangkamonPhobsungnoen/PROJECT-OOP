@@ -27,8 +27,8 @@ public class HomeView {
         jbback = new JButton("BACK");
         
         jlhname = new JLabel("HOM-KLIN-NGERN");
-        jlcashier = new JLabel("                             CASHIER");
-        jlmenu = new JLabel("                 EDIT MENU");
+        jlcashier = new JLabel("                           CASHIER");
+        jlmenu = new JLabel("                EDIT MENU");
                  
         // head
         jphead.setLayout(new BorderLayout());

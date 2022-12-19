@@ -187,6 +187,7 @@ public class HomklinngernController implements ActionListener, MouseListener{
         } // ปุ่ม clear ใน cashier
         else if (e.getSource().equals(cashierview.getJbclear())) {
             cashiermodel.clearOrderList(cashierview);
+            cashierview.getJtfpay().setText("");
             
             String bill = cashierview.getJtabill().getText();
             usermodel.showBill(userview, bill);

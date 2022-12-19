@@ -208,7 +208,7 @@ public class CashierView {
         jf.setVisible(false);
         jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jf.setResizable(false);
-        jf.setBounds(700,150, 820, 550);
+        jf.setBounds(680,150, 820, 550);
 
         //Receipt bill
 //        jtabill.setText("-----------------------------------------------------------------------\n"

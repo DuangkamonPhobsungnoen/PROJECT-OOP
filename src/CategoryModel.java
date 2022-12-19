@@ -19,6 +19,10 @@ public class CategoryModel extends HomklinngernModel {
     public String getSelectCat() {
         return selectCat;
     }
+
+    public void setSelectCat(String selectCat) {
+        this.selectCat = selectCat;
+    }
     
     // สำหรับดึง menu จาก database
     public ArrayList<Menu> getMenuList(CategoryView view) {
@@ -29,10 +33,9 @@ public class CategoryModel extends HomklinngernModel {
         //ดึง ตาราง menu
         String query = "SELECT * FROM `menu` WHERE `username_menu` =? AND `category_menu` =?";
         try {
-            String cat = String.valueOf(view.getCb().getSelectedItem());
             ps = getConnection().prepareStatement(query);
             ps.setString(1, getUsername());
-            ps.setString(2, cat);
+            ps.setString(2, selectCat);
             rs = ps.executeQuery();
             Menu menu;
             while (rs.next()) {
@@ -42,12 +45,12 @@ public class CategoryModel extends HomklinngernModel {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        selectCat = String.valueOf(view.getCb().getSelectedItem());
         return menuList;
     }
     
     public void showMenuCat(CategoryView view) {
         // ดึงจาก array มาแสดง
+        selectCat = String.valueOf(view.getCb().getSelectedItem());
         ArrayList<Menu> list = getMenuList(view);
         DefaultTableModel model = (DefaultTableModel)view.getTable().getModel();
         model.setRowCount(0); //ถ้าไม่มีบรรทัดนี้ เมนูจะเพิ่มต่อกันเรื่อยๆ
@@ -129,6 +132,7 @@ public class CategoryModel extends HomklinngernModel {
                     ps = getConnection().prepareStatement(query);
                     ps.setString(1, getUsername());
                     ps.setString(2, selectCat);
+                    System.out.println(ps);
                     rs = ps.executeQuery();
                     while (rs.next()) {
                         id = rs.getInt("ID");
@@ -136,6 +140,7 @@ public class CategoryModel extends HomklinngernModel {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                
                 return id;
     }
     

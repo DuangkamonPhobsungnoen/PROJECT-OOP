@@ -234,6 +234,9 @@ public class HomklinngernController implements ActionListener, MouseListener{
         
         //btn ... in catagory
         else if (e.getSource().equals(categoryview.getJbdot())) {
+            String Category = categorymodel.getSelectCat();
+            updateopmodel.setSelectCat(Category);
+            deleteopmodel.setSelectCat(Category);
             optionview.getJf().setVisible(true);
         } 
 

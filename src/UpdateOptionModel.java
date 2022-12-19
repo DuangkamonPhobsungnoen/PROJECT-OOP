@@ -22,12 +22,10 @@ public class UpdateOptionModel extends OptionModel {
                 ps = getConnection().prepareStatement(query);
                 ps.setString(1, getUsername());
                 ps.setString(2, getSelectCat());
-                System.out.println("ps "+ps);
                 rs = ps.executeQuery();
                 while (rs.next()) {
                     id = rs.getInt("ID");
                     query = "UPDATE `menu` SET `category_menu`='"+newCat+"' WHERE `ID`="+id;
-                    System.out.println("query "+query);
                     Statement st = getConnection().createStatement();
                     st.executeUpdate(query);
                 }

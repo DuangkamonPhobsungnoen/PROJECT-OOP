@@ -35,27 +35,5 @@ public class HomklinngernModel {
         }
         return con;
     }
-    
-    public int lastID(String table){
-        // หาไอดีสุดท้ายในตารางนั้นๆ
-        PreparedStatement ps;
-        ResultSet rs;
-        int lastID = 0;
-        String query = "SELECT * FROM `"+table+"`";
-        try {
-            ps = getConnection().prepareStatement(query);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                int thisID = rs.getInt("ID");
-                if (thisID > lastID){
-                    lastID = thisID;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return lastID;
-    }
-    
-    
+ 
 }

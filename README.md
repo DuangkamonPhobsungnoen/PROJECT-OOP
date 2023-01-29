@@ -26,7 +26,8 @@ OBJECT-ORIENTED PROGRAMMING
 >
 >6.Figma
 
-##Figma
+## Figma
+>**`Overall`**
 >**[Click link](https://www.figma.com/file/GaoX3lyx35QQUx67d8SBTj/%E0%B8%AB%E0%B8%AD%E0%B8%A1%E0%B8%81%E0%B8%A5%E0%B8%B4%E0%B9%88%E0%B8%99%E0%B9%80%E0%B8%87%E0%B8%B4%E0%B8%99?node-id=1%3A2)**
 
 ## Class Diagram
@@ -34,6 +35,7 @@ OBJECT-ORIENTED PROGRAMMING
 **[Click link](https://cloud.smartdraw.com/editor.aspx?depoId=40269318&credID=-43054967&pubDocShare=1DCEA343F90680BBB7627F9723B8466DD56)**
 
 ## Presentation
+>**`Presentation`**
 >**[Click link](https://www.canva.com/design/DAFUXN3e4e8/kDpMNRkSMsjdFsx0qjCxKA/edit)**
 
 ## Developer

@@ -1,4 +1,4 @@
-# HOM-KLIN-NGERN
+OBJECT-ORIENTED PROGRAMMING
 ## Description
 >**`คำอธิบาย`**
 >

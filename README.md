@@ -1,4 +1,4 @@
-OBJECT-ORIENTED PROGRAMMING
+HOM-KLIN-NGERN PROJECT
 ## Description
 >**`คำอธิบาย`**
 >
@@ -39,10 +39,10 @@ OBJECT-ORIENTED PROGRAMMING
 >**[Click link](https://www.canva.com/design/DAFUXN3e4e8/kDpMNRkSMsjdFsx0qjCxKA/edit)**
 
 ## Developer
-| Student ID | Name - Surname |  Responsible | 
-| :-------- | :-------- | :--------- | 
-| 64070112 | นางสาวสุธีรา พิทักษ์ผลิน | Database, Model | 
-| 64070149 | นางสาวดวงกมล พบสูงเนิน | Database, GUI |
-| 64070153 | นางสาวทัตพร ตันนารัตน์ | GUI, Demo | 
-| 64070175 | นางสาวบุษบาวรรณ ประเสริฐสุข | GUI , Cashier bill |
-| 64070203 | นายภัทรชัย เทิบจันทึก | Database , Class Diagram |
+| Student ID | Name - Surname |  Responsible | Github |
+| :-------- | :-------- | :--------- | :--------- |
+| 64070112 | นางสาวสุธีรา พิทักษ์ผลิน | Database, Model | [SutheeraP](https://github.com/SutheeraP) |
+| 64070149 | นางสาวดวงกมล พบสูงเนิน | Database, GUI | [DuangkamonPhobsungnoen](https://github.com/DuangkamonPhobsungnoen) |
+| 64070153 | นางสาวทัตพร ตันนารัตน์ | GUI, Demo | [Tadphorn](https://github.com/Tadphorn) |
+| 64070175 | นางสาวบุษบาวรรณ ประเสริฐสุข | GUI , Cashier bill | [64070175Busabawan](https://github.com/64070175Busabawan) |
+| 64070203 | นายภัทรชัย เทิบจันทึก | Database , Class Diagram | 64070203@it.kmitl.ac.th |

@@ -21,9 +21,18 @@ OBJECT-ORIENTED PROGRAMMING
 >3.Github
 >
 >4.Canva
+>
+>5.Smartdraw
+
+## Class Diagram
+>**[Class Diagram](https://cloud.smartdraw.com/editor.aspx?depoId=40269318&credID=-43054967&pubDocShare=1DCEA343F90680BBB7627F9723B8466DD56)**
+
+## Canva
+>**[Presentation](https://www.canva.com/design/DAFUXN3e4e8/kDpMNRkSMsjdFsx0qjCxKA/edit)**
+
 ## Developer
-| Student ID | Name - Surname |  Responsible |
-| :-------- | :-------- | :--------- |
+| Student ID | Name - Surname |  Responsible | 
+| :-------- | :-------- | :--------- | 
 | 64070112 | นางสาวสุธีรา พิทักษ์ผลิน | Database, Model | 
 | 64070149 | นางสาวดวงกมล พบสูงเนิน | Database, GUI |
 | 64070153 | นางสาวทัตพร ตันนารัตน์ | GUI, Demo | 
